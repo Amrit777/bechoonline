@@ -1,0 +1,41 @@
+{
+  "name": "FruitVilla",
+  "short_name": "FruitVilla",
+  "icons": [
+    {
+      "src": "http://fruitvilla.multicommerce.test/uploads/3/192x192.png",
+      "sizes": "128x128",
+      "type": "image/png"
+    },
+    {
+      "src": "http://fruitvilla.multicommerce.test/uploads/3/144x144.png",
+      "sizes": "144x144",
+      "type": "image/png"
+    },
+    {
+      "src": "http://fruitvilla.multicommerce.test/uploads/3/152x152.png",
+      "sizes": "152x152",
+      "type": "image/png"
+    },
+    {
+      "src": "http://fruitvilla.multicommerce.test/uploads/3/192x192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "http://fruitvilla.multicommerce.test/uploads/3/256x256.png",
+      "sizes": "256x256",
+      "type": "image/png"
+    },
+    {
+      "src": "http://fruitvilla.multicommerce.test/uploads/3/512x512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ],
+  "lang": "en-US",
+  "start_url": "/pwa",
+  "display": "standalone",
+  "background_color": "black",
+  "theme_color": "red"
+}
