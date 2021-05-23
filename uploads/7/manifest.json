@@ -1,0 +1,41 @@
+{
+  "name": "Food",
+  "short_name": "Food",
+  "icons": [
+    {
+      "src": "https://food.bechoo.co/uploads/7/192x192.png",
+      "sizes": "128x128",
+      "type": "image/png"
+    },
+    {
+      "src": "https://food.bechoo.co/uploads/7/144x144.png",
+      "sizes": "144x144",
+      "type": "image/png"
+    },
+    {
+      "src": "https://food.bechoo.co/uploads/7/152x152.png",
+      "sizes": "152x152",
+      "type": "image/png"
+    },
+    {
+      "src": "https://food.bechoo.co/uploads/7/192x192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "https://food.bechoo.co/uploads/7/256x256.png",
+      "sizes": "256x256",
+      "type": "image/png"
+    },
+    {
+      "src": "https://food.bechoo.co/uploads/7/512x512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ],
+  "lang": "Blue",
+  "start_url": "/pwa",
+  "display": "standalone",
+  "background_color": "Yellow",
+  "theme_color": "Yello"
+}
