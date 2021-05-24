@@ -3887,3 +3887,43 @@ a.d-flex {
 .h-50{
   height: 50px !important;
 }
+
+/* amit singh added whatsapp */
+
+.whatsapp {
+	display: inline-block;
+	position: fixed;
+	bottom: 10px;
+	right: 10px;
+	z-index: 9999;
+}
+
+@media (max-width: 576px) {
+	.whatsapp-btn {
+		width: 40px;
+		height: 40px;
+	}
+}
+
+.whatsapp-btn {
+	background-color: #25d366;
+	border-radius: 50%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 55px;
+	height: 55px;
+}
+
+@media (max-width: 576px) {
+	.whatsapp-btn svg {
+		width: 22px;
+		height: 22px;
+	}
+}
+
+.whatsapp-btn svg {
+	fill: #fff;
+	width: 28px;
+	height: 28px;
+}
