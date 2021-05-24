@@ -13,11 +13,11 @@
         <!-- FOR PAGE ICON -->
         <link rel="icon" href="{{ asset('uploads/'.domain_info('user_id').'/favicon.ico') }}">
         @php
-        Helper::autoload_site_data();        
+        Helper::autoload_site_data();
         @endphp
         <style type="text/css">
            :root {
-              --main-theme-color: {{ Cache::get(domain_info('user_id').'theme_color','#dc3545') }};   
+              --main-theme-color: {{ Cache::get(domain_info('user_id').'theme_color','#dc3545') }};
           }
         </style>
         <!-- FOR FONT ICON -->
@@ -31,17 +31,17 @@
          @stack('css')
         <!-- FOR STYLE -->
         <link rel="stylesheet" href="{{ asset('frontend/bigbag/css/main.css') }}">
-       
+
         <!--=====================================
                     CSS LINK PART END
         =======================================-->
         {{ load_header() }}
     </head>
 <body>
- 
 
 
-{{-- load partials views --}}      
+
+{{-- load partials views --}}
 @include('frontend/bigbag/layouts/header')
 @yield('content')
 @include('frontend/bigbag/layouts/footer')

@@ -7,7 +7,7 @@
 $stripe=false;
 @endphp
 <div class="container py-5">
-	
+
 	<div class="row">
 		<div class="col-lg-7 mx-auto">
 			<div class="card">
@@ -16,7 +16,7 @@ $stripe=false;
 						<ul role="tablist" class="nav bg-light nav-pills rounded nav-fill mb-3">
 							@foreach($getways as $key => $row)
 							<li class="nav-item"> <a data-toggle="pill" href="#{{ $row->slug }}" class="nav-link @if($key == 0) active @endif"> <img height="50" src="{{ asset($row->preview->content) }}"></a> </li>
-							@endforeach							
+							@endforeach
 						</ul>
 
 						<!-- Credit card form content -->
@@ -28,7 +28,7 @@ $stripe=false;
 							else{
 								$url=url('/seller/make-charge/');
 							}
-							
+
 							@endphp
 							<!-- credit card info-->
 							@foreach($getways as $key => $row)
@@ -47,7 +47,7 @@ $stripe=false;
 									<input type="hidden" id="publishable_key" value="{{ $credentials->publishable_key }}">
 									<div class="form-group">
 
-										
+
 										<label for="card-element">
 											Credit or debit card
 										</label>
@@ -72,34 +72,34 @@ $stripe=false;
 									<div class="form-group">
 										<label >
 											<h6>{{ __('Name') }}</h6>
-										</label> 
-										<input type="text" name="name" readonly="" value="{{ Auth::user()->name }}" class="form-control "> 
+										</label>
+										<input type="text" name="name" readonly="" value="{{ Auth::user()->name }}" class="form-control ">
 									</div>
 									<div class="form-group">
 										<label >
 											<h6>{{ __('Email') }}</h6>
-										</label> 
-										<input type="text" name="email" readonly="" value="{{ Auth::user()->email }}" class="form-control "> 
+										</label>
+										<input type="text" name="email" readonly="" value="{{ Auth::user()->email }}" class="form-control ">
 									</div>
 									<div class="form-group">
 										<label for="username">
 											<h6>{{ __('Phone Number') }}</h6>
-										</label> 
-										<input type="number" name="phone" placeholder="Enter Your Phone Number" required class="form-control "> 
+										</label>
+										<input type="number" name="phone" placeholder="Enter Your Phone Number" required class="form-control ">
 									</div>
 									@if($info->price > 0)
 									<button type="submit" class="subscribe btn btn-primary btn-block shadow-sm"> {{ __('Make Payment With') }} {{ $row->name }} ({{ $price }}) </button>
 									@else
 									<a href="{{ url(env('APP_URL').'/contact') }}" target="_blank"  class="subscribe btn btn-primary btn-block shadow-sm text-white">{{ __('Please Contact With Us') }}</a>
 									@endif
-									
+
 								</form>
-								@endif								
-							</div> 
+								@endif
+							</div>
 							@endforeach
 							<!-- Paypal info -->
-							
-							
+
+
 							<!-- End -->
 						</div>
 					</div>
@@ -116,7 +116,7 @@ $stripe=false;
 </div>
 </div>
 
-@endsection	
+@endsection
 @push('js')
 @if($stripe == true)
 <script src="{{ asset('assets/js/stripe.js') }}"></script>

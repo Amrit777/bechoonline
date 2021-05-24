@@ -38,7 +38,6 @@
                                 <th><i class="far fa-image"></i></th>
                                 <th>{{ __('Name') }}</th>
                                 <th>{{ __('Price') }}</th>
-
                                 <th>{{ __('Variation') }}</th>
                                 <th>{{ __('Options') }}</th>
                                 <th class="text-right"><span class="mr-3">{{ __('Cart') }}</span></th>
@@ -78,9 +77,9 @@
                                         </td>
                                         <td>
                                             @if (count($row->options) > 0)
-                                                <select class="form-control option " name="option[]">
+                                                <select class="form-control select2 multislect option " name="option[]" multiple>
 
-                                                    <option disabled selected>{{ __('Select Option') }}</option>
+                                                    {{-- <option disabled selected>{{ __('Select Option') }}</option> --}}
 
                                                     @foreach ($row->options as $option)
 

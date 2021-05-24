@@ -8,7 +8,7 @@
   <title>{{ config('app.name', 'Laravel') }}</title>
   <!-- General CSS Files -->
   <link rel="stylesheet" href="{{ asset('assets/frontend/css/bootstrap.min.css') }}">
-  <!-- INCLUDE FONTS --> 
+  <!-- INCLUDE FONTS -->
   <link rel="stylesheet" href="{{ asset('assets/css/fontawsome/all.min.css') }}">
   <link href="//fonts.googleapis.com/css?family=Nunito:400,600,700,800" rel="stylesheet">
   <!-- CSS Libraries -->
@@ -16,7 +16,7 @@
   <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
   <link rel="stylesheet" href="{{ asset('assets/css/font/flaticon.css') }}">
   <link rel="stylesheet" href="{{ asset('assets/css/components.css') }}">
-  
+
   @stack('style')
 </head>
 
@@ -39,10 +39,14 @@
       <div class="footer-left">
         Copyright &copy; {{ date('Y') }} <div class="bullet"></div> Powered By <a href="{{ url('/') }}">{{ env('APP_NAME') }} v2.5</a>
       </div>
-      
+
     </footer>
   </div>
 </div>
+<!--=====================================
+WHATSAPP amit singh
+=======================================-->
+{{ load_main_whatsapp() }}
 <!-- General JS Scripts -->
 <script src="{{ asset('assets/js/jquery-3.5.1.min.js')}}"></script>
 <script src="{{ asset('assets/js/popper.min.js')}}"></script>

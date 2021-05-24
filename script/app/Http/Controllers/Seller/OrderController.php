@@ -37,16 +37,12 @@ class OrderController extends Controller
 
         if ($type == 'all') {
             if (!empty($request->src)) {
-
-	// amit singh
-
-
+                // amit singh
                 $search = $request->src;
                 $orders = Order::where([
                     ['user_id', $user_id],
                     ['order_no', $search]
                 ]);
-                // amit singh
                 $orders = $orders->orWhere(function ($query) use ($search) {
                     $query->whereHas('order_item.term', function ($q) use ($search) {
                         $q->where('title', 'LIKE', "%{$search}%");
@@ -140,18 +136,6 @@ class OrderController extends Controller
      */
     public function store(Request $request)
     {
-        //     [term_id] => 36
-        // [variation] => Array
-        //     (
-        //         [0] => 2
-        //         [1] => 3
-        //         [2] => 4
-        //     )
-
-        // [qty] => 1
-        // print_r($request->all());
-        // exit();
-        // die("sds");
         $user_id = Auth::id();
         $this->user_id = $user_id;
         $option = $request->option ?? [];
@@ -275,8 +259,10 @@ class OrderController extends Controller
                 'location' => 'required',
                 'zip_code' => 'required',
                 'shipping_method' => 'required',
-                'payment_method' => 'required',
-                'payment_id' => 'required|max:100',
+                // 'payment_method' => 'required',
+                // 'payment_id' => 'required|max:100',
+                "payment_id" => "required_if:payment_status,==,1|max:100"
+
             ]);
 
 
@@ -346,17 +332,22 @@ class OrderController extends Controller
         } else {
 
             $validatedData = $request->validate([
-                'email' => 'required|email|max:50',
+                // 'email' => 'required|email|max:50',
                 'name' => 'required|max:50',
-                'payment_method' => 'required',
-                'payment_id' => 'required|max:100',
+                // 'payment_method' => 'required',
+                // 'payment_id' => 'required|max:100',
+                "payment_id" => "required_if:payment_status,==,1|max:100"
             ]);
-            $user_id = Auth::id();
-            $user = Customer::where('created_by', $user_id)->where('email', $request->email)->first();
-            if (empty($user)) {
-                $error['errors']['error'] = 'Sorry, Customer Not Exist';
-                return response()->json($error, 401);
+
+            if (!$request->filled('name')) {
+                $request['name'] = 'Guest';
             }
+            $user_id = Auth::id();
+            // $user = Customer::where('created_by', $user_id)->where('email', $request->email)->first();
+            // if (empty($user)) {
+            //     $error['errors']['error'] = 'Sorry, Customer Not Exist';
+            //     return response()->json($error, 401);
+            // }
             $prefix = Useroption::where('user_id', $user_id)->where('key', 'order_prefix')->first();
             $max_id = Order::max('id');
             if (empty($prefix)) {
@@ -379,8 +370,8 @@ class OrderController extends Controller
             $order->total = Cart::total();
             $order->save();
 
-            $info['name'] = $request->name;
-            $info['email'] = $request->email;
+            $info['name'] = $request->filled('name') ? $request->name : "Guest";
+            $info['email'] = $request->filled('email') ? $request->email : "";
             $info['comment'] = $request->comment;
             $info['coupon_discount'] = Cart::discount();
             $info['sub_total'] = Cart::subtotal();

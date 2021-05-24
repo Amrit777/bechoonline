@@ -37,7 +37,7 @@ class PlanController extends Controller
 
 	public function make_charge(Request $request,$id)
 	{
-		
+
 		$info=Plan::where('status',1)->where('is_default',0)->where('price','>',0)->findorFail($id);
 		$getway=Category::where('type','payment_getway')->where('featured',1)->where('slug','!=','cod')->findorFail($request->mode);
 
@@ -69,17 +69,17 @@ class PlanController extends Controller
 			return Stripe::make_payment($data);
 		}
 		if ($getway->slug=='mollie') {
-			
+
 			return Mollie::make_payment($data);
 		}
 		if ($getway->slug=='paystack') {
-			
+
 			return Paystack::make_payment($data);
 		}
 		if ($getway->slug=='razorpay') {
 			return redirect('/seller/payment-with/razorpay');
 		}
-		if ($getway->slug=='mercado') {            
+		if ($getway->slug=='mercado') {
             return Mercado::make_payment($data);
         }
 	}
@@ -105,7 +105,7 @@ class PlanController extends Controller
                 $transection->status = 1;
             }
 			$transection->save();
-			
+
 			$exp_days =  $plan->days;
 			$expiry_date = \Carbon\Carbon::now()->addDays(($exp_days - 1))->format('Y-m-d');
 
@@ -121,15 +121,15 @@ class PlanController extends Controller
 			$user->plan_id = $plan->id;
 			$user->trasection_id = $transection->id;
 			$user->will_expired=$expiry_date;
-			
+
 
 			$auto_order=Option::where('key','auto_order')->first();
              if($auto_order->value == 'yes'  && $transection->status == 1){
                 $user->status=1;
              }
-             
+
             $user->save();
-           
+
             if($auto_order->value == 'yes' && $transection->status == 1){
                 $meta=Userplanmeta::where('user_id',Auth::id())->first();
                 if(empty($meta)){
@@ -166,14 +166,14 @@ class PlanController extends Controller
 			}
 
 
-			
+
 			DB::commit();
 		} catch (Exception $e) {
 			DB::rollback();
 		}
 		}
 		return redirect('seller/settings/plan');
-		
+
 	}
 
 	public function fail()

@@ -151,7 +151,7 @@
                                     Shipped To<br>
                                     Shipping Method: {{ $order->shipping_info->shipping_method->name ?? '' }}<br>
                                     Name: {{ $order_content->name ?? '' }}<br>
-                                    Email: {{ $order_content->email ?? '' }}<br>
+                                    @if(!empty($order_content->email)) Email: {{ $order_content->email ?? '' }}<br> @endif
                                     Phone: {{ $order_content->phone ?? '' }}<br>
 
                                     City: {{ $order->shipping_info->city->name ?? '' }}<br>
@@ -164,8 +164,7 @@
                                 @endif
                                 @if ($order->order_type == 0)
                                     Name: {{ $order_content->name ?? '' }}<br>
-                                    Email: {{ $order_content->email ?? '' }}<br>
-
+                                    @if(!empty($order_content->email)) Email: {{ $order_content->email ?? '' }}<br> @endif
                                 @endif
                             </td>
 

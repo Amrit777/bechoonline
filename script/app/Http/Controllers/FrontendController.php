@@ -38,7 +38,7 @@ class FrontendController extends Controller
         $url=str_replace('www.','',$url);
         if($url==env('APP_PROTOCOLESS_URL') || $url == 'localhost'){
 
-        
+
         $seo=Option::where('key','seo')->first();
         $seo=json_decode($seo->value);
 
@@ -61,11 +61,11 @@ class FrontendController extends Controller
 
 
     	$latest_gallery=Category::where('type','gallery')->with('preview')->where('is_admin',1)->latest()->take(15)->get();
-    	$features=Category::where('type','features')->with('preview','excerpt')->where('is_admin',1)->latest()->take(6)->get(); 
-    	
-    	$testimonials=Category::where('type','testimonial')->with('excerpt')->where('is_admin',1)->latest()->get(); 
+    	$features=Category::where('type','features')->with('preview','excerpt')->where('is_admin',1)->latest()->take(6)->get();
 
-    	$brands=Category::where('type','brand')->with('preview')->where('is_admin',1)->latest()->get(); 
+    	$testimonials=Category::where('type','testimonial')->with('excerpt')->where('is_admin',1)->latest()->get();
+
+    	$brands=Category::where('type','brand')->with('preview')->where('is_admin',1)->latest()->get();
 
     	$plans=Plan::where('status',1)->where('is_default',0)->latest()->take(3)->get();
     	$header=Option::where('key','header')->first();
@@ -73,7 +73,7 @@ class FrontendController extends Controller
 
     	$about_1=Option::where('key','about_1')->first();
     	$about_1=json_decode($about_1->value ?? '');
-       
+
         $about_2=Option::where('key','about_2')->first();
         $about_2=json_decode($about_2->value ?? '');
 
@@ -105,7 +105,7 @@ class FrontendController extends Controller
 
     }
 
-   
+
     public function page($slug){
         $info=Term::where('slug',$slug)->with('content','excerpt')->where('is_admin',1)->first();
         if(empty($info)){
@@ -117,15 +117,15 @@ class FrontendController extends Controller
 
         SEOMeta::setTitle($info->title);
         SEOMeta::setDescription($info->excerpt->value ?? null);
-       
+
 
         SEOTools::setTitle($info->title);
         SEOTools::setDescription($info->excerpt->value ?? null);
-       
-        
+
+
         SEOTools::opengraph()->addProperty('image', asset('uploads/logo.png'));
         SEOTools::twitter()->setTitle($info->title);
-       
+
         SEOTools::jsonLd()->addImage(asset('uploads/logo.png'));
         return view('page',compact('info'));
     }
@@ -139,19 +139,19 @@ class FrontendController extends Controller
 
         SEOMeta::setTitle('Our Service');
         SEOMeta::setDescription($seo->description ?? null);
-       
+
 
         SEOTools::setTitle('Our Service');
         SEOTools::setDescription($seo->description ?? null);
-       
-        
+
+
         SEOTools::opengraph()->addProperty('image', asset('uploads/logo.png'));
         SEOTools::twitter()->setTitle('Our Service');
-       
+
         SEOTools::jsonLd()->addImage(asset('uploads/logo.png'));
-        $features=Category::where('type','features')->with('preview','excerpt')->where('is_admin',1)->latest()->get(); 
+        $features=Category::where('type','features')->with('preview','excerpt')->where('is_admin',1)->latest()->get();
         return view('service',compact('features'));
-    } 
+    }
 
     public function priceing(){
         $seo=Option::where('key','seo')->first();
@@ -162,17 +162,17 @@ class FrontendController extends Controller
 
         SEOMeta::setTitle('Priceing');
         SEOMeta::setDescription($seo->description ?? null);
-       
+
 
         SEOTools::setTitle('Priceing');
         SEOTools::setDescription($seo->description ?? null);
-       
-        
+
+
         SEOTools::opengraph()->addProperty('image', asset('uploads/logo.png'));
         SEOTools::twitter()->setTitle('Priceing');
-       
+
         SEOTools::jsonLd()->addImage(asset('uploads/logo.png'));
-        
+
         $plans=Plan::where('status',1)->where('is_default',0)->get();
 
         return view('priceing',compact('plans'));
@@ -217,8 +217,8 @@ class FrontendController extends Controller
             if ($validator->fails())
             {
                 $msg['errors']['domain']=$validator->errors()->all()[0];
-                return response()->json($msg,422); 
-                
+                return response()->json($msg,422);
+
             }
         }
         $validatedData = $request->validate([
@@ -235,7 +235,7 @@ class FrontendController extends Controller
 
         return response()->json('Your message submitted successfully !!');
     }
-    
+
 
     public function register_view($id)
     {
@@ -248,11 +248,11 @@ class FrontendController extends Controller
         \App::setlocale($request->local);
         return redirect('/');
     }
-    
+
 
     public function register(Request $request,$id)
     {
-    	
+
           if(env('NOCAPTCHA_SITEKEY') != null){
            $messages = [
                 'g-recaptcha-response.required' => 'You must check the reCAPTCHA.',
@@ -266,11 +266,11 @@ class FrontendController extends Controller
             if ($validator->fails())
             {
                 $msg['errors']['domain']=$validator->errors()->all()[0];
-                return response()->json($msg,422); 
-                
+                return response()->json($msg,422);
+
             }
         }
-        
+
         \Validator::extend('without_spaces', function($attr, $value){
     		return preg_match('/^\S*$/u', $value);
     	});
@@ -313,12 +313,12 @@ class FrontendController extends Controller
     	$check=Domain::where('domain',$domain)->first();
     	if (!empty($check)) {
     		$msg['errors']['domain']="Sorry Domain Name Already Exists";
-    		return response()->json($msg,422); 
+    		return response()->json($msg,422);
     	}
 
     	if (!empty($check_fulldomain)) {
     		$msg['errors']['domain']="Sorry Domain Name Already Exists";
-    		return response()->json($msg,422); 
+    		return response()->json($msg,422);
     	}
 
         DB::beginTransaction();
@@ -347,21 +347,21 @@ class FrontendController extends Controller
     	Auth::loginUsingId($user->id);
         $auto=true;
         if($info->price == 0){
-          $auto_order=Option::where('key','auto_order')->first(); 
+          $auto_order=Option::where('key','auto_order')->first();
           if($auto_order->value == 'yes'){
             $plan=$info;
             $auto=true;
           }
 
           $auto=false;
-          
+
         }
         else{
-          $plan=Plan::where('is_default',1)->first();  
+          $plan=Plan::where('is_default',1)->first();
           $auto=false;
         }
 
-        
+
         $userplan=new Userplanmeta;
         $userplan->user_id=Auth::id();
         if(!empty($plan)){
@@ -394,7 +394,7 @@ class FrontendController extends Controller
             $transection->category_id = 2;
             $transection->user_id = Auth::id();
             $transection->trasection_id = \Str::random(10);
-            $transection->status = 1;            
+            $transection->status = 1;
             $transection->save();
 
             $userplan=new Userplan;
@@ -405,7 +405,7 @@ class FrontendController extends Controller
             $userplan->trasection_id = $transection->id ?? null;
             $userplan->will_expired=$expiry_date;
 
-            
+
             if($auto == true){
                 $userplan->status=1;
             }
@@ -416,7 +416,7 @@ class FrontendController extends Controller
 
         }
         else{
-            
+
             if(!empty($plan)){
                 if($plan->is_default==1){
                     $exp_days =  $plan->days ?? 5;
@@ -444,7 +444,7 @@ class FrontendController extends Controller
                 }
             }
 
-        
+
         }
 
         DB::commit();
@@ -454,7 +454,7 @@ class FrontendController extends Controller
 
 
     	return response()->json(['Successfully Registered']);
-    	
+
     }
 
 
@@ -474,7 +474,7 @@ class FrontendController extends Controller
     {
         if(Session::has('success')){
            Session::flash('success', 'Thank You For Subscribe After Review The Order You Will Get A Notification Mail From Admin');
-           return redirect('merchant/plan'); 
+           return redirect('merchant/plan');
         }
     	$info=Plan::where('status',1)->where('is_default',0)->where('price','>',0)->findorFail($id);
     	$getways=Category::where('type','payment_getway')->where('featured',1)->where('slug','!=','cod')->with('preview')->get();
@@ -495,7 +495,7 @@ class FrontendController extends Controller
         $currency=json_decode($currency->value);
         $currency_name=$currency->currency_name;
         $total=$info->price;
-       
+
         $data['ref_id']=$id;
         $data['getway_id']=$request->mode;
         $data['amount']=$total;
@@ -521,18 +521,18 @@ class FrontendController extends Controller
         if ($getway->slug=='mollie') {
             return Mollie::make_payment($data);
         }
-        if ($getway->slug=='paystack') {            
+        if ($getway->slug=='paystack') {
             return Paystack::make_payment($data);
         }
-        if ($getway->slug=='mercado') {            
+        if ($getway->slug=='mercado') {
             return Mercado::make_payment($data);
         }
-        
+
         if ($getway->slug=='razorpay') {
            return redirect('/merchant/payment-with/razorpay');
         }
 
-        
+
     }
 
     public function success()
@@ -559,7 +559,7 @@ class FrontendController extends Controller
 
             $max_order=Userplan::max('id');
             $order_prefix=Option::where('key','order_prefix')->first();
-            
+
 
             $order_no = $order_prefix->value.$max_order;
 
@@ -570,14 +570,14 @@ class FrontendController extends Controller
             $user->plan_id = $plan->id;
             $user->trasection_id = $transection->id;
             $user->will_expired=$expiry_date;
-            
+
             $auto_order=Option::where('key','auto_order')->first();
              if($auto_order->value == 'yes' && $transection->status == 1){
                 $user->status=1;
              }
-             
+
             $user->save();
-           
+
             if($auto_order->value == 'yes' && $transection->status == 1){
                 $meta=Userplanmeta::where('user_id',Auth::id())->first();
                 if(empty($meta)){
@@ -602,7 +602,7 @@ class FrontendController extends Controller
             $data['info']=$user;
             $data['to_admin']=env('MAIL_TO');
             $data['from_email']=Auth::user()->email;
-            
+
             try {
                 if(env('QUEUE_MAIL') == 'on'){
                     dispatch(new \App\Jobs\SendInvoiceEmail($data));
@@ -611,9 +611,9 @@ class FrontendController extends Controller
                     \Mail::to(env('MAIL_TO'))->send(new OrderMail($data));
                 }
             } catch (Exception $e) {
-                
+
             }
-            
+
                 DB::commit();
             } catch (Exception $e) {
                 DB::rollback();
@@ -637,5 +637,5 @@ class FrontendController extends Controller
          return view('seller.plan.index',compact('posts'));
     }
 
-   
+
 }

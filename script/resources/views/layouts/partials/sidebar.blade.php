@@ -26,16 +26,16 @@
         @endcan
 
         @php
-        $plan=false;            
+        $plan=false;
         @endphp
         @can('plan.create')
         @php
-           $plan=true; 
+           $plan=true;
         @endphp
-        @endcan 
+        @endcan
         @can('plan.list')
         @php
-        $plan=true;            
+        $plan=true;
         @endphp
         @endcan
         @if($plan == true)
@@ -69,10 +69,10 @@
             @endcan
             @can('customer.list')
             <li><a class="nav-link" href="{{ route('admin.customer.index') }}">{{ __('All Customers') }}</a></li>
-            @endcan 
+            @endcan
             @can('customer.request')
             <li><a class="nav-link" href="{{ route('admin.customer.index','type=3') }}">{{ __('Customer Request') }}</a></li>
-            @endcan 
+            @endcan
             @can('customer.list')
             <li><a class="nav-link" href="{{ route('admin.customer.index','type=2') }}">{{ __('Suspended Customers') }}</a></li>
             @endcan
@@ -128,7 +128,7 @@
           </ul>
         </li>
         @endcan
-        
+
         @can('language_edit')
         <li class="dropdown {{ Request::is('admin/language*') ? 'active' : '' }}">
           <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="flaticon-translation"></i> <span>{{ __('Language') }}</span></a>
@@ -171,7 +171,7 @@
         </li>
         @endcan
 
-       
+
         @can('admin.list','role.list')
          <li class="dropdown {{ Request::is('admin/role*') ? 'active' : '' }} {{ Request::is('admin/users*') ? 'active' : '' }}">
           <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="flaticon-member"></i> <span>{{ __('Admins & Roles') }}</span></a>
@@ -189,7 +189,7 @@
         @endif
 
         @if(Auth::user()->role_id==3)
-        
+
         <li class="{{ Request::is('seller/dashboard*') ? 'active' : '' }}">
           <a class="nav-link" href="{{ route('seller.dashboard') }}">
             <i class="flaticon-dashboard"></i> <span>{{ __('Dashboard') }}</span>
@@ -204,6 +204,11 @@
 
           </ul>
         </li>
+        <li class="{{ Request::is('seller/order/create') ? 'active' : '' }}">
+            <a class="nav-link" href="{{ route('seller.order.create') }}">
+              <i class="flaticon-customer"></i> <span>{{ __('POS') }}</span>
+            </a>
+          </li>
 
         <li class="dropdown {{ Request::is('seller/product*') ? 'active' : '' }} {{ Request::is('seller/inventory*') ? 'active' : '' }} {{ Request::is('seller/category*') ? 'active' : '' }} {{ Request::is('seller/attribute*') ? 'active' : '' }} {{ Request::is('seller/brand*') ? 'active' : '' }} {{ Request::is('seller/coupon*') ? 'active' : '' }}">
           <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="flaticon-box"></i> <span>{{ __('Products') }}</span></a>
@@ -242,7 +247,7 @@
         </li>
 
 
-      
+
 
         <li class="dropdown {{ Request::is('seller/location*') ? 'active' : '' }} {{ Request::is('seller/shipping*') ? 'active' : '' }}">
           <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="flaticon-delivery"></i> <span>{{ __('Shipping') }}</span></a>
@@ -266,7 +271,7 @@
             <li><a class="nav-link" href="{{ route('seller.settings.show','shop-settings') }}">{{ __('Shop Settings') }}</a></li>
             <li><a class="nav-link" href="{{ route('seller.settings.show','payment') }}">{{ __('Payment Options') }}</a></li>
             <li><a class="nav-link" href="{{ route('seller.settings.show','plan') }}">{{ __('Subscriptions') }}</a></li>
-            
+
           </ul>
         </li>
           <li class="dropdown {{ Request::is('seller/marketing*') ? 'active' : '' }}">
@@ -276,18 +281,18 @@
              <li><a class="nav-link" href="{{ route('seller.marketing.show','tag-manager') }}">{{ __('Google Tag Manager') }}</a></li>
             <li><a class="nav-link" href="{{ route('seller.marketing.show','facebook-pixel') }}">{{ __('Facebook Pixel') }}</a></li>
              <li><a class="nav-link" href="{{ route('seller.marketing.show','whatsapp') }}">{{ __('Whatsapp Api') }}</a></li>
-          
+
           </ul>
         </li>
         <li class="menu-header">{{ __('SALES CHANNELS') }}</li>
         <li class="dropdown {{ Request::is('seller/setting*') ? 'active' : '' }}">
           <a href="#" class="nav-link has-dropdown"><i class="flaticon-shop"></i> <span>{{ __('Online store') }}</span></a>
           <ul class="dropdown-menu">
-            <li><a href="{{ route('seller.theme.index') }}">{{ __('Themes') }}</a></li> 
-            <li><a href="{{ route('seller.menu.index') }}">{{ __('Menus') }}</a></li> 
-            <li><a href="{{ route('seller.page.index') }}">{{ __('Pages') }}</a></li> 
-            <li><a href="{{ route('seller.slider.index') }}">{{ __('Sliders') }}</a></li> 
-            <li><a href="{{ route('seller.seo.index') }}">{{ __('Seo') }}</a></li> 
+            <li><a href="{{ route('seller.theme.index') }}">{{ __('Themes') }}</a></li>
+            <li><a href="{{ route('seller.menu.index') }}">{{ __('Menus') }}</a></li>
+            <li><a href="{{ route('seller.page.index') }}">{{ __('Pages') }}</a></li>
+            <li><a href="{{ route('seller.slider.index') }}">{{ __('Sliders') }}</a></li>
+            <li><a href="{{ route('seller.seo.index') }}">{{ __('Seo') }}</a></li>
 
           </ul>
         </li>
@@ -296,7 +301,7 @@
           <a href="{{ domain_info('full_domain') }}" class="btn btn-primary btn-lg btn-block btn-icon-split">
             <i class="fas fa-external-link-alt"></i>{{ __('Your Website') }}
           </a>
-        </div> 
-        @endif      
+        </div>
+        @endif
       </aside>
     </div>

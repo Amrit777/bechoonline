@@ -57,7 +57,7 @@
                 <div class="card-body">
                     <form method="post" action="{{ route('seller.orders.method') }}" class="basicform">
                         @csrf
-                  
+
                     <div class="float-left">
                         @if(count($orders) > 0)
                         <div class="input-group mb-1">
@@ -69,19 +69,19 @@
                                 <option value="completed">{{ __('Completed') }}</option>
                                 <option value="archived">{{ __('Archived') }}</option>
                                 <option value="canceled">{{ __('Cancel') }}</option>
-                               
+
 
                                 @if($type== 'canceled')
                                 <option value="delete" class="text-danger">{{ __('Delete Permanently') }}</option>
-                                
+
                                 @endif
                             </select>
-                            <div class="input-group-append">                                            
+                            <div class="input-group-append">
                                 <button class="btn btn-primary basicbtn" type="submit">{{ __('Submit') }}</button>
                             </div>
                         </div>
                         @endif
-                    </div>  
+                    </div>
                    <div class="float-right">
                     @if(count($request->all()) > 0)
                     {{ $orders->appends($request->all())->links('vendor.pagination.bootstrap-4') }}
@@ -89,7 +89,7 @@
                     {{ $orders->links('vendor.pagination.bootstrap-4') }}
                     @endif
                    </div>
-               
+
 
 
                     <div class="table-responsive">
@@ -133,16 +133,16 @@
                                         <span class="badge badge-success">{{ __('Complete') }}</span>
 
                                         @elseif($row->payment_status==0)
-                                        <span class="badge badge-danger">{{ __('Cancel') }}</span> 
+                                        <span class="badge badge-danger">{{ __('Cancel') }}</span>
                                         @elseif($row->payment_status==3)
-                                        <span class="badge badge-danger">{{ __('Incomplete') }}</span> 
+                                        <span class="badge badge-danger">{{ __('Incomplete') }}</span>
 
                                         @endif
                                     </td>
                                     <td>
                                         @if($row->status=='pending')
                                         <span class="badge badge-warning">{{ __('Awaiting processing') }}</span>
-                                        
+
                                         @elseif($row->status=='processing')
                                         <span class="badge badge-primary">{{ __('Processing') }}</span>
 
@@ -156,7 +156,7 @@
                                         <span class="badge badge-warning">{{ __('Archived') }}</span>
                                         @elseif($row->status=='canceled')
                                         <span class="badge badge-danger">{{ __('Canceled') }}</span>
-                                        
+
                                         @else
                                         <span class="badge badge-info">{{ $row->status }}</span>
 
@@ -188,13 +188,13 @@
                     </form>
                     </div>
                 </div>
-                
+
             </div>
         </div>
     </div>
 
 
-    
+
 </div>
 
 
@@ -218,7 +218,7 @@
                             <option value="1" >{{ __('Complete') }}</option>
                             <option value="3" >{{ __('Incomplete') }}</option>
                             <option value="cancel" >{{ __('Cancel') }}</option>
-                           
+
                         </select>
                     </div>
                 </div>

@@ -31,6 +31,7 @@
         "razorpay/razorpay": "^2.5",
         "samdark/sitemap": "^2.2",
         "spatie/laravel-analytics": "^3.10",
+        "spatie/laravel-cookie-consent": "^2.12",
         "spatie/laravel-permission": "^3.17"
     },
     "require-dev": {
