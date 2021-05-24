@@ -25,10 +25,11 @@
                                     <a class="nav-link" id="profile-tab4" data-toggle="tab" href="#profile4" role="tab"
                                         aria-controls="profile" aria-selected="false">Location</a>
                                 </li>
-                                <li class="nav-item">
+                                {{-- amit singh --}}
+                                {{-- <li class="nav-item">
                                     <a class="nav-link" id="profile-tab4" data-toggle="tab" href="#pwa" role="tab"
                                         aria-controls="profile" aria-selected="false">PWA Settings</a>
-                                </li>
+                                </li> --}}
 
                                 <li class="nav-item">
                                     <a class="nav-link" id="contact-tab4" data-toggle="tab" href="#contact4" role="tab"

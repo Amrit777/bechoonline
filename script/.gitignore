@@ -1,4 +1,4 @@
-script/vendor
+vendor/
 node_modules/
 npm-debug.log
 yarn-error.log
@@ -26,6 +26,5 @@ script/.env
 script/bootstrap/cache/
 script/storage/
 script/public/storage/
-script/vendor/
 
 

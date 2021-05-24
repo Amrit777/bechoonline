@@ -49,6 +49,19 @@
                                             <input id="email" type="email" class="form-control" name="email">
                                         </div>
                                     </div>
+                                    {{-- amit singh --}}
+                                    <div class="row">
+                                        <div class="form-group col-6">
+                                            <label for="store_name">{{ __('Store Name') }}</label>
+                                            <input id="store_name" type="text" class="form-control" name="store_name"
+                                                autofocus>
+                                        </div>
+                                        <div class="form-group col-6">
+                                            <label for="whatsapp_number">{{ __('WhatsaApp Number') }}</label>
+                                            <input id="whatsapp_number" type="number" class="form-control"
+                                                name="whatsapp_number">
+                                        </div>
+                                    </div>
 
                                     <div class="row">
                                         <div class="form-group col-6">
@@ -78,7 +91,8 @@
                                             <div class="col-12">
                                                 <div class="form-group">
                                                     <div class="input-group mb-2">
-                                                        <input type="text" class="form-control text-right" name="domain"
+                                                        <input id="domain-input-append" type="text"
+                                                            class="form-control text-right" name="domain"
                                                             placeholder="subdomain without protocol">
                                                         <div class="input-group-append">
                                                             <div class="input-group-text">
@@ -174,6 +188,23 @@
     <script src="{{ asset('assets/js/scripts.js') }}"></script>
     <script src="{{ asset('assets/js/form.js') }}"></script>
     <script src="{{ asset('assets/js/admin/register.js') }}"></script>
+    <script>
+        $('#store_name').on('keypress', function(event) {
+            var regex = new RegExp("^[a-zA-Z0-9 ]+$");
+            var key = String.fromCharCode(!event.charCode ? event.which : event.charCode);
+            if (!regex.test(key)) {
+                event.preventDefault();
+                return false;
+            }
+        });
+        $(function() {
+            $('#store_name').keyup(function() {
+                key = $(this).val().replace(/ /g, "-").toLowerCase();
+                $('#domain-input-append').val(key);
+            });
+        });
+
+    </script>
 </body>
 
 </html>

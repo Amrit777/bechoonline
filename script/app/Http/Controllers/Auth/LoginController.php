@@ -63,7 +63,7 @@ class LoginController extends Controller
         } elseif (Auth::user()->role_id == 3) {
             $url = Auth::user()->user_domain->full_domain;
             if (Auth::user()->status == 3) {
-                $this->redirectTo = env('APP_URL') . '/merchant/dashboard';
+                $this->redirectTo = env('APP_URL');
                 return $this->redirectTo;
             } elseif (Auth::user()->status === 0 || Auth::user()->status == 2) {
                 $this->redirectTo = env('APP_URL') . '/suspended';
