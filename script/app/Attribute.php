@@ -39,6 +39,6 @@ class Attribute extends Model
 	}
 
 	public function files(){
-		return $this->hasOne('App\File','attribute_id','id'); 
+		return $this->hasOne('App\File','attribute_id','id');
 	}
 }

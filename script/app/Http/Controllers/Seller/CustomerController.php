@@ -24,7 +24,7 @@ class CustomerController extends Controller
      */
     public function index(Request $request)
     {
-     
+
         if ($request->src) {
             $posts=Customer::where('created_by',Auth::id())->where($request->type,'LIKE','%'.$request->src.'%')->latest()->paginate(50);
         }
@@ -77,19 +77,19 @@ class CustomerController extends Controller
        $limit=user_limit();
         $posts_count=Customer::where('created_by',Auth::id())->count();
          if ($limit['customer_limit'] <= $posts_count) {
-        
+
          $error['errors']['error']='Maximum customers limit exceeded';
          return response()->json($error,401);
         }
 
-         
+
        $validatedData = $request->validate([
         'email' => 'required|email|unique:users,email|max:50',
         'name' => 'required|max:20',
         'password' => 'required|min:6',
        ]);
 
-       
+
        $check=Customer::where([['created_by',Auth::id()],['email',$request->email]])->first();
        if(!empty($check)){
          $error['errors']['error']='Email already exists';
@@ -145,21 +145,21 @@ class CustomerController extends Controller
         $validatedData = $request->validate([
         'email' => 'required|max:50|email|unique:customers,email,' . $id,
         'name' => 'required|max:20',
-       
+
        ]);
 
         if ($request->change_password) {
           $validatedData = $request->validate([
             'password' => 'required|min:6',
           ]);
-        }   
+        }
        $user=  Customer::where('created_by',Auth::id())->findorFail($id);
        $user->name = $request->name;
        $user->email = $request->email;
        if ($request->change_password) {
           $user->password = Hash::make($request->password);
        }
-       
+
        $user->save();
 
        return response()->json(['User Updated Successfully']);
@@ -173,8 +173,8 @@ class CustomerController extends Controller
      */
     public function destroy(Request $request)
     {
-       
-       
+
+
          if ($request->type=='delete') {
             $auth_id=Auth::id();
             foreach ($request->ids as $key => $id) {
@@ -184,6 +184,6 @@ class CustomerController extends Controller
             return response()->json(['Customer Deleted']);
         }
 
-        
+
     }
 }

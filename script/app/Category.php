@@ -53,7 +53,7 @@ class Category extends Model
 	public function child_relation()
 	{
 		 return $this->belongsToMany(Category::class,Categoryrelation::class,'relation_id');
-		
+
 	}
 
 	public function gateway_users()

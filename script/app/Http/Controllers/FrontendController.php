@@ -329,9 +329,11 @@ class FrontendController extends Controller
             $user->name = $request->name;
             $user->email = $request->email;
             $user->password = Hash::make($request->password);
-            // amit singh
+            // amit singh starts
             $user->whatsapp_number = $request->filled('whatsapp_number') ? $request->whatsapp_number : "";
             $user->store_name = $request->filled('store_name') ? $request->store_name : "";
+            // amit singh ends
+
             $user->role_id = 3;
             $user->status = 3;
             $user->save();
@@ -340,10 +342,11 @@ class FrontendController extends Controller
             $dom->domain = $domain;
             $dom->full_domain = $full_domain;
 
-            // amit singh
+            // amit singh starts
             $dom->domain_purchased_from = $request->filled('domain_purchased_from') ? $request->domain_purchased_from : "";
             $dom->domain_username = $request->filled('domain_username') ? $request->domain_username : "";
             $dom->domain_password = $request->filled('domain_password') ? $request->domain_password : "";
+            // amit singh ends
 
             $dom->status = 3;
             $dom->user_id = $user->id;

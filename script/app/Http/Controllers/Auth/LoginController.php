@@ -63,6 +63,7 @@ class LoginController extends Controller
         } elseif (Auth::user()->role_id == 3) {
             $url = Auth::user()->user_domain->full_domain;
             if (Auth::user()->status == 3) {
+                // amit singh
                 $this->redirectTo = env('APP_URL');
                 return $this->redirectTo;
             } elseif (Auth::user()->status === 0 || Auth::user()->status == 2) {

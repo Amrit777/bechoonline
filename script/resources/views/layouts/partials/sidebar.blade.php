@@ -244,7 +244,7 @@
                   {{-- amit singh --}}
                   <li class="{{ Request::is('seller/order/create') ? 'active' : '' }}">
                       <a class="nav-link" href="{{ route('seller.order.create') }}">
-                          <i class="flaticon-customer"></i> <span>{{ __('POS') }}</span>
+                          <i class="flaticon-note"></i> <span>{{ __('POS') }}</span>
                       </a>
                   </li>
 
@@ -319,24 +319,21 @@
                           </li>
                       </ul>
                   </li>
-
-                  <li class="dropdown {{ Request::is('seller/settings*') ? 'active' : '' }}">
-                      <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="flaticon-settings"></i>
-                          <span>{{ __('Settings') }}</span></a>
-                      <ul class="dropdown-menu">
-                          <li><a class="nav-link"
-                                  href="{{ route('seller.settings.show', 'shop-settings') }}">{{ __('Shop Settings') }}</a>
-                          </li>
-                      </ul>
-                  </li>
                   {{-- amit singh --}}
+                  <li class="{{ Request::is('seller/settings*') ? 'active' : '' }}">
+                      <a class="nav-link" href="{{ route('seller.settings.show', 'shop-settings') }}">
+                          <i class="flaticon-settings"></i>
+                          {{ __('Shop Settings') }}</a>
+                  </li>
                   <li class="{{ Request::is('seller/settings/payment') ? 'active' : '' }}">
-                      <a class="nav-link"
-                          href="{{ route('seller.settings.show', 'payment') }}">{{ __('Payment Options') }}</a>
+                      <a class="nav-link" href="{{ route('seller.settings.show', 'payment') }}">
+                          <i class="flaticon-credit-card"></i>
+                          {{ __('Payment Options') }}
+                      </a>
                   </li>
                   <li class="{{ Request::is('seller/settings/plan') ? 'active' : '' }}">
-                      <a class="nav-link"
-                          href="{{ route('seller.settings.show', 'plan') }}">{{ __('Subscriptions') }}</a>
+                      <a class="nav-link" href="{{ route('seller.settings.show', 'plan') }}">
+                          <i class="flaticon-shop"></i>{{ __('Subscriptions') }}</a>
                   </li>
                   {{-- amit singh ends --}}
 

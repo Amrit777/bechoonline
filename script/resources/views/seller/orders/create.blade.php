@@ -76,30 +76,27 @@
                                             </select>
                                         </td>
                                         <td>
+                                            {{-- amit singh added --}}
                                             @if (count($row->options) > 0)
-                                                <select class="form-control select2 multislect option " name="option[]" multiple>
-
-                                                    {{-- <option disabled selected>{{ __('Select Option') }}</option> --}}
-
-                                                    @foreach ($row->options as $option)
-
-                                                        <option @if ($option->type == 1) disabled @endif>{{ $option->name }}
-                                                        </option>
-
-                                                        @foreach ($option->childrenCategories as $item)
-                                                            <option value="{{ $item->id }}"
-                                                                data-mainprice="{{ $row->price->price }}"
-                                                                data-productid="{{ $row->id }}"
-                                                                data-price="{{ $item->amount }}"
-                                                                data-amounttype="{{ $item->amount_type }}">&nbsp&nbsp
-                                                                {{ $item->name }}</option>
-                                                        @endforeach
-
-                                                    @endforeach
-                                                </select>
+                                                @foreach ($row->options as $key => $option)
+                                                    <div class="form-group">
+                                                        <label class="form-label">{{ $option->name }} @if ($option->is_required == 1) <span
+                                                                    class="text-danger">*</span> @endif
+                                                        </label>
+                                                        <div class="selectgroup w-100">
+                                                            @foreach ($option->childrenCategories as $item)
+                                                                <label class="selectgroup-item">
+                                                                    <input @if ($option->select_type == 1) type="checkbox" name="option[]"  @else type="radio" name="option[{{ $key }}]" @endif value="{{ $item->id }}" class="selectgroup-input
+                                                                             @if ($option->is_required == 1) req  @endif" >
+                                                                    <span
+                                                                        class="selectgroup-button">{{ $item->name }}</span>
+                                                                </label>
+                                                            @endforeach
+                                                        </div>
+                                                    </div>
+                                                @endforeach
                                             @endif
                                         </td>
-
                                         <td>
                                             <div class="input-group">
                                                 <input type="number" class="form-control" @if ($row->stock->stock_manage == 1) max="{{ $row->stock->stock_qty }}" min="0" @endif required="" value="1" name="qty">

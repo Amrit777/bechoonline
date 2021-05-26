@@ -29,7 +29,7 @@ class LoginController extends Controller
      *
      * @var string
      */
-   // protected $redirectTo;
+    // protected $redirectTo;
 
     /**
      * Create a new controller instance.
@@ -43,36 +43,30 @@ class LoginController extends Controller
 
     public function redirectTo()
     {
-        if (Auth::user()->role_id==1) {
-            $this->redirectTo=env('APP_URL').'/admin/dashboard';
+        if (Auth::user()->role_id == 1) {
+            $this->redirectTo = env('APP_URL') . '/admin/dashboard';
+            return $this->redirectTo;
+        } elseif (Auth::user()->role_id == 2) {
+            $url = Auth::user()->user_domain->full_domain;
+            if (url('/') != $url) {
+                Auth::logout();
+                $this->redirectTo = $url . '/user/login';
+            } else {
+                $this->redirectTo = $url . '/user/dashboard';
+            }
+
+            return $this->redirectTo;
+        } elseif (Auth::user()->role_id == 3) {
+            $url = Auth::user()->user_domain->full_domain;
+            if (url('/') != $url) {
+                Auth::logout();
+                $this->redirectTo = $url . '/login';
+            } else {
+                $this->redirectTo = $url . '/seller/dashboard';
+            }
+
             return $this->redirectTo;
         }
-        elseif (Auth::user()->role_id==2) {
-           $url= Auth::user()->user_domain->full_domain;
-           if (url('/') != $url) {
-             Auth::logout();
-             $this->redirectTo=$url.'/user/login';
-           }
-           else{
-             $this->redirectTo=$url.'/user/dashboard';
-           }
-          
-           return $this->redirectTo;
-       }
-       elseif (Auth::user()->role_id==3) {
-          $url= Auth::user()->user_domain->full_domain;
-          if (url('/') != $url) {
-             Auth::logout();
-             $this->redirectTo=$url.'/login';
-           }
-           else{
-             $this->redirectTo=$url.'/seller/dashboard';
-           }
-          
-           return $this->redirectTo;
-       }
-       $this->middleware('guest')->except('logout');
-   }
-
-
+        $this->middleware('guest')->except('logout');
+    }
 }

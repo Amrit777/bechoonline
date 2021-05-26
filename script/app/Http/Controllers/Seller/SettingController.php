@@ -408,12 +408,13 @@ class SettingController extends Controller
             $socials = Useroption::where('user_id', $user_id)->where('key', 'socials')->first();
             $local = $local->value ?? '';
             $socials = json_decode($socials->value ?? '');
-            if (file_exists('uploads/' . Auth::id() . '/manifest.json')) {
-                $pwa = file_get_contents('uploads/' . Auth::id() . '/manifest.json');
-                $pwa = json_decode($pwa);
-            } else {
-                $pwa = [];
-            }
+            $pwa = [];
+            // if (file_exists('uploads/' . Auth::id() . '/manifest.json')) {
+            //     $pwa = file_get_contents('uploads/' . Auth::id() . '/manifest.json');
+            //     $pwa = json_decode($pwa);
+            // } else {
+            //     $pwa = [];
+            // }
 
             $order_receive_method = Useroption::where('user_id', $user_id)->where('key', 'order_receive_method')->first();
             $order_receive_method = $order_receive_method->value ?? 'email';
