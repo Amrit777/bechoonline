@@ -11,18 +11,18 @@ class Useroption extends Model
     {
         $user_id = domain_info('user_id');
         $tax = Useroption::where('user_id', $user_id)->where('key', 'tax')->first();
-        return !empty($tax) ? $tax : 0;
+        return !empty($tax) ? $tax->value : 0;
     }
     public function gstinValue()
     {
         $user_id = domain_info('user_id');
         $gstin = Useroption::where('user_id', $user_id)->where('key', 'gstin')->first();
-        return !empty($gstin) ? $gstin : "";
+        return !empty($gstin) ? $gstin->value : "";
     }
     public function min_delivery_amtValue()
     {
         $user_id = domain_info('user_id');
         $min_delivery_amt = Useroption::where('user_id', $user_id)->where('key', 'min_delivery_amt')->first();
-        return !empty($min_delivery_amt) ? $min_delivery_amt : 0;
+        return !empty($min_delivery_amt) ? $min_delivery_amt->value : 0;
     }
 }

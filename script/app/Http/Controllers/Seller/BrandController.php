@@ -8,9 +8,10 @@ use App\Category;
 use App\Categorymeta;
 use Auth;
 use Str;
+
 class BrandController extends Controller
 {
-   
+
     /**
      * Display a listing of the resource.
      *
@@ -18,8 +19,8 @@ class BrandController extends Controller
      */
     public function index()
     {
-        $posts=Category::where('user_id',Auth::id())->where('type','brand')->with('preview')->latest()->paginate(20);
-        return view('seller.brand.index',compact('posts'));
+        $posts = Category::where('user_id', Auth::id())->where('type', 'brand')->with('preview')->latest()->paginate(20);
+        return view('seller.brand.index', compact('posts'));
     }
 
     /**
@@ -40,50 +41,53 @@ class BrandController extends Controller
      */
     public function store(Request $request)
     {
-         
-          $limit=user_limit();
-         $posts_count=\App\Category::where('user_id',Auth::id())->where('type','brand')->count();
-         if ($limit['brand_limit'] <= $posts_count) {
-        
-         $error['errors']['error']='Maximum Brand limit exceeded';
-         return response()->json($error,401);
+
+        $validatedData = $request->validate([
+            'name' => 'required|unique:categories|max:100',
+            'file' => 'image|max:500',
+        ]);
+        $limit = user_limit();
+        $posts_count = \App\Category::where('user_id', Auth::id())->where('type', 'brand')->count();
+        if ($limit['brand_limit'] <= $posts_count) {
+
+            $error['errors']['error'] = 'Maximum Brand limit exceeded';
+            return response()->json($error, 401);
         }
 
-         if ($limit['storage_limit'] <= str_replace(',', '', folderSize('uploads/'.Auth::id()))) {
-         \Session::flash('error', 'Maximum storage limit exceeded');
-         $error['errors']['error']='Maximum storage limit exceeded';
-         return response()->json($error,401);
+        if ($limit['storage_limit'] <= str_replace(',', '', folderSize('uploads/' . Auth::id()))) {
+            \Session::flash('error', 'Maximum storage limit exceeded');
+            $error['errors']['error'] = 'Maximum storage limit exceeded';
+            return response()->json($error, 401);
         }
 
-        $slug=Str::slug($request->name);
-        
-        $check=Category::where('type','brand')->where('slug',$slug)->count();
+        $slug = Str::slug($request->name);
+
+        $check = Category::where('type', 'brand')->where('slug', $slug)->count();
         if ($check > 0) {
-            $slug= $slug.'-'.rand(20,100);    
+            $slug = $slug . '-' . rand(20, 100);
         }
 
 
-        $category= new Category;
-        $category->name=$request->name;
-        $category->slug=$slug;      
-        $category->type='brand';
-        $category->featured=$request->featured;
-        $category->user_id=Auth::id();
+        $category = new Category;
+        $category->name = $request->name;
+        $category->slug = $slug;
+        $category->type = 'brand';
+        $category->featured = $request->featured;
+        $category->user_id = Auth::id();
         $category->save();
 
-        if($request->file){
+        if ($request->file) {
 
-            $fileName = time().'.'.$request->file->extension();  
-            $path='uploads/'.Auth::id().'/'.date('y/m');
+            $fileName = time() . '.' . $request->file->extension();
+            $path = 'uploads/' . Auth::id() . '/' . date('y/m');
             $request->file->move($path, $fileName);
-            $name=$path.'/'.$fileName;
+            $name = $path . '/' . $fileName;
 
-            $meta= new Categorymeta;
-            $meta->category_id =$category->id;
-            $meta->type="preview";
-            $meta->content=$name;
+            $meta = new Categorymeta;
+            $meta->category_id = $category->id;
+            $meta->type = "preview";
+            $meta->content = $name;
             $meta->save();
-
         }
 
         return response()->json(['Brand Created']);
@@ -108,8 +112,8 @@ class BrandController extends Controller
      */
     public function edit($id)
     {
-        $info= Category::where('user_id',Auth::id())->findOrFail($id);
-        return view('seller.brand.edit',compact('info'));
+        $info = Category::where('user_id', Auth::id())->findOrFail($id);
+        return view('seller.brand.edit', compact('info'));
     }
 
     /**
@@ -121,40 +125,39 @@ class BrandController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $category= Category::where('user_id',Auth::id())->findOrFail($id);
-        $category->name=$request->name;
-             
-        $category->featured=$request->featured;
+        $category = Category::where('user_id', Auth::id())->findOrFail($id);
+        $category->name = $request->name;
+
+        $category->featured = $request->featured;
         $category->save();
 
-        if($request->file){
-            $limit=user_limit();
-            if ($limit['storage_limit'] <= str_replace(',', '', folderSize('uploads/'.Auth::id()))) {
-               \Session::flash('error', 'Maximum storage limit exceeded');
-               $error['errors']['error']='Maximum storage limit exceeded';
-               return response()->json($error,401);
+        if ($request->file) {
+            $limit = user_limit();
+            if ($limit['storage_limit'] <= str_replace(',', '', folderSize('uploads/' . Auth::id()))) {
+                \Session::flash('error', 'Maximum storage limit exceeded');
+                $error['errors']['error'] = 'Maximum storage limit exceeded';
+                return response()->json($error, 401);
             }
 
-            if(!empty($category->preview)){
-                if(file_exists($category->preview->content)){
+            if (!empty($category->preview)) {
+                if (file_exists($category->preview->content)) {
                     unlink($category->preview->content);
                 }
             }
 
-            $fileName = time().'.'.$request->file->extension();  
-            $path='uploads/'.Auth::id().'/'.date('y/m');
+            $fileName = time() . '.' . $request->file->extension();
+            $path = 'uploads/' . Auth::id() . '/' . date('y/m');
             $request->file->move($path, $fileName);
-            $name=$path.'/'.$fileName;
-            $meta =  Categorymeta::where('category_id',$category->id)->where('type','preview')->first();
-            if (empty($meta)){
-              $meta= new Categorymeta;  
+            $name = $path . '/' . $fileName;
+            $meta =  Categorymeta::where('category_id', $category->id)->where('type', 'preview')->first();
+            if (empty($meta)) {
+                $meta = new Categorymeta;
             }
-            
-            $meta->category_id =$category->id;
-            $meta->type="preview";
-            $meta->content=$name;
-            $meta->save();
 
+            $meta->category_id = $category->id;
+            $meta->type = "preview";
+            $meta->content = $name;
+            $meta->save();
         }
 
 
@@ -169,10 +172,10 @@ class BrandController extends Controller
      */
     public function destroy(Request $request)
     {
-        if ($request->type=='delete') {
+        if ($request->type == 'delete') {
             foreach ($request->ids as $key => $row) {
-                $id=base64_decode($row);
-                $category= Category::destroy($id);
+                $id = base64_decode($row);
+                $category = Category::destroy($id);
             }
         }
 

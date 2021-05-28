@@ -19,7 +19,7 @@
 	<div class="card-body">
 
 		<div class="float-left mb-2">
-			<button class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">{{ __('Create New') }}</button>				
+			<button class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">{{ __('Create New') }}</button>
 		</div>
 		<div class="table-responsive custom-table">
 			<table class="table">
@@ -62,11 +62,12 @@
 					@csrf
 					<div class="form-group">
 						<label>{{ __('Select Image') }}</label>
-						<input type="file" accept="Image/*" name="file" required="" class="form-control"> 
+						<input type="file" accept="Image/*" name="file" required="" class="form-control">
+                        <span>The file may not be greater than 500 kilobytes. The file must be an image.</span>
 					</div>
 					<div class="form-group">
 						<label>{{ __('Url') }}</label>
-						<input type="text"  name="url" required="" value="#" class="form-control"> 
+						<input type="text"  name="url" required="" value="#" class="form-control">
 					</div>
 
 				</div>

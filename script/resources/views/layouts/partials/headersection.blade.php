@@ -4,6 +4,6 @@
   	  @foreach(request()->segments() as $segment)
       <div class="breadcrumb-item">{{ $segment }}</div>
       @endforeach
-      
+
   </div>
 </div>

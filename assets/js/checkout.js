@@ -1,53 +1,69 @@
 (function ($) {
-"use strict";
+	"use strict";
 
-$('.type').on('change',()=>{
-	var type=$('.type').val();
-	if (type==1) {
-		$('.location').show();
+	$('.type').on('change', () => {
+		var type = $('.type').val();
+		if (type == 1) {
+			$('.location').show();
 		}
-		else{
+		else {
+			console.log("sddssdds");
+			$('#phone').removeAttr("required");
+			$('#phonelabel').removeClass("required");
+
+			$('#address').removeAttr("required");
+			$('#addresslabel').removeClass("required");
+			$("input[name='address']").removeAttr('required');
+
+			$('#address').removeAttr("required");
+			$('#addresslabel').removeClass("required");
+			$('#location').removeAttr("required");
+			$('#locationlabel').removeClass("required");
+			$('#zip').removeAttr("required");
+			$('#ziplabel').removeClass("required");
+			$("#payment_id").removeAttr("required");
+			$('#payidlabel').removeClass("required");
 			$('.location').hide();
 		}
-});
-
-$('#location').on('change',()=>{
-	var location_id=$('#location').val();
-	var shipping_url=$('#shipping').val();			
-	var url=shipping_url+'/'+location_id;			
-	$.ajax({
-		type: 'get',
-		url: url,
-		dataType: 'json',
-		success: function(response){ 
-			$('.shipping_method').remove();				
-
-			$.each(response, function(index, row){
-				var html='<div class="custom-control custom-radio shipping_method "><input id="'+row.id+'" name="shipping_method" data-amount="'+row.slug+'" value="'+row.id+'" type="radio" class="custom-control-input method'+row.id+'" onclick="calculateShipping('+row.id+')" required><label  class="custom-control-label" for="'+row.id+'">'+row.name+'</label></div>';
-				$('#method_area').append(html);
-			});
-
-
-		},
-
 	});
 
-	$('.location').show()
-});
+	$('#location').on('change', () => {
+		var location_id = $('#location').val();
+		var shipping_url = $('#shipping').val();
+		var url = shipping_url + '/' + location_id;
+		$.ajax({
+			type: 'get',
+			url: url,
+			dataType: 'json',
+			success: function (response) {
+				$('.shipping_method').remove();
 
-})(jQuery);	
+				$.each(response, function (index, row) {
+					var html = '<div class="custom-control custom-radio shipping_method "><input id="' + row.id + '" name="shipping_method" data-amount="' + row.slug + '" value="' + row.id + '" type="radio" class="shippingmethod custom-control-input method' + row.id + '" onclick="calculateShipping(' + row.id + ')" required><label  class="custom-control-label" for="' + row.id + '">' + row.name + '</label></div>';
+					$('#method_area').append(html);
+				});
+
+
+			},
+
+		});
+
+		$('.location').show()
+	});
+
+})(jQuery);
 
 function calculateShipping(id) {
 
-	var amount= $('.method'+id).attr('data-amount');
-	var shipping_amount=parseFloat(amount);
-	var TotalAmount=parseFloat($('#TotalAmount').val());
+	var amount = $('.method' + id).attr('data-amount');
+	var shipping_amount = parseFloat(amount);
+	var TotalAmount = parseFloat($('#TotalAmount').val());
 
 
-	var weight_amount= calculateWeight(shipping_amount);
+	var weight_amount = calculateWeight(shipping_amount);
 	$('.total_shipping_area').show();
 	$('#total_shipping_amount').html(weight_amount);
-	var total=TotalAmount+weight_amount;
+	var total = TotalAmount + weight_amount;
 	$('#total_cart_amount').html(total)
 }
 

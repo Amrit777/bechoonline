@@ -21,21 +21,21 @@ class CategoryController extends Controller
          }
          else{
             $posts=Category::withCount('posts')->where('type','category')->latest()->paginate(20);
-         }   
+         }
 
-       
+
        return view('admin.category.index',compact('posts'));
-    } 
+    }
 
     public function countries(Request $request)
     {
         if ($request->src) {
-           $posts=Category::withCount('posts')->where('type','country')->where($request->type,$request->src)->latest()->paginate(20); 
+           $posts=Category::withCount('posts')->where('type','country')->where($request->type,$request->src)->latest()->paginate(20);
         }
         else{
             $posts=Category::withCount('posts')->where('type','country')->latest()->paginate(20);
         }
-       
+
        return view('admin.location.country.index',compact('posts'));
     }
     public function countryCreate()
@@ -51,7 +51,7 @@ class CategoryController extends Controller
         else{
           $posts=Category::withCount('posts')->where('type','city')->latest()->paginate(20);
         }
-       
+
        return view('admin.location.city.index',compact('posts'));
     }
     public function cityCreate()
@@ -59,7 +59,7 @@ class CategoryController extends Controller
         return view('admin.location.city.create');
     }
 
-   
+
 
 
     /**
@@ -80,7 +80,7 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        
+
         $validatedData = $request->validate([
         'name' => 'required|unique:categories|max:100',
         'file' => 'image|max:1000',
@@ -89,7 +89,7 @@ class CategoryController extends Controller
         if (empty($slug)) {
             $slug=Category::max('id')+1;
         }
-         
+
         $post= new Category;
         $post->name=$request->name;
         $post->slug=$slug;
@@ -98,12 +98,12 @@ class CategoryController extends Controller
             request()->file->move('uploads/admin/1/'.date('y/m'), $imageName);
             $post->avatar='uploads/admin/1/'.date('y/m').'/'.$imageName;
         }
-        
+
         $post->type=$request->type;
         if ($request->p_id) {
            $post->p_id=$request->p_id;
         }
-        
+
         $post->featured=$request->featured;
         $post->save();
 
@@ -181,7 +181,7 @@ class CategoryController extends Controller
             }
             $post->avatar='uploads/'.date('y/m').'/'.$imageName;
         }
-        
+
         $post->p_id=$request->p_id;
         $post->featured=$request->featured;
         $post->save();
@@ -192,7 +192,7 @@ class CategoryController extends Controller
           $data['zoom']=$request->zoom;
           $meta= Categorymeta::where('type','mapinfo')->where('category_id',$post->id)->first();
           if (!empty($meta)) {
-         
+
           $meta->content=json_encode($data);
           $meta->save();
            }
@@ -210,7 +210,7 @@ class CategoryController extends Controller
      */
     public function destroy(Request $request)
     {
-        
+
         if ($request->type == "delete") {
            foreach ($request->ids as $row) {
                 $category=Category::with('preview')->find($row);
@@ -219,7 +219,7 @@ class CategoryController extends Controller
                         unlink($category->preview->content);
                     }
                 }
-                
+
                 $category->delete();
            }
         }

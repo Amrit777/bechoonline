@@ -311,10 +311,13 @@
                                         <div class="form-group">
                                             <label>Logo</label>
                                             <input type="file" name="logo" accept="image/*" class="form-control">
+                                            <span>The logo may not be greater than 1000 kilobytes. The logo must be a file
+                                                of type: png.</span>
                                         </div>
                                         <div class="form-group">
                                             <label>Favicon</label>
                                             <input type="file" name="favicon" accept="image/*" class="form-control">
+                                            <span>The favicon may not be greater than 100 kilobytes. The favicon must be a file of type: ico.</span>
                                         </div>
 
                                         <label>Social Links</label>

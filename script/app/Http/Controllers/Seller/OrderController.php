@@ -136,6 +136,7 @@ class OrderController extends Controller
      */
     public function store(Request $request)
     {
+
         $user_id = Auth::id();
         $this->user_id = $user_id;
         $option = $request->option ?? [];
@@ -186,7 +187,14 @@ class OrderController extends Controller
             $price = $price;
 
 
-            Cart::add($term->id, $term->title, $request->qty, $price, 0, ['attribute' => $attributes, 'options' => $options, 'preview' => $term->preview->media->url ?? asset('uploads/default.png')]);
+            Cart::add(
+                $term->id,
+                $term->title,
+                $request->qty,
+                $price,
+                0,
+                ['attribute' => $attributes, 'options' => $options, 'preview' => $term->preview->media->url ?? asset('uploads/default.png')]
+            );
             Cart::setGlobalTax(tax());
         }
 
@@ -233,21 +241,27 @@ class OrderController extends Controller
     public function make_order(Request $request)
     {
         $user_id = Auth::id();
-
+        $customer_id = null;
         if ($request->customer_type == 1) {
             $user = Customer::where('created_by', $user_id)->where('email', $request->email)->first();
-            if (empty($user)) {
-                $error['errors']['error'] = 'Sorry, Customer Not Exist';
-                return response()->json($error, 401);
+            if (!empty($user)) {
+                $customer_id = $user->id;
             }
-            $customer_id = $user->id;
-        } else {
-            $customer_id = null;
         }
 
         if (Cart::count() == 0) {
             return response()->json('Cart empty');
         }
+
+
+        // amit singh
+        $gstQry = Useroption::where('key', 'tax')->where('user_id', $user_id)->first();
+        $gst = 0;
+        if (!empty($gstQry)) {
+            $gst = $gstQry->value;
+        }
+
+
 
         if ($request->delivery_type == '1') {
 
@@ -259,10 +273,8 @@ class OrderController extends Controller
                 'location' => 'required',
                 'zip_code' => 'required',
                 'shipping_method' => 'required',
-                // 'payment_method' => 'required',
-                // 'payment_id' => 'required|max:100',
-                "payment_id" => "required_if:payment_status,==,1|max:100"
-
+                'payment_method' => 'required',
+                'payment_id' => 'required|max:100',
             ]);
 
 
@@ -284,6 +296,8 @@ class OrderController extends Controller
             $order->order_type  = $request->delivery_type;
             $order->payment_status = $request->payment_status;
             $order->status = 'pending';
+            $order->tax = Cart::tax();
+            $order->gst = $gst; // amit singh
             $order->tax = Cart::tax();
             $order->shipping = $this->calculateWeight(Cart::weight(), $shipping_amount->slug);
             $order->total = $this->calculateShipping(Cart::total(), $shipping_amount->slug, Cart::weight());
@@ -330,24 +344,28 @@ class OrderController extends Controller
 
             return response()->json(['Order Created']);
         } else {
-
-            $validatedData = $request->validate([
-                // 'email' => 'required|email|max:50',
-                'name' => 'required|max:50',
-                // 'payment_method' => 'required',
-                // 'payment_id' => 'required|max:100',
-                "payment_id" => "required_if:payment_status,==,1|max:100"
-            ]);
-
-            if (!$request->filled('name')) {
-                $request['name'] = 'Guest';
+            // amit singh
+            if ($request->customer_type == 1) {
+                $validatedData = $request->validate([
+                    'email' => 'required|email|max:50'
+                ]);
             }
+            if ($request->payment_status == 1) {
+                $validatedData = $request->validate([
+                    'payment_id' => 'required|max:100'
+                ]);
+            }
+            $validatedData = $request->validate([
+                'name' => 'required|max:50',
+                'payment_method' => 'required'
+            ]);
+            // amit singh
+
             $user_id = Auth::id();
-            // $user = Customer::where('created_by', $user_id)->where('email', $request->email)->first();
-            // if (empty($user)) {
-            //     $error['errors']['error'] = 'Sorry, Customer Not Exist';
-            //     return response()->json($error, 401);
-            // }
+            $user = Customer::where('created_by', $user_id)->where('email', $request->email)->first();
+            if (!empty($user)) {
+                $customer_id = $user->id;
+            }
             $prefix = Useroption::where('user_id', $user_id)->where('key', 'order_prefix')->first();
             $max_id = Order::max('id');
             if (empty($prefix)) {
@@ -366,12 +384,13 @@ class OrderController extends Controller
             $order->order_type  = $request->delivery_type;
             $order->payment_status = $request->payment_status;
             $order->status = 'pending';
+            $order->gst = $gst; // amit singh
             $order->tax = Cart::tax();
             $order->total = Cart::total();
             $order->save();
 
-            $info['name'] = $request->filled('name') ? $request->name : "Guest";
-            $info['email'] = $request->filled('email') ? $request->email : "";
+            $info['name'] = $request->name;
+            $info['email'] = $request->email;
             $info['comment'] = $request->comment;
             $info['coupon_discount'] = Cart::discount();
             $info['sub_total'] = Cart::subtotal();
