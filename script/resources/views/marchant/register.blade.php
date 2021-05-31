@@ -42,11 +42,12 @@
                                         <div class="form-group col-6">
                                             <label for="frist_name">{{ __('Name') }}</label>
                                             <input id="frist_name" type="text" class="form-control" name="name"
-                                                autofocus>
+                                                autofocus required="">
                                         </div>
                                         <div class="form-group col-6">
                                             <label for="last_name">{{ __('Email') }}</label>
-                                            <input id="email" type="email" class="form-control" name="email">
+                                            <input id="email" type="email" class="form-control" name="email"
+                                                required="">
                                         </div>
                                     </div>
                                     {{-- amit singh --}}
@@ -54,12 +55,12 @@
                                         <div class="form-group col-6">
                                             <label for="store_name">{{ __('Store Name') }}</label>
                                             <input id="store_name" type="text" class="form-control" name="store_name"
-                                                autofocus>
+                                                autofocus required="">
                                         </div>
                                         <div class="form-group col-6">
                                             <label for="whatsapp_number">{{ __('WhatsaApp Number') }}</label>
                                             <input id="whatsapp_number" type="number" class="form-control"
-                                                name="whatsapp_number">
+                                                name="whatsapp_number" required="">
                                         </div>
                                     </div>
                                     {{-- amit singh --}}
@@ -85,16 +86,15 @@
                                     @if ($info->custom_domain == 0)
                                         <div class="form-divider">
                                             {{ __('Your Subdomain') }} <br>
-                                            <span>{{ __('Example') }}: </span>
-                                            <span>{example}.{{ env('APP_PROTOCOLESS_URL') }}</span>
                                         </div>
                                         <div class="row">
                                             <div class="col-12">
                                                 <div class="form-group">
                                                     <div class="input-group mb-2">
                                                         <input id="domain-input-append" type="text"
-                                                            class="form-control text-right" name="domain"
-                                                            placeholder="subdomain without protocol">
+                                                            class="form-control text-right"
+                                                            placeholder="subdomain without protocol" disabled>
+                                                        <input type="text" name="domain" hidden>
                                                         <div class="input-group-append">
                                                             <div class="input-group-text">
                                                                 .{{ env('APP_PROTOCOLESS_URL') }}</div>
@@ -104,11 +104,9 @@
 
                                             </div>
                                         </div>
-                                    @else
+                                        {{-- @else
                                         <div class="form-divider">
                                             {{ __(' Protocol Less Domain') }}<br>
-                                            <span>{{ __('Example') }}: </span>
-                                            <span>{{ __('example.com') }}</span>
                                         </div>
                                         <div class="row">
                                             <div class="col-12">
@@ -121,37 +119,60 @@
                                                         class="text-danger">{{ __('You Need To Also Connect With Your Domain With Our Server Once Complete The Payment You Will Get The Credentials') }}</small></span>
 
                                             </div>
-                                        </div>
+                                        </div> --}}
 
                                     @endif
 
                                     @if ($info->custom_domain == 1)
                                         <div class="form-divider">
-                                            {{ __('Full Domain') }} <br>
-                                            <span>{{ __('Example') }}: </span>
-                                            <span>https://example.com</span>
+                                            {{ __('Enter domain details') }} <br>
                                         </div>
                                         <div class="row">
+                                            <div <div class="form-group col-6">
+                                                <label for="password2"
+                                                    class="d-block">{{ __('Select your domain provider') }}</label>
+                                                <select class="form-control" name="domain_purchased_from">
+                                                    {{-- @if (!empty($domainslist))
+                                                        @foreach ($domainslist as $item)
+                                                            <option value="{{ $key }}">{{ $row }}</option>
+                                                        @endforeach
+                                                    @endif --}}
+                                                    <option value="Bechocart">Bechocart</option>
+                                                    <option value="GoDaddy">GoDaddy</option>
+                                                    <option value="Hostinger">Hostinger</option>
+                                                    <option value="Bigrock">Bigrock</option>
+                                                </select>
+                                            </div>
+                                            <div class="form-group col-6">
+                                                <label for="password2"
+                                                    class="d-block">{{ __('Or, you can buy clicking on this button') }}</label>
+                                                <a href="https://www.google.com" target="blank"
+                                                    class="btn btn-primary btn-lg btn-block ">
+                                                    {{ __(' Buy domain') }}
+                                                </a>
+                                            </div>
                                             <div class="col-12">
                                                 <div class="form-group">
-
                                                     <input type="text" class="form-control" name="full_domain"
-                                                        placeholder="Enter Your Domain with protocol">
-
-
+                                                        placeholder="Enter Your domain (URL)">
                                                 </div>
-
                                             </div>
+                                            <div class="form-group col-6">
+                                                <input id="domain_username" type="text" class="form-control"
+                                                    name="domain_username" placeholder="Enter Your domain username">
+                                            </div>
+                                            <div class="form-group col-6">
+                                                <input id="domain_password" type="text" class="form-control"
+                                                    name="domain_password" placeholder="Enter Your domain password">
+                                            </div>
+
                                         </div>
+                                        {{-- amit singh --}}
                                     @endif
                                     @if (env('NOCAPTCHA_SITEKEY') != null)
                                         <div class="form-group">
-
                                             {!! NoCaptcha::renderJs() !!}
                                             {!! NoCaptcha::display() !!}
-
-
-
                                         </div>
                                     @endif
                                     <div class="form-group">
@@ -159,7 +180,8 @@
                                             <input type="checkbox" required="" name="agree" class="custom-control-input"
                                                 id="agree">
                                             <label class="custom-control-label"
-                                                for="agree">{{ __('I agree with the') }} <a
+                                                for="agree">{{ __('I agree with the') }}
+                                                <a
                                                     href="{{ url('/page/terms-and-condition') }}">{{ __('terms and conditions') }}</a></label>
                                         </div>
                                     </div>
@@ -202,6 +224,7 @@
             $('#store_name').keyup(function() {
                 key = $(this).val().replace(/ /g, "-").toLowerCase();
                 $('#domain-input-append').val(key);
+                $("input[name=domain]").val(key);
             });
         });
 

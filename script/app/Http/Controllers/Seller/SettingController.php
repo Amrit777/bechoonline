@@ -406,8 +406,16 @@ class SettingController extends Controller
             $tax = Useroption::where('user_id', $user_id)->where('key', 'tax')->first();
             $local = Useroption::where('user_id', $user_id)->where('key', 'local')->first();
             $socials = Useroption::where('user_id', $user_id)->where('key', 'socials')->first();
+            if(empty($socials->value)){
+                die("empty");
+                $defaultSocials = '[{"icon":"fa-facebook-square","url":""},{"icon":"fa fa-instagram","url":""}]';
+                $socials = json_decode($defaultSocials);
+            }else{
+                print_r($socials->value);
+                die("not empty");
+                $socials = json_decode($socials->value);
+            }
             $local = $local->value ?? '';
-            $socials = json_decode($socials->value ?? '');
             $pwa = [];
             // if (file_exists('uploads/' . Auth::id() . '/manifest.json')) {
             //     $pwa = file_get_contents('uploads/' . Auth::id() . '/manifest.json');

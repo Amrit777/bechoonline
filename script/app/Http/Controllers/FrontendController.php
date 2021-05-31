@@ -337,6 +337,18 @@ class FrontendController extends Controller
             $user->role_id = 3;
             $user->status = 3;
             $user->save();
+            // amit singh starts
+            if ($request->filled('shop_name')) {
+                $shop_name = Useroption::where('user_id', $user->id)->where('key', 'shop_name')->first();
+                if (empty($shop_name)) {
+                    $shop_name = new Useroption;
+                    $shop_name->key = 'shop_name';
+                }
+                $shop_name->value = $request->shop_name;
+                $shop_name->user_id = $user->id;
+                $shop_name->save();
+            }
+            // amit singh ends
 
             $dom = new Domain;
             $dom->domain = $domain;
