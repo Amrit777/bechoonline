@@ -356,11 +356,15 @@ class SettingController extends Controller
                 $social = new Useroption;
                 $social->key = 'socials';
             }
-
+            $placeholders = [
+                'Enter Facebook URL',
+                'Enter Instagram URL'
+            ];
             $links = [];
             foreach ($request->icon ?? [] as $key => $value) {
                 $data['icon'] = $value;
                 $data['url'] = $request->url[$key];
+                $data['placeholder'] = $placeholders[$key]; // amit singh
                 array_push($links, $data);
             }
 
@@ -406,13 +410,12 @@ class SettingController extends Controller
             $tax = Useroption::where('user_id', $user_id)->where('key', 'tax')->first();
             $local = Useroption::where('user_id', $user_id)->where('key', 'local')->first();
             $socials = Useroption::where('user_id', $user_id)->where('key', 'socials')->first();
-            if(empty($socials->value)){
-                die("empty");
-                $defaultSocials = '[{"icon":"fa-facebook-square","url":""},{"icon":"fa fa-instagram","url":""}]';
+
+            if (empty($socials->value)) {
+                $defaultSocials = '[{"icon":"fa-facebook-square","url":"","placeholder":"Enter facebook URL"},
+                {"icon":"fa fa-instagram","url":"","placeholder":"Enter Instagram URL"}]';
                 $socials = json_decode($defaultSocials);
-            }else{
-                print_r($socials->value);
-                die("not empty");
+            } else {
                 $socials = json_decode($socials->value);
             }
             $local = $local->value ?? '';

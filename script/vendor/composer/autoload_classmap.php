@@ -108,7 +108,7 @@ return array(
     'App\\Http\\Controllers\\Seller\\ReportController' => $baseDir . '/app/Http/Controllers/Seller/ReportController.php',
     'App\\Http\\Controllers\\Seller\\ReviewController' => $baseDir . '/app/Http/Controllers/Seller/ReviewController.php',
     'App\\Http\\Controllers\\Seller\\SeoController' => $baseDir . '/app/Http/Controllers/Seller/SeoController.php',
-    'App\\Http\\Controllers\\Seller\\SettingController' => $baseDir . '/app/Http/Controllers/Seller/SettingController copy.php',
+    'App\\Http\\Controllers\\Seller\\SettingController' => $baseDir . '/app/Http/Controllers/Seller/SettingController.php',
     'App\\Http\\Controllers\\Seller\\ShippingController' => $baseDir . '/app/Http/Controllers/Seller/ShippingController.php',
     'App\\Http\\Controllers\\Seller\\SliderController' => $baseDir . '/app/Http/Controllers/Seller/SliderController.php',
     'App\\Http\\Controllers\\Seller\\Subscription\\InstamojoController' => $baseDir . '/app/Http/Controllers/Seller/Subscription/InstamojoController.php',

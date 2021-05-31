@@ -317,38 +317,35 @@
                                         <div class="form-group">
                                             <label>Favicon</label>
                                             <input type="file" name="favicon" accept="image/*" class="form-control">
-                                            <span>The favicon may not be greater than 100 kilobytes. The favicon must be a file of type: ico.</span>
+                                            <span>The favicon may not be greater than 100 kilobytes. The favicon must be a
+                                                file of type: ico.</span>
                                         </div>
 
                                         <label>Social Links</label>
                                         <table class="table table-bordered table-striped" id="user_table">
                                             <thead>
                                                 <tr>
+                                                    <th width="35%"></th>
                                                     <th width="35%">Url</th>
-                                                    <th width="35%">Icon Class (<a href="https://fontawesome.com/"
-                                                            target="_blank">fontawesome</a>)</th>
-                                                    <th width="30%"><button type="button" name="add" id="add"
-                                                            class="btn btn-success btn-sm">Add New</button></th>
+                                                    <th width="35%">Icon Class</th>
+                                                    {{-- <th width="30%"><button type="button" name="add" id="add"
+                                                            class="btn btn-success btn-sm">Add New</button></th> --}}
                                                 </tr>
                                             </thead>
                                             <tbody>
 
                                                 @foreach ($socials ?? [] as $key => $row)
-
                                                     <tr>
+                                                        <td>{{ $row->placeholder }}</td>
                                                         <td><input type="text" name="url[]" class="form-control" required
                                                                 value="{{ $row->url }}" /></td>
-                                                        <td><input type="text" name="icon[]" class="form-control"
-                                                                placeholder="fa fa-facebook" required
+                                                        <td><input type="text" name="icon[]" class="form-control" required readonly="true"
                                                                 value="{{ $row->icon }}" /></td>
-                                                        <td><button type="button" name="remove" id=""
-                                                                class="btn btn-danger remove">Remove</button></td>
+                                                        {{-- <td><button type="button" name="remove" id=""
+                                                                class="btn btn-danger remove">Remove</button></td> --}}
                                                     </tr>
-
                                                 @endforeach
-
                                             </tbody>
-
                                         </table>
                                         <div class="form-group">
                                             <button class="btn btn-primary float-right col-3 basicbtn"
