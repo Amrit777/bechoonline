@@ -69,7 +69,7 @@
                                         <div class="form-group col-6">
                                             <label for="password" class="d-block">{{ __('Password') }}</label>
                                             <input id="password" type="password" class="form-control pwstrength"
-                                                data-indicator="pwindicator" name="password">
+                                                data-indicator="pwindicator" name="password" required>
                                             <div id="pwindicator" class="pwindicator">
                                                 <div class="bar"></div>
                                                 <div class="label"></div>
@@ -79,7 +79,7 @@
                                             <label for="password2"
                                                 class="d-block">{{ __('Password Confirmation') }}</label>
                                             <input id="password2" type="password" class="form-control"
-                                                name="password_confirmation">
+                                                name="password_confirmation" required>
                                         </div>
                                     </div>
 
@@ -131,7 +131,7 @@
                                             <div <div class="form-group col-6">
                                                 <label for="password2"
                                                     class="d-block">{{ __('Select your domain provider') }}</label>
-                                                <select class="form-control" name="domain_purchased_from">
+                                                <select class="form-control" name="domain_purchased_from" required>
                                                     {{-- @if (!empty($domainslist))
                                                         @foreach ($domainslist as $item)
                                                             <option value="{{ $key }}">{{ $row }}</option>
@@ -146,7 +146,7 @@
                                             <div class="form-group col-6">
                                                 <label for="password2"
                                                     class="d-block">{{ __('Or, you can buy clicking on this button') }}</label>
-                                                <a href="https://www.google.com" target="blank"
+                                                <a href="https://bechocart.supersite2.myorderbox.com/" target="blank"
                                                     class="btn btn-primary btn-lg btn-block ">
                                                     {{ __(' Buy domain') }}
                                                 </a>
@@ -154,16 +154,16 @@
                                             <div class="col-12">
                                                 <div class="form-group">
                                                     <input type="text" class="form-control" name="full_domain"
-                                                        placeholder="Enter Your domain (URL)">
+                                                        placeholder="Enter Your domain (URL)" required>
                                                 </div>
                                             </div>
                                             <div class="form-group col-6">
                                                 <input id="domain_username" type="text" class="form-control"
-                                                    name="domain_username" placeholder="Enter Your domain username">
+                                                    name="domain_username" placeholder="Enter Your domain username" required>
                                             </div>
                                             <div class="form-group col-6">
                                                 <input id="domain_password" type="text" class="form-control"
-                                                    name="domain_password" placeholder="Enter Your domain password">
+                                                    name="domain_password" placeholder="Enter Your domain password" required>
                                             </div>
 
                                         </div>

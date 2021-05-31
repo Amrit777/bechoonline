@@ -282,11 +282,15 @@ class FrontendController extends Controller
             'name' => 'required|string|max:255',
             'email' => 'required|unique:users|email|max:255',
             'password' => 'required|min:8|confirmed|string',
-            'domain' => 'required|max:50|without_spaces|string',
         ]);
 
         $info = Plan::where('status', 1)->findorFail($id);
         if ($info->custom_domain == 0) {
+            // amit singh
+            $validatedData = $request->validate([
+                'domain' => 'required|max:50|without_spaces|string',
+            ]);
+            // amit singh
             $domain = strtolower($request->domain) . '.' . env('APP_PROTOCOLESS_URL');
             $input = trim($domain, '/');
             if (!preg_match('#^http(s)?://#', $input)) {
@@ -299,7 +303,7 @@ class FrontendController extends Controller
             $validatedData = $request->validate([
                 'full_domain' => 'required|string|max:50',
             ]);
-            $domain = strtolower($request->domain);
+            $domain = strtolower($request->full_domain); //amit singh
             $input = trim($domain, '/');
             if (!preg_match('#^http(s)?://#', $input)) {
                 $input = 'http://' . $input;
@@ -353,7 +357,6 @@ class FrontendController extends Controller
             $dom = new Domain;
             $dom->domain = $domain;
             $dom->full_domain = $full_domain;
-
             // amit singh starts
             $dom->domain_purchased_from = $request->filled('domain_purchased_from') ? $request->domain_purchased_from : "";
             $dom->domain_username = $request->filled('domain_username') ? $request->domain_username : "";
@@ -384,7 +387,6 @@ class FrontendController extends Controller
                 $plan = Plan::where('is_default', 1)->first();
                 $auto = false;
             }
-
 
             $userplan = new Userplanmeta;
             $userplan->user_id = Auth::id();
