@@ -58,7 +58,7 @@
         {{-- end load --}}
 
         {{-- load whatsapp api --}}
-        {{ load_whatsapp() }}
+        {{-- {{ load_whatsapp() }} --}}
         {{-- end whatsapp api loading --}}
     </div>
     <!--====== End - Main App ======-->
@@ -71,7 +71,8 @@
     <input type="hidden" id="currency_icon" value="{{ $currency_info['currency_icon'] }}">
     <input type="hidden" id="preloader" value="{{ asset('uploads/preload.webp') }}">
     <input type="hidden" id="base_url" value="{{ url('/') }}">
-    <input type="hidden" id="theme_color" value="{{ Cache::get(domain_info('user_id') . 'theme_color', '#dc3545') }}">
+    <input type="hidden" id="theme_color"
+        value="{{ Cache::get(domain_info('user_id') . 'theme_color', '#dc3545') }}">
 
 
     <!--====== Vendor Js ======-->

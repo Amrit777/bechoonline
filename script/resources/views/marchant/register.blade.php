@@ -53,8 +53,8 @@
                                     {{-- amit singh --}}
                                     <div class="row">
                                         <div class="form-group col-6">
-                                            <label for="store_name">{{ __('Store Name') }}</label>
-                                            <input id="store_name" type="text" class="form-control" name="store_name"
+                                            <label for="shop_name">{{ __('Store Name') }}</label>
+                                            <input id="shop_name" type="text" class="form-control" name="shop_name"
                                                 autofocus required="">
                                         </div>
                                         <div class="form-group col-6">
@@ -212,7 +212,7 @@
     <script src="{{ asset('assets/js/form.js') }}"></script>
     <script src="{{ asset('assets/js/admin/register.js') }}"></script>
     <script>
-        $('#store_name').on('keypress', function(event) {
+        $('#shop_name').on('keypress', function(event) {
             var regex = new RegExp("^[a-zA-Z0-9 ]+$");
             var key = String.fromCharCode(!event.charCode ? event.which : event.charCode);
             if (!regex.test(key)) {
@@ -221,7 +221,7 @@
             }
         });
         $(function() {
-            $('#store_name').keyup(function() {
+            $('#shop_name').keyup(function() {
                 key = $(this).val().replace(/ /g, "-").toLowerCase();
                 $('#domain-input-append').val(key);
                 $("input[name=domain]").val(key);

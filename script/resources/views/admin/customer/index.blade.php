@@ -40,7 +40,7 @@
                 <option value="email">{{ __('Search By User Mail') }}</option>
 
               </select>
-              <div class="input-group-append">                                            
+              <div class="input-group-append">
                 <button class="btn btn-primary" type="submit"><i class="fas fa-search"></i></button>
               </div>
             </div>
@@ -64,13 +64,13 @@
                 <option value="delete" >{{ __('Delete Permanently') }}</option>
                 @endif
               </select>
-              <div class="input-group-append">                                            
+              <div class="input-group-append">
                 <button class="btn btn-primary basicbtn" type="submit">{{ __('Submit') }}</button>
               </div>
             </div>
             @endcan
           </div>
-          
+
 
           <div class="table-responsive">
             <table class="table table-striped table-hover text-center table-borderless">
@@ -111,7 +111,7 @@
                         {{ __('Action') }}
                       </button>
                       <div class="dropdown-menu">
-                       
+
                          @can('customer.edit')
                         <a class="dropdown-item has-icon" href="{{ route('admin.customer.edit',$row->id) }}"><i class="fas fa-user-edit"></i> {{ __('Edit') }}</a>
 
@@ -126,7 +126,7 @@
                          <a class="dropdown-item has-icon" href="{{ route('admin.customer.show',$row->id) }}"><i class="far fa-envelope"></i>{{ __('Send Email') }}</a>
                       </div>
                     </div>
-                   
+
 
                   </td>
                 </tr>
@@ -147,7 +147,7 @@
                </tr>
              </tfoot>
            </table>
-           
+
          </div>
        </form>
         {{ $posts->appends($request->all())->links('vendor.pagination.bootstrap-4') }}

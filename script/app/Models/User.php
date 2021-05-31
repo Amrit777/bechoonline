@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Useroption;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -9,9 +10,10 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\DB;
 use Spatie\Permission\Traits\HasRoles;
 use Laravel\Sanctum\HasApiTokens;
+
 class User extends Authenticatable
 {
-    use HasFactory, Notifiable,HasRoles,HasApiTokens;
+    use HasFactory, Notifiable, HasRoles, HasApiTokens;
 
     /**
      * The attributes that are mass assignable.
@@ -44,7 +46,7 @@ class User extends Authenticatable
     ];
 
 
-     public static function getpermissionGroups()
+    public static function getpermissionGroups()
     {
         $permission_groups = DB::table('permissions')
             ->select('group_name as name')
@@ -85,42 +87,56 @@ class User extends Authenticatable
 
     public function usermeta()
     {
-        return $this->hasOne('App\Usermeta')->where('type','content');
+        return $this->hasOne('App\Usermeta')->where('type', 'content');
     }
 
     public function user_domain()
     {
-        return $this->belongsTo('App\Domain','domain_id','id');
+        return $this->belongsTo('App\Domain', 'domain_id', 'id');
     }
 
     public function orders()
     {
-        return $this->hasMany('App\Order','customer_id','id');
+        return $this->hasMany('App\Order', 'customer_id', 'id');
     }
     public function orders_complete()
     {
-        return $this->hasMany('App\Order','customer_id','id')->where('status','completed');
+        return $this->hasMany('App\Order', 'customer_id', 'id')->where('status', 'completed');
     }
 
     public function orders_processing()
     {
-        return $this->hasMany('App\Order','customer_id','id')->where('status','!=','completed')->where('status','!=','canceled');
+        return $this->hasMany('App\Order', 'customer_id', 'id')->where('status', '!=', 'completed')->where('status', '!=', 'canceled');
     }
 
 
     public function user_plan()
     {
-        return $this->hasOne('App\Models\Userplan','user_id','id')->orderBy('id','DESC')->where('status',1)->with('plan_info');
+        return $this->hasOne('App\Models\Userplan', 'user_id', 'id')->orderBy('id', 'DESC')->where('status', 1)->with('plan_info');
     }
 
     public function customers()
     {
-       return $this->hasMany('App\User','created_by','id');
+        return $this->hasMany('App\User', 'created_by', 'id');
     }
 
-    public function userlimit(){
+    public function userlimit()
+    {
         return $this->hasOne('App\Models\Userplanmeta');
     }
-   
-  
+    public function useroptions($key, $want = null)
+    {
+        $whatsapp = Useroption::where('key', $key)->where('user_id', $this->id)->first();
+        if (!empty($whatsapp)) {
+            if (!empty($want)) {
+                $value = json_decode($whatsapp->value);
+                if (!empty($value)) {
+                    return $value->$want ?? "";
+                }
+            } else {
+                return $whatsapp->value;
+            }
+        }
+        return "";
+    }
 }

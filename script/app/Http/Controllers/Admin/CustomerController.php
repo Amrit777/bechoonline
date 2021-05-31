@@ -14,6 +14,8 @@ use App\Term;
 use Hash;
 use App\Models\Userplanmeta;
 use App\Models\Customer;
+use App\Useroption;
+
 class CustomerController extends Controller
 {
     protected $request;
@@ -45,7 +47,7 @@ class CustomerController extends Controller
                     return $q->where('domain',$request->src);
                 })->with('user_domain','user_plan')->where('status',$type)->latest()->paginate(40);
             }
-            
+
         }
         elseif (!empty($request->src) && !empty($request->term)) {
              if ($type === 'all') {
@@ -55,8 +57,8 @@ class CustomerController extends Controller
                 $posts=User::where('role_id',3)->where('status',$type)->with('user_domain','user_plan')->where($request->term,$request->src)->latest()->paginate(40);
              }
         }
-        else{  
-           if ($type === 'all') { 
+        else{
+           if ($type === 'all') {
             $posts=User::where('role_id',3)->with('user_domain','user_plan')->latest()->paginate(40);
            }
            else{
@@ -110,10 +112,10 @@ class CustomerController extends Controller
         $price=Plan::find($request->plan);
         if($price->is_default == 1){
            $validatedData = $request->validate([
-            
+
             'trasection_id' => 'required',
             'trasection_method' => 'required',
-            
+
           ]);
         }
 
@@ -130,10 +132,10 @@ class CustomerController extends Controller
         $domain->full_domain=$request->full_domain;
         $domain->user_id=$user->id;
         $domain->status=$request->domain_status;
-        $domain->save();   
+        $domain->save();
 
-        
-       
+
+
         $exp_days =  $price->days;
         $expiry_date = \Carbon\Carbon::now()->addDays(($exp_days - 1))->format('Y-m-d');
 
@@ -143,12 +145,12 @@ class CustomerController extends Controller
 
         $trasection=new Trasection;
         $trasection->user_id= $user->id;
-        $trasection->category_id = $request->trasection_method;  
-        $trasection->status=1;  
-        $trasection->trasection_id=$request->trasection_id;  
+        $trasection->category_id = $request->trasection_method;
+        $trasection->status=1;
+        $trasection->trasection_id=$request->trasection_id;
         $trasection->save();
-        
-        
+
+
 
         $plan=new Userplan;
         $plan->order_no=$order_prefix->value.$max_id;
@@ -171,10 +173,10 @@ class CustomerController extends Controller
         $meta->location_limit=$price->location_limit;
         $meta->brand_limit=$price->brand_limit;
         $meta->variation_limit=$price->variation_limit;
-        
+
         $meta->save();
 
-        
+
 
         $user_up=User::find($user->id);
         $user_up->domain_id=$domain->id;
@@ -202,6 +204,7 @@ class CustomerController extends Controller
 
         $customers=Customer::withCount('orders')->where('created_by',$id)->latest()->paginate(20);
         $posts=\App\Term::where('user_id',$id)->latest()->paginate(40);
+
        return view('admin.customer.show',compact('info','histories','customers','posts'));
     }
 
@@ -212,7 +215,7 @@ class CustomerController extends Controller
        }
 
        $info=User::withCount('term','orders','customers')->where('role_id',3)->findorFail($id);
-      
+
        $planinfo=Userplanmeta::where('user_id',$id)->first();
        abort_if(empty($planinfo),404);
        return view('admin.customer.planinfo',compact('info','planinfo'));
