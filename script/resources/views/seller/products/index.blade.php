@@ -18,11 +18,11 @@ $url=domain_info('full_domain');
 	</div>
 </div>
 @endif
-<div class="card @if($type==1) card-success @elseif($type==2) card-info @elseif($type==3) card-warning @elseif($type== 0 && $type != 'all') card-danger @endif">
+<div class="card table-card-body @if($type==1) card-success @elseif($type==2) card-info @elseif($type==3) card-warning @elseif($type== 0 && $type != 'all') card-danger @endif">
 	<div class="card-body">
 		<div class="row mb-2">
 			<div class="col-lg-8">
-				<div class="">
+				<div class="products-finalised-status">
 					
 					<a href="{{ route('seller.product.list',1) }}" class="mr-2 btn btn-outline-success @if($type==1) active @endif">{{ __('Publish') }} ({{ $actives }})</a>
 
@@ -33,17 +33,17 @@ $url=domain_info('full_domain');
 				</div>
 			</div>
 			<div class="col-lg-4">
-				
-				<a href="#" class="btn btn-info float-right mr-3" data-toggle="modal" data-target="#import">{{ __('Import') }}</a>
-				
-				<div class="float-right mr-3">
-					<a href="{{ route('seller.product.create') }}" class="btn btn-primary float-right">{{ __('Add New') }}</a>
+				<div class="add-import">
+					<a href="#" class="btn btn-info float-right mr-3" data-toggle="modal" data-target="#import">{{ __('Import') }}</a>
+					
+					<div class="float-right mr-3">
+						<a href="{{ route('seller.product.create') }}" class="btn btn-primary float-right">{{ __('Add New') }}</a>
+					</div>
 				</div>
-				
 			</div>
 		</div>
 		<br>
-		<div class="float-right">
+		<div class="float-right searching-cards">
 			<form>
 				<div class="input-group mb-2">
 
@@ -80,7 +80,7 @@ $url=domain_info('full_domain');
 				</div>
 				
 			</div>
-			<div class="table-responsive custom-table">
+			<div class="table-responsive custom-table display-desktop-table">
 				<table class="table">
 					<thead>
 						<tr>
@@ -154,7 +154,43 @@ $url=domain_info('full_domain');
 						</tr>
 					</tfoot>
 				</table>
+			</div>
 				
+				<ul class="card-tables display-mobile-table">
+					@foreach($posts as $row)
+					<li>
+						<div class="custom-control custom-checkbox">
+							<input type="checkbox" name="ids[]" class="custom-control-input" id="customCheck{{ $row->id }}" value="{{ $row->id }}">
+							<label class="custom-control-label" for="customCheck{{ $row->id }}"></label>
+						</div>
+						<div class="table-image">
+							<img src="{{ asset($row->preview->media->url ?? 'uploads/default.png') }}" height="50" alt="">
+						</div>
+						<div class="title">
+							<h6>{{ $row->title }} (#{{ $row->id }}) </h6>
+							<div class="edit-show">
+								<a href="{{ route('seller.product.edit',$row->id) }}">{{ __('Edit') }}</a> | <a href="{{ $url.'/product/'.$row->slug.'/'.$row->id }}" target="_blank">{{ __('Show') }}</a> 
+							</div>
+						</div>
+						<div class="status-visible">
+							@if($row->status==1)
+								<span class="badge badge-success">{{ __('Active') }}</span>
+								@elseif($row->status==2)
+								<span class="badge badge-info">{{ __('Draft') }}</span>
+								@elseif($row->status==3)
+								<span class="badge badge-warning">{{ __('Incomplete') }}</span>	
+								@elseif($row->status==0)
+								<span class="badge badge-danger">{{ __('Trash') }}</span>	
+
+								@endif
+						</div>
+						<div class="foot-bottom">
+							<div class="primary">{{ $row->updated_at->diffForHumans() }}</div>
+							<div class="secondary"><span>Total Sales</span>{{ $row->order_count }}</div>
+						</div>
+					</li>
+					@endforeach
+				</ul>
 			</form>
 			{{ $posts->appends($request->all())->links('vendor.pagination.bootstrap-4') }}
 		</div>

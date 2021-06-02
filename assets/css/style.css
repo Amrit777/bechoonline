@@ -5060,3 +5060,132 @@ a.d-flex {
   content: " *";
   color: red;
 }
+
+/*Kunal Behal CSS Changes */
+
+.display-mobile-table {
+    display: none;
+}
+
+ul.card-tables {
+    float: left;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    margin-top: 40px;
+    list-style: none;
+}
+
+ul.card-tables li {
+    float: left;
+    width: 100%;
+    margin-bottom: 10px;
+      background: #fff;
+    border-radius: 8px;
+    border-bottom: 2px solid #47c363;
+    box-shadow: 0 4px 8px rgb(0 0 0 / 3%);
+    padding: 13px;
+    position: relative;
+}
+
+ul.card-tables li .custom-control.custom-checkbox {
+    float: left;
+    line-height: 60px;
+    position: relative;
+    height: 60px;
+    width: 30px;
+    margin-right: 10px;
+}
+
+ul.card-tables li .table-image {
+    float: left;
+    width: 60px;
+    height: 60px;
+    overflow: hidden;
+    border-radius: 6px;
+    position: relative;
+    margin-right: 20px;
+}
+
+ul.card-tables li .table-image img {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    height: 100%;
+}
+
+ul.card-tables li .custom-control.custom-checkbox input#customCheck35 {
+}
+
+ul.card-tables li .custom-control label:before ,
+ul.card-tables li .custom-control label:after,
+ul.card-tables li .custom-control .custom-control-input {
+    top: 20px;
+}
+
+ul.card-tables li .status-visible {
+    float: right;
+    height: 60px;
+    line-height: 60px;
+}
+
+ul.card-tables li .title {
+    float: left;
+}
+
+ul.card-tables li .status-visible span.badge\ {
+}
+
+ul.card-tables li .foot-bottom {
+    float: left;
+    width: 100%;
+    margin-top: 10px;
+}
+
+ul.card-tables li .foot-bottom .primary {
+    float: left;
+    margin-left: 40px;
+}
+
+ul.card-tables li .foot-bottom .secondary {
+    float: right;
+}
+
+ul.card-tables li .foot-bottom .secondary span {
+    margin-right: 10px;
+}
+
+
+/*Responsiveness*/
+
+@media only screen and (max-width: 800px) {
+  .display-desktop-table {display: none;}
+  .display-mobile-table {display: inline-block;}
+  .products-finalised-status a.btn {min-width: 100px;margin: 6px 0;}
+  .card.table-card-body {background: transparent;box-shadow: none;border: none;border-radius: 0;}
+  .table-card-body .card-body {padding: 0;}
+  .edit-show a:first-child {margin-right: 6px;}
+  .edit-show a:last-child {margin-left: 6px;}
+}
+
+
+@media only screen and (max-width: 480px) {
+  .products-finalised-status a.btn {float: left;width: 48%;margin: 4px 1% !important;box-sizing: border-box;}
+  .add-import {float: left;width: 100%;margin-top: 10px;}
+  .add-import a.btn {width: 48%;margin: 5px 1%;}
+  .add-import .float-right.mr-3 { margin: 5px 1% !important; width: 48%;}
+  .add-import .float-right.mr-3 a.btn {width: 100%;margin: 0;}
+  .searching-cards {width: 100%;margin-bottom: 10px;}
+  ul.card-tables li .table-image {width: 40px;height: 40px;margin-right: 12px;}
+  ul.card-tables li .custom-control.custom-checkbox {position: absolute;top: 50%;transform: translateY(-50%);left: -7px;height: auto;width: auto;line-height: normal;}
+  ul.card-tables li .custom-control .custom-control-input,
+  ul.card-tables li .custom-control label:before,
+  ul.card-tables li .custom-control label:after{top: 0;}
+  ul.card-tables li .title h6 {display: -webkit-box;-webkit-line-clamp: 1;-webkit-box-orient: vertical;overflow: hidden;margin: 0;}
+  ul.card-tables li .status-visible {height: 40px;line-height: 40px;}
+  ul.card-tables li .foot-bottom .primary {margin-left: 0px;}
+}
+@media only screen and (max-width: 400px) {
+  ul.card-tables li .title {float: left;max-width: 130px;width: 100%;} 
+}
