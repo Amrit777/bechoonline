@@ -55,7 +55,7 @@
                                 <li class="list-group-item">{{ __('Email :') }} {{ $info->email }}</li>
                                 {{-- amit singh --}}
                                 <li class="list-group-item">{{ __('Whatsapp :') }}
-                                    {{ $info->useroptions('whatsapp', 'phone_number') ?? '' }}</li>
+                                    {{ $info->whatsapp_number ?? '' }}</li>
                                 <li class="list-group-item">{{ __('Store :') }} {{ $info->useroptions('shop_name') }}
                                 </li>
                                 {{-- amit singh --}}
