@@ -320,20 +320,20 @@
                       </ul>
                   </li>
                   {{-- amit singh --}}
-                  <li class="{{ Request::is('seller/settings*') ? 'active' : '' }}">
+                  <li class="{{ Request::is('seller/settings/shop-settings') ? 'active' : '' }}">
                       <a class="nav-link" href="{{ route('seller.settings.show', 'shop-settings') }}">
                           <i class="flaticon-settings"></i>
-                          {{ __('Shop Settings') }}</a>
+                          <span>{{ __('Shop Settings') }}</span></a>
                   </li>
                   <li class="{{ Request::is('seller/settings/payment') ? 'active' : '' }}">
                       <a class="nav-link" href="{{ route('seller.settings.show', 'payment') }}">
                           <i class="flaticon-credit-card"></i>
-                          {{ __('Payment Options') }}
+                          <span>{{ __('Payment Options') }}</span>
                       </a>
                   </li>
                   <li class="{{ Request::is('seller/settings/plan') ? 'active' : '' }}">
                       <a class="nav-link" href="{{ route('seller.settings.show', 'plan') }}">
-                          <i class="flaticon-shop"></i>{{ __('Subscriptions') }}</a>
+                          <i class="flaticon-shop"></i><span>{{ __('Subscriptions') }}</span></a>
                   </li>
                   {{-- amit singh ends --}}
 

@@ -23,7 +23,7 @@ $url=domain_info('full_domain');
 		<div class="row mb-2">
 			<div class="col-lg-8">
 				<div class="">
-					
+
 					<a href="{{ route('seller.product.list',1) }}" class="mr-2 btn btn-outline-success @if($type==1) active @endif">{{ __('Publish') }} ({{ $actives }})</a>
 
 					<a href="{{ route('seller.product.list',2) }}" class="mr-2 btn btn-outline-info @if($type==2) active @endif">{{ __('Draft') }} ({{ $drafts }})</a>
@@ -33,13 +33,13 @@ $url=domain_info('full_domain');
 				</div>
 			</div>
 			<div class="col-lg-4">
-				
+
 				<a href="#" class="btn btn-info float-right mr-3" data-toggle="modal" data-target="#import">{{ __('Import') }}</a>
-				
+
 				<div class="float-right mr-3">
 					<a href="{{ route('seller.product.create') }}" class="btn btn-primary float-right">{{ __('Add New') }}</a>
 				</div>
-				
+
 			</div>
 		</div>
 		<br>
@@ -53,7 +53,7 @@ $url=domain_info('full_domain');
 						<option value="id">{{ __('Search By Id') }}</option>
 
 					</select>
-					<div class="input-group-append">                                            
+					<div class="input-group-append">
 						<button class="btn btn-primary" type="submit"><i class="fas fa-search"></i></button>
 					</div>
 				</div>
@@ -67,18 +67,18 @@ $url=domain_info('full_domain');
 						<option disabled selected="">{{ __('Select Action') }}</option>
 						<option value="1">{{ __('Publish Now') }}</option>
 						<option value="2">{{ __('Draft') }}</option>
-						
+
 						@if($type== 0 && $type != 'all')
 						<option value="delete" class="text-danger">{{ __('Delete Permanently') }}</option>
 						@else
 						<option value="0">{{ __('Move To Trash') }}</option>
 						@endif
 					</select>
-					<div class="input-group-append">                                            
+					<div class="input-group-append">
 						<button class="btn btn-primary basicbtn" type="submit">{{ __('Submit') }}</button>
 					</div>
 				</div>
-				
+
 			</div>
 			<div class="table-responsive custom-table">
 				<table class="table">
@@ -92,9 +92,9 @@ $url=domain_info('full_domain');
 							</th>
 							<th class="am-title"><i class="far fa-image"></i></th>
 							<th class="am-title">{{ __('Name') }}</th>
-							
+
 							<th class="am-title">{{ __('Total Sales') }}</th>
-							
+
 							<th class="am-title">{{ __('Status') }}</th>
 							<th class="am-date">{{ __('Last Update') }}</th>
 						</tr>
@@ -109,23 +109,23 @@ $url=domain_info('full_domain');
 								</div>
 							</td>
 							<td><img src="{{ asset($row->preview->media->url ?? 'uploads/default.png') }}" height="50" alt=""></td>
-							<td>{{ $row->title }} (#{{ $row->id }}) 
+							<td>{{ $row->title }} (#{{ $row->id }})
 								<div>
-									<a href="{{ route('seller.product.edit',$row->id) }}">{{ __('Edit') }}</a> | <a href="{{ $url.'/product/'.$row->slug.'/'.$row->id }}" target="_blank">{{ __('Show') }}</a> 
+									<a href="{{ route('seller.product.edit',$row->id) }}">{{ __('Edit') }}</a> | <a href="{{ $url.'/product/'.$row->slug.'/'.$row->id }}" target="_blank">{{ __('Show') }}</a>
 								</div>
 							</td>
-							
+
 							<td>{{ $row->order_count }}</td>
-							
+
 							<td>
 								@if($row->status==1)
 								<span class="badge badge-success">{{ __('Active') }}</span>
 								@elseif($row->status==2)
 								<span class="badge badge-info">{{ __('Draft') }}</span>
 								@elseif($row->status==3)
-								<span class="badge badge-warning">{{ __('Incomplete') }}</span>	
+								<span class="badge badge-warning">{{ __('Incomplete') }}</span>
 								@elseif($row->status==0)
-								<span class="badge badge-danger">{{ __('Trash') }}</span>	
+								<span class="badge badge-danger">{{ __('Trash') }}</span>
 
 								@endif
 
@@ -146,15 +146,15 @@ $url=domain_info('full_domain');
 							<th class="am-title"><i class="far fa-image"></i></th>
 
 							<th class="am-title">{{ __('Name') }}</th>
-							
+
 							<th class="am-title">{{ __('Total Sales') }}</th>
-							
+
 							<th class="am-title">{{ __('Status') }}</th>
 							<th class="am-date">{{ __('Last Update') }}</th>
 						</tr>
 					</tfoot>
 				</table>
-				
+
 			</form>
 			{{ $posts->appends($request->all())->links('vendor.pagination.bootstrap-4') }}
 		</div>
@@ -183,7 +183,7 @@ $url=domain_info('full_domain');
 					</div>
 				</div>
 				<div class="modal-footer">
-					
+
 
 					<div class="import_area">
 						<div>
@@ -191,14 +191,14 @@ $url=domain_info('full_domain');
 							</p>
 						</div>
 
-						
+
 						<div>
 							<button type="button" class="btn btn-secondary" data-dismiss="modal">{{ __('Close') }}</button>
 							<button type="submit" class="btn btn-primary basicbtn">{{ __('Import') }}</button>
 						</div>
 
 					</div>
-					
+
 
 				</div>
 			</form>

@@ -29,6 +29,7 @@ use Artesaos\SEOTools\Facades\SEOMeta;
 use Artesaos\SEOTools\Facades\OpenGraph;
 use Artesaos\SEOTools\Facades\JsonLd;
 use App\Models\Userplanmeta;
+use App\Useroption;
 use Illuminate\Http\Request;
 use DB;
 
@@ -281,8 +282,18 @@ class FrontendController extends Controller
         $validatedData = $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|unique:users|email|max:255',
-            'password' => 'required|min:8|confirmed|string',
+            'password' => 'required|min:8|confirmed|string'
         ]);
+
+        if ($request->filled('shop_name')) {
+            $existShop = Useroption::where('key', 'shop_name')->where('value', $request->shop_name)->first();
+            if (!empty($existShop)) {
+                $msg['errors']['shop_name'] = "Shop Name Already Exists";
+                return response()->json($msg, 422);
+            }
+        }
+
+
 
         $info = Plan::where('status', 1)->findorFail($id);
         if ($info->custom_domain == 0) {

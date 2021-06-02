@@ -128,6 +128,23 @@ class OrderController extends Controller
         return view('seller.orders.create', compact('posts', 'src'));
     }
 
+    public function poscreate(Request $request)
+    {
+        if (!empty($request->search)) {
+            $posts = Term::with('preview', 'price', 'attributes', 'options', 'stock');
+            if (is_int($request->search)) {
+                $posts = $posts->where('id', $request->search);
+            } else {
+                $posts = $posts->where('title', 'LIKE', "%{$request->search}%");
+            }
+            $posts = $posts->where('type', 'product')->where('status', 1)->latest()->paginate(40);
+        } else {
+            $posts = Term::with('preview', 'price', 'attributes', 'options', 'stock')->where('user_id', Auth::id())->where('type', 'product')->where('status', 1)->latest()->paginate(40);
+        }
+        $src = $request->src ?? '';
+        return view('seller.orders.create', compact('posts', 'src'));
+    }
+
     /**
      * Store a newly created resource in storage.
      *
@@ -253,15 +270,12 @@ class OrderController extends Controller
             return response()->json('Cart empty');
         }
 
-
         // amit singh
         $gstQry = Useroption::where('key', 'tax')->where('user_id', $user_id)->first();
         $gst = 0;
         if (!empty($gstQry)) {
             $gst = $gstQry->value;
         }
-
-
 
         if ($request->delivery_type == '1') {
 
@@ -274,8 +288,13 @@ class OrderController extends Controller
                 'zip_code' => 'required',
                 'shipping_method' => 'required',
                 'payment_method' => 'required',
-                'payment_id' => 'required|max:100',
             ]);
+
+            if ($request->payment_status == 1) {
+                $validatedData = $request->validate([
+                    'payment_id' => 'required|max:100',
+                ]);
+            }
 
 
             $prefix = Useroption::where('user_id', $user_id)->where('key', 'order_prefix')->first();
@@ -345,6 +364,10 @@ class OrderController extends Controller
             return response()->json(['Order Created']);
         } else {
             // amit singh
+            $validatedData = $request->validate([
+                'name' => 'required|max:50',
+                'payment_method' => 'required'
+            ]);
             if ($request->customer_type == 1) {
                 $validatedData = $request->validate([
                     'email' => 'required|email|max:50'
@@ -355,10 +378,7 @@ class OrderController extends Controller
                     'payment_id' => 'required|max:100'
                 ]);
             }
-            $validatedData = $request->validate([
-                'name' => 'required|max:50',
-                'payment_method' => 'required'
-            ]);
+
             // amit singh
 
             $user_id = Auth::id();
