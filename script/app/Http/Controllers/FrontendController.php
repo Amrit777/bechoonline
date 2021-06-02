@@ -282,6 +282,7 @@ class FrontendController extends Controller
         $validatedData = $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|unique:users|email|max:255',
+            'whatsapp_number' => 'required|unique:users,whatsapp_number|max:10',
             'password' => 'required|min:8|confirmed|string'
         ]);
 
