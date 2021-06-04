@@ -51,7 +51,7 @@
                                     $term_id = $row->id;
 
                                 @endphp
-                                <form method="post" class="basicform" action="{{ route('seller.order.store') }}">
+                                <form method="post" class="basicform" data-id="{{$row->id}}" action="{{ route('seller.order.store') }}">
                                     @csrf
                                     <input type="hidden" name="term_id" value="{{ $term_id }}">
                                     <input type="hidden" name="main_price" id="main_price{{ $row->id }}"
@@ -92,7 +92,7 @@
                                                                             @else type="checkbox" name="option[{{ $key }}]" @endif
                                                                             value="{{ $item->id }}"
                                                                             class="selectgroup-input
-                                                                                  @if ($option->is_required == 1) req @endif
+                                                                                  @if ($option->is_required == 1) req{{ $row->id }} @endif
                                                                                   @if ($option->select_type == 0) radiotypecheckbox @endif
                                                                                   "
                                                                     data-mainprice="{{ $row->price->price }}"
@@ -115,7 +115,7 @@
                                                 <div class="input-group-append">
                                                     <button onclick="assignId({{ $row->id }})" @if ($row->stock->stock_status == 0) disabled="" @endif
                                                         class="btn btn-primary btn-icon" id="submitbtn{{ $row->id }}"
-                                                        type="submit"><i class="fas fa-cart-arrow-down"></i></button>
+                                                        type="submit" data-id="{{ $row->id }}"><i class="fas fa-cart-arrow-down"></i></button>
                                                 </div>
                                             </div>
                                         </td>
