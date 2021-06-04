@@ -54,6 +54,8 @@
                                 <form method="post" class="basicform" action="{{ route('seller.order.store') }}">
                                     @csrf
                                     <input type="hidden" name="term_id" value="{{ $term_id }}">
+                                    <input type="hidden" name="main_price" id="main_price{{ $row->id }}"
+                                        value="{{ $price }}">
                                     <tr>
                                         <td><a
                                                 href="{{ route('seller.product.edit', $row->id) }}">#{{ $row->id }}</a>
@@ -86,8 +88,19 @@
                                                         <div class="selectgroup w-100">
                                                             @foreach ($option->childrenCategories as $item)
                                                                 <label class="selectgroup-item">
-                                                                    <input @if ($option->select_type == 1) type="checkbox" name="option[]"  @else type="radio" name="option[{{ $key }}]" @endif value="{{ $item->id }}" class="selectgroup-input
-                                                                             @if ($option->is_required == 1) req  @endif" >
+                                                                    <input @if ($option->select_type == 1) type="checkbox" name="option[]"
+                                                                            @else type="checkbox" name="option[{{ $key }}]" @endif
+                                                                            value="{{ $item->id }}"
+                                                                            class="selectgroup-input
+                                                                                  @if ($option->is_required == 1) req @endif
+                                                                                  @if ($option->select_type == 0) radiotypecheckbox @endif
+
+
+                                                                                  "
+                                                                    data-mainprice="{{ $row->price->price }}"
+                                                                    data-productid="{{ $row->id }}"
+                                                                    data-price="{{ $item->amount }}"
+                                                                    data-amounttype="{{ $item->amount_type }}" >
                                                                     <span
                                                                         class="selectgroup-button">{{ $item->name }}</span>
                                                                 </label>
