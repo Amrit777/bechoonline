@@ -69,7 +69,7 @@ var dataId = '';
 			required = true;
 		}
 		if (required == false) {
-			$('.required_option').text("Please select required option.");
+			Sweet('error', "Please select required option.")
 		}
 
 		if (required == true) {
