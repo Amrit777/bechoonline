@@ -185,8 +185,25 @@
                                 </tr>
                             </tfoot>
                         </table>
-                    </form>
                     </div>
+
+                    <ul class="card-tables display-mobile-table" style="display:none;">
+                        <li>
+                            <div class="custom-control custom-checkbox">
+                                <input type="checkbox" name="ids[]" class="custom-control-input" id="customCheck{{ $row->id }}" value="{{ $row->id }}">
+                                <label class="custom-control-label" for="customCheck{{ $row->id }}"></label>
+                            </div>
+                            <div class="title">
+                                <div class="order-name">
+                                    <a href="{{ route('seller.order.show',$row->id) }}">{{ $row->order_no }}</a>
+                                </div>
+                                <div class="client-name">
+                                    @if($row->customer_id !== null)<a href="{{ route('seller.customer.show',$row->customer_id) }}">{{ $row->customer->name }}</a> @else {{ __('Guest User') }} @endif   
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                    </form>
                 </div>
 
             </div>
