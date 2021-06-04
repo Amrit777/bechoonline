@@ -94,8 +94,6 @@
                                                                             class="selectgroup-input
                                                                                   @if ($option->is_required == 1) req @endif
                                                                                   @if ($option->select_type == 0) radiotypecheckbox @endif
-
-
                                                                                   "
                                                                     data-mainprice="{{ $row->price->price }}"
                                                                     data-productid="{{ $row->id }}"
@@ -106,6 +104,7 @@
                                                                 </label>
                                                             @endforeach
                                                         </div>
+                                                        <span class="required_option"></span>
                                                     </div>
                                                 @endforeach
                                             @endif
