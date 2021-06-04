@@ -47,6 +47,8 @@ var dataId = '';
 		});
 	});
 	$(".basicform").on('submit', function (e) {
+		var id = $(this).attr('data-id');
+		console.log("id " + id);
 		e.preventDefault();
 		$.ajaxSetup({
 			headers: {
@@ -56,9 +58,11 @@ var dataId = '';
 		var basicbtnhtml = $('#submitbtn' + dataId).html();
 		var required = false;
 
-		if ($('.req').length > 0) {
-
-			$('.req:checked').each(function () {
+		if ($('.req' + id).length > 0) {
+			console.log("im sdcscs " + id);
+			
+			$('.req' + id + ':checked').each(function () {
+				console.log("im jsndcjksncksjdc " + id);
 				if (this.checked == true) {
 					required = true;
 				} else {
