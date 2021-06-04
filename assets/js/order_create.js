@@ -54,41 +54,59 @@ var dataId = '';
 			}
 		});
 		var basicbtnhtml = $('#submitbtn' + dataId).html();
-		$.ajax({
-			type: 'POST',
-			url: this.action,
-			data: new FormData(this),
-			dataType: 'json',
-			contentType: false,
-			cache: false,
-			processData: false,
-			beforeSend: function () {
+		var required = false;
 
-				$('#submitbtn' + dataId).html('<div class="spinner-border text-white spinner-border-sm" role="status"> <span class="sr-only">Loading...</span></div>');
-				$('#submitbtn' + dataId).attr('disabled', '')
+		if ($('.req').length > 0) {
 
-			},
+			$('.req:checked').each(function () {
+				if (this.checked == true) {
+					required = true;
+				} else {
+					required = false;
+				}
+			});
+		} else {
+			required = true;
+		}
+		if (required == false) {
+			$('.required_option').text("Please select required option.");
+		}
 
-			success: function (response) {
-				$('#submitbtn' + dataId).removeAttr('disabled')
-				Sweet('success', 'Cart Item Added');
-				$('#submitbtn' + dataId).html(basicbtnhtml);
+		if (required == true) {
+			$.ajax({
+				type: 'POST',
+				url: this.action,
+				data: new FormData(this),
+				dataType: 'json',
+				contentType: false,
+				cache: false,
+				processData: false,
+				beforeSend: function () {
 
-				$('#cart_count').html(response.count);
-				render_cart_item(response.items);
-			},
-			error: function (xhr, status, error) {
-				$('#submitbtn' + dataId).html(basicbtnhtml);
+					$('#submitbtn' + dataId).html('<div class="spinner-border text-white spinner-border-sm" role="status"> <span class="sr-only">Loading...</span></div>');
+					$('#submitbtn' + dataId).attr('disabled', '')
 
-				$.each(xhr.responseJSON.errors, function (key, item) {
-					Sweet('error', item)
-					$("#errors").html("<li class='text-danger'>" + item + "</li>")
-				});
+				},
 
-			}
-		})
+				success: function (response) {
+					$('#submitbtn' + dataId).removeAttr('disabled')
+					Sweet('success', 'Cart Item Added');
+					$('#submitbtn' + dataId).html(basicbtnhtml);
 
+					$('#cart_count').html(response.count);
+					render_cart_item(response.items);
+				},
+				error: function (xhr, status, error) {
+					$('#submitbtn' + dataId).html(basicbtnhtml);
 
+					$.each(xhr.responseJSON.errors, function (key, item) {
+						Sweet('error', item)
+						$("#errors").html("<li class='text-danger'>" + item + "</li>")
+					});
+
+				}
+			})
+		}
 	});
 
 	$(".cartform").on('submit', function (e) {
@@ -118,33 +136,6 @@ var dataId = '';
 		})
 	});
 
-	// $('.selectgroup-input').on('click', function (e) {
-	// 	console.log("insirde");
-	// 	let thisRadio = $(this);
-	// 	if ($(this).is(":checked")) {
-	// 		console.log("was checked ");
-
-	// 		thisRadio.is("checked");
-	// 		thisRadio.prop('checked', false);
-	// 		// subtract this item value from total
-	// 		let total_price = 0;
-	// 		var id = $(this).attr('data-productid');
-	// 		var price = $(this).attr('data-price'); // price of item selected
-	// 		var price = parseFloat(price);
-	// 		console.log("price1: " + price);
-
-	// 		var mainprice = $(this).attr('data-mainprice'); // initial price of product
-	// 		var mainprice = parseFloat(mainprice);
-	// 		console.log("mainpriceOne1: " + mainprice);
-	// 		total_price = mainprice - price;
-
-	// 		$('#price' + id).html('Rs.' + total_price + '.00');
-
-	// 	} else {
-	// 		console.log("was not checked ");
-
-	// 	}
-	// });
 })(jQuery);
 
 function assignId(id) {
