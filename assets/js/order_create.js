@@ -4,46 +4,50 @@ var dataId = '';
 	$('.selectgroup-input').on('click', function (e) {
 
 		var $box = $(this);
-		if ($box.hasClass('radiotypecheckbox')) {
+		if ($(this).hasClass('radiotypecheckbox')) {
 			if ($box.is(":checked")) {
-				// the name of the box is retrieved using the .attr() method
-				// as it is assumed and expected to be immutable
 				var group = "input:checkbox[name='" + $box.attr("name") + "']";
-				// the checked state of the group/box on the other hand will change
-				// and the current value is retrieved using .prop() method
 				$(group).prop("checked", false);
 				$box.prop("checked", true);
 			} else {
 				$box.prop("checked", false);
+				var id = $(this).attr('data-productid');
+				var initialprice = $('#price' + id).attr('data-price');
+				var price = $(this).attr('data-price'); // price of item selected
+				var price = parseFloat(price);
+
+				var mainprice = $(this).attr('data-mainprice'); // initial price of product
+				var mainprice = parseFloat(mainprice);
+
+				var total_price = initialprice - price;
+
+				$('#price' + id).html('Rs.' + total_price + '.00');
+				$('#price' + id).attr('data-price', total_price);
 			}
 		}
 		let total = 0;
-
 		$('.selectgroup-input:checked').each(function () {
+
 			var id = $(this).attr('data-productid');
 			var price = $(this).attr('data-price'); // price of item selected
 			var price = parseFloat(price);
-			console.log("price0: " + price);
 
 			total = parseFloat(price + total);
-			console.log("total0: " + total);
-
 
 			var mainprice = $(this).attr('data-mainprice'); // initial price of product
 			var mainprice = parseFloat(mainprice);
-			console.log("mainpriceOne0: " + mainprice);
-
 
 			var price_type = $(this).attr('data-amounttype');
 			if (price_type == 0) {
 				var percent = mainprice * total / 100;
 				var total_price = mainprice + percent;
-			}
-			else {
+			} else {
 				var total_price = mainprice + total;
 			}
 
 			$('#price' + id).html('Rs.' + total_price + '.00');
+			$('#price' + id).attr('data-price', total_price);
+
 		});
 	});
 	$(".basicform").on('submit', function (e) {
@@ -59,10 +63,7 @@ var dataId = '';
 		var required = false;
 
 		if ($('.req' + id).length > 0) {
-			console.log("im sdcscs " + id);
-			
 			$('.req' + id + ':checked').each(function () {
-				console.log("im jsndcjksncksjdc " + id);
 				if (this.checked == true) {
 					required = true;
 				} else {
