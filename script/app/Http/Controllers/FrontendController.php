@@ -322,8 +322,11 @@ class FrontendController extends Controller
             }
             $urlParts = parse_url($input);
             $domain = preg_replace('/^www\./', '', $urlParts['host']);
-
-            $full_domain = rtrim($request->full_domain, '/');
+            if ($urlParts['scheme'] != 'https') {
+                $full_domain = env('APP_PROTOCOL') . $request->full_domain;
+            } else {
+                $full_domain = rtrim($request->full_domain, '/');
+            }
         }
 
         $check_fulldomain = Domain::where('full_domain', $full_domain)->first();
@@ -447,8 +450,17 @@ class FrontendController extends Controller
                     $userplan->status = 1;
                 }
                 $userplan->save();
+                // amit singh
 
-                Session::flash('success', 'Thank You For Subscribe After Review The Order You Will Get A Notification Mail From Admin');
+                $domain = Domain::where('user_id', Auth::id())->first();
+                $domainname = "";
+                if (!empty($domain)) {
+                    $domainname = $domain->full_domain;
+                }
+                $msg = "Your website link is:" . $domainname
+                    . "Want to have your own brand name URL (www.yourstorename.com) Purchase the plan accordingly.";
+
+                Session::flash('success', $msg);
             } else {
 
                 if (!empty($plan)) {
@@ -503,8 +515,18 @@ class FrontendController extends Controller
 
     public function make_payment($id)
     {
+        // amit singh
+
+        $domain = Domain::where('user_id', Auth::id())->first();
+        $domainname = "";
+        if (!empty($domain)) {
+            $domainname = $domain->full_domain;
+        }
+        $msg = "Your website link is:" . $domainname
+            . "Want to have your own brand name URL (www.yourstorename.com) Purchase the plan accordingly.";
+
         if (Session::has('success')) {
-            Session::flash('success', 'Thank You For Subscribe After Review The Order You Will Get A Notification Mail From Admin');
+            Session::flash('success', $msg);
             return redirect('merchant/plan');
         }
         $info = Plan::where('status', 1)->where('is_default', 0)->where('price', '>', 0)->findorFail($id);
@@ -623,8 +645,17 @@ class FrontendController extends Controller
                     $meta->save();
                 }
 
-                Session::flash('success', 'Thank You For Subscribe After Review The Order You Will Get A Notification Mail From Admin');
+                // amit singh
 
+                $domain = Domain::where('user_id', Auth::id())->first();
+                $domainname = "";
+                if (!empty($domain)) {
+                    $domainname = $domain->full_domain;
+                }
+                $msg = "Your website link is:" . $domainname
+                    . "Want to have your own brand name URL (www.yourstorename.com) Purchase the plan accordingly.";
+
+                Session::flash('success', $msg);
 
 
                 $data['info'] = $user;

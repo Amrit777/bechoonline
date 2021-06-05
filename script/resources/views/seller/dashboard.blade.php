@@ -10,9 +10,8 @@
                             {{ __('Dear,') }} <b>{{ Auth::user()->name }}</b>.
                             {{ __(' Thank you for joining ') }} <b>{{ env('APP_NAME') }}</b>.
                             {{ __('Your account is sent for an approval. Once approved you will be able to setup your store
-            and start selling online. You will receive the user manual videos on your provided WhatsApp mobile number.
-             For any support contact us on ') }}
-                            <b> {{ __(' WhatsApp ') }} </b> {{ __(' button.') }}
+            and start selling online.') }}
+                            {{ __('To know more about How to configure your shop in Bechocart click on the chat icon and watch the video.') }}
                         </p>
                     </div>
                 </div>

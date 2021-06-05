@@ -59,7 +59,7 @@
                                         </div>
                                         <div class="form-group col-6">
                                             <label for="whatsapp_number">{{ __('WhatsaApp Number') }}</label>
-                                            <input id="whatsapp_number" type="number" class="form-control"
+                                            <input id="whatsapp_number" type="text" class="form-control"
                                                 name="whatsapp_number" required="">
                                         </div>
                                     </div>
