@@ -188,6 +188,7 @@
                     </div>
 
                     <ul class="card-tables display-mobile-table" style="display:none;">
+                        @foreach($orders as $key => $row)
                         <li>
                             <div class="custom-control custom-checkbox">
                                 <input type="checkbox" name="ids[]" class="custom-control-input" id="customCheck{{ $row->id }}" value="{{ $row->id }}">
@@ -198,10 +199,11 @@
                                     <a href="{{ route('seller.order.show',$row->id) }}">{{ $row->order_no }}</a>
                                 </div>
                                 <div class="client-name">
-                                    @if($row->customer_id !== null)<a href="{{ route('seller.customer.show',$row->customer_id) }}">{{ $row->customer->name }}</a> @else {{ __('Guest User') }} @endif   
+                                    @if($row->customer_id !== null)<a href="{{ route('seller.customer.show',$row->customer_id) }}">{{ $row->customer->name }}</a> @else {{ __('Guest User') }} @endif
                                 </div>
                             </div>
                         </li>
+                        @endforeach
                     </ul>
                     </form>
                 </div>
