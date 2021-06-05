@@ -135,7 +135,7 @@
                             <div class="mb-3">
                                 <label for="address" class="" id="addresslabel">{{ __('Address') }}</label>
                                 <input type="text" name="address" class="form-control" id="address"
-                                    placeholder="1234 Main St">
+                                    placeholder="1234 Main St" autocomplete="off">
                                 <div class="invalid-feedback">
                                     {{ __('Please enter your shipping address.') }}
                                 </div>
@@ -268,8 +268,8 @@
                     $('#email').attr("required", "required");
                     $('#emaillabel').addClass("required");
 
-                    $("#payment_id").removeAttr("required");
-                    $('#payidlabel').removeClass("required");
+                    $("#payment_id").attr("required", "required");
+                    $('#payidlabel').addClass("required");
                 }
 
                 if (customer_type == '0' && delivery_type == '0') {
@@ -278,6 +278,12 @@
                     console.log("Guest + walkin case");
                     $('#email').removeAttr("required");
                     $('#emaillabel').removeClass("required");
+
+                    $('input[name=shipping_method]').removeAttr("required");
+                    $('input[name=shipping_method]').removeClass("required");
+
+
+
                     var payment_status = $('input[name=payment_status]:checked').val();
                     if (payment_status == '1') {
                         $("#payment_id").attr("required", "required");
