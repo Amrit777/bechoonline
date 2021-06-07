@@ -4,7 +4,7 @@
 <div class="">
     <div class="row justify-content-center">
         <div class="col-12">
-            <div class="card">
+            <div class="card upper-order-cards">
                 <div class="card-header">
                     <div class="col-sm-10">
                         <ul class="nav nav-pills">
@@ -36,7 +36,7 @@
                     </div>
                 </div>
             </div>
-            <div class="card">
+            <div class="card order-table-card">
                 <div class="card-header">
                     <h4>{{ __('Orders') }}</h4>
 
@@ -92,7 +92,7 @@
 
 
 
-                    <div class="table-responsive">
+                    <div class="table-responsive display-desktop-table">
                         <table class="table table-hover table-nowrap card-table text-center">
                             <thead>
                                 <tr>
@@ -187,7 +187,7 @@
                         </table>
                     </div>
 
-                    <ul class="card-tables display-mobile-table" style="display:none;">
+                    <ul class="card-tables display-mobile-table">
                         @foreach($orders as $key => $row)
                         <li>
                             <div class="custom-control custom-checkbox">
@@ -201,6 +201,59 @@
                                 <div class="client-name">
                                     @if($row->customer_id !== null)<a href="{{ route('seller.customer.show',$row->customer_id) }}">{{ $row->customer->name }}</a> @else {{ __('Guest User') }} @endif
                                 </div>
+                            </div>
+                            <!-- <div class="status-visible">
+                                <span class="item-stock"><b>Items:</b>{{ $row->order_items_count }}</span>
+                                <a href="{{ route('seller.invoice',$row->id) }}" class="btn btn-primary btn-sm"><i class="fas fa-file-invoice"></i></a>
+                            </div> -->
+
+                            <div class="foot-bottom">
+                                <div class="primary"><a href="{{ route('seller.order.show',$row->id) }}">{{ $row->created_at->format('d-F-Y') }}</a></div>
+                                <div class="secondary"><span>Amount</span>{{ amount_format($row->total) }}</div>
+                            </div>
+                            <div class="bottom-footer-card">
+                                <div class="payment-status"><span>Payment: </span>
+                                    @if($row->payment_status==2)
+                                        <span class="badge badge-warning">{{ __('Pending') }}</span>
+
+                                        @elseif($row->payment_status==1)
+                                        <span class="badge badge-success">{{ __('Complete') }}</span>
+
+                                        @elseif($row->payment_status==0)
+                                        <span class="badge badge-danger">{{ __('Cancel') }}</span>
+                                        @elseif($row->payment_status==3)
+                                        <span class="badge badge-danger">{{ __('Incomplete') }}</span>
+
+                                    @endif
+                                </div>
+
+                                <div class="fulfilment-status"><span>Fulfilment: </span>
+                                    @if($row->status=='pending')
+                                        <span class="badge badge-warning">{{ __('Awaiting processing') }}</span>
+
+                                        @elseif($row->status=='processing')
+                                        <span class="badge badge-primary">{{ __('Processing') }}</span>
+
+                                        @elseif($row->status=='ready-for-pickup')
+                                        <span class="badge badge-info">{{ __('Ready for pickup') }}</span>
+
+                                        @elseif($row->status=='completed')
+                                        <span class="badge badge-success">{{ __('Completed') }}</span>
+
+                                        @elseif($row->status=='archived')
+                                        <span class="badge badge-warning">{{ __('Archived') }}</span>
+                                        @elseif($row->status=='canceled')
+                                        <span class="badge badge-danger">{{ __('Canceled') }}</span>
+
+                                        @else
+                                        <span class="badge badge-info">{{ $row->status }}</span>
+
+                                    @endif
+                                </div> 
+                            </div>
+                            <div class="status-visible bottom-status">
+                                <span class="item-stock"><b>Items:</b>{{ $row->order_items_count }}</span>
+                                <a href="{{ route('seller.invoice',$row->id) }}" class="btn btn-primary btn-sm"><i class="fas fa-file-invoice"></i></a>
                             </div>
                         </li>
                         @endforeach
