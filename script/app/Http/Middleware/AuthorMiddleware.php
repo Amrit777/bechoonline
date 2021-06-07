@@ -17,11 +17,11 @@ class AuthorMiddleware
     public function handle($request, Closure $next)
     {
         if (Auth::guard('customer')->check()) {
-             
+
             $url= Auth::guard('customer')->user()->user_domain->full_domain ?? '';
 
             if($url != url('/')){
-               
+
                Auth::guard('customer')->logout();
                return redirect()->route('login');
             }
@@ -29,9 +29,9 @@ class AuthorMiddleware
         }else{
             if(Auth::check()){
                 Auth::guard('customer')->logout();
-                Auth::logout(); 
+                Auth::logout();
             }
             return redirect('user/login');
-        } 
+        }
     }
 }

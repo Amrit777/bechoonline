@@ -63,8 +63,8 @@ class FrontendController extends Controller
             SEOTools::jsonLd()->addImage(asset('uploads/logo.png'));
 
 
-            $latest_gallery = Category::where('type', 'gallery')->with('preview')->where('is_admin', 1)->latest()->take(15)->get();
-            $features = Category::where('type', 'features')->with('preview', 'excerpt')->where('is_admin', 1)->latest()->take(6)->get();
+            $latest_gallery = Category::where('type', 'gallery')->with('preview')->where('is_admin', 1)->latest()->take(25)->get(); // amit singh
+            $features = Category::where('type', 'features')->with('preview', 'excerpt')->where('is_admin', 1)->latest()->take(36)->get(); // amit singh
 
             $testimonials = Category::where('type', 'testimonial')->with('excerpt')->where('is_admin', 1)->latest()->get();
 

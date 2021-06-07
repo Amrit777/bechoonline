@@ -263,6 +263,10 @@ class OrderController extends Controller
             $user = Customer::where('created_by', $user_id)->where('email', $request->email)->first();
             if (!empty($user)) {
                 $customer_id = $user->id;
+            } else {
+                $error['errors']['error'] = 'Sorry, Customer Not Exist';
+                $error['errors']['userdonotexist'] = 'Sorry, Customer Not Exist';
+                return response()->json($error, 401);
             }
         }
 

@@ -10,7 +10,7 @@
           <div class="divider mb-3"></div>
           <span class="text-uppercase text-sm letter-spacing ">{{ $header->title ?? '' }}</span>
           <h1 class="mb-3 mt-3">{{ $header->highlight_title ?? '' }}</h1>
-          
+
           <p class="mb-4 pr-5">{{ $header->description ?? '' }}</p>
           <div class="btn-container ">
             <a href="#priceing" class="btn btn-main-2 btn-icon btn-round-full">{{ __('Get Start Now') }} <i class="icofont-simple-right ml-2"></i></a>
@@ -29,31 +29,31 @@
             <div class="feature-icon mb-4">
               <i class="{{ $about_1->preview }}"></i>
             </div>
-            
+
             <h4 class="mb-3">{{ $about_1->title }}</h4>
             <p class="mb-4">{{ $about_1->description }}</p>
             @if(!empty($about_1->btn_text) && !empty($about_1->btn_link))
             <a href="{{ url($about_1->btn_link) }}" class="btn btn-main btn-round-full">{{ $about_1->btn_text }}</a>
             @endif
           </div>
-        
+
           <div class="feature-item mb-5 mb-lg-0">
             <div class="feature-icon mb-4">
               <i class="{{ $about_2->preview }}"></i>
             </div>
-            
+
             <h4 class="mb-3">{{ $about_2->title }}</h4>
             <p class="mb-4">{{ $about_2->description }}</p>
             @if(!empty($about_2->btn_text) && !empty($about_2->btn_link))
             <a href="{{ url($about_2->btn_link) }}" class="btn btn-main btn-round-full">{{ $about_2->btn_text }}</a>
             @endif
           </div>
-        
+
           <div class="feature-item mb-5 mb-lg-0">
             <div class="feature-icon mb-4">
               <i class="{{ $about_3->preview }}"></i>
             </div>
-            
+
             <h4 class="mb-3">{{ $about_3->title }}</h4>
             <p class="mb-4">{{ $about_3->description }}</p>
             @if(!empty($about_3->btn_text) && !empty($about_3->btn_link))
@@ -113,7 +113,7 @@
             <p>{{ __('Total Reviews') }}</p>
           </div>
         </div>
-        
+
         <div class="col-lg-3 col-md-6 col-sm-6">
           <div class="counter-stat">
             <i class="icofont-world"></i>
@@ -157,7 +157,7 @@
           </div>
         </div>
       </div>
-      @endforeach 
+      @endforeach
     </div>
   </div>
 </section>
@@ -181,7 +181,7 @@
                     <div class="port__card">
                       <div class="portfolio__img">
                         <img src="{{ asset($row->preview->content ?? '') }}"   alt="">
-                      </div>                                
+                      </div>
                     </div>
                   </a>
                    @endforeach
@@ -190,7 +190,7 @@
             </div>
           </div>
         </section>
-      </div>      
+      </div>
       </div>
     </div>
   </div>
@@ -314,7 +314,7 @@
           </div>
         </div>
         @endforeach
-        
+
       </div>
     </div>
   </div>

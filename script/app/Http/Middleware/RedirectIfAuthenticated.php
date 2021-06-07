@@ -30,15 +30,15 @@ class RedirectIfAuthenticated
             $url= Auth::guard('customer')->user()->user_domain->full_domain ?? '';
 
             return redirect($url.'/user/dashboard');
-         }  
+         }
 
          if (Auth::guard($guard)->check() && Auth::User()->role_id == 1) {
              return redirect(env('APP_URL').'/admin/dashboard');
          }
         elseif (Auth::guard($guard)->check() && Auth::User()->role_id == 2) {
-           
+
            $url=  Auth::user()->user_domain->full_domain ?? env('APP_URL');
-           
+
            return redirect($url.'/user/dashboard');
         }
         elseif(Auth::guard($guard)->check() && Auth::User()->role_id == 3)
@@ -57,11 +57,11 @@ class RedirectIfAuthenticated
                  Auth::logout();
                  return redirect($url.'/login');
                 }
-                
+
                return redirect($url.'/seller/dashboard');
             }
-           
-            
+
+
         }
       }
 

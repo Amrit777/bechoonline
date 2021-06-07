@@ -12,7 +12,7 @@ use Str;
 use Auth;
 class FrontendController extends Controller
 {
-    
+
 
     /**
      * Store a newly created resource in storage.
@@ -30,7 +30,7 @@ class FrontendController extends Controller
             ]);
 
             if ($request->file) {
-                 $fileName = time().'.'.$request->file->extension();  
+                 $fileName = time().'.'.$request->file->extension();
                  $request->file->move('uploads/1/'.date('Y/m/'), $fileName);
                  $fileName='uploads/1/'.date('Y/m/').$fileName;
             }
@@ -66,7 +66,7 @@ class FrontendController extends Controller
             ]);
 
             if ($request->file) {
-                 $fileName = time().'.'.$request->file->extension();  
+                 $fileName = time().'.'.$request->file->extension();
                  $request->file->move('uploads/1/'.date('Y/m/'), $fileName);
                  $fileName='uploads/1/'.date('Y/m/').$fileName;
             }
@@ -89,7 +89,7 @@ class FrontendController extends Controller
         }
 
         if ($request->type=="testimonial") {
-            
+
 
             $category=new Category;
             $category->type="testimonial";
@@ -99,7 +99,7 @@ class FrontendController extends Controller
             $category->user_id=Auth::id();
             $category->save();
 
-           
+
 
             $meta=new Categorymeta;
             $meta->category_id =$category->id;
@@ -118,7 +118,7 @@ class FrontendController extends Controller
             ]);
 
             if ($request->file) {
-                 $fileName = time().'.'.$request->file->extension();  
+                 $fileName = time().'.'.$request->file->extension();
                  $request->file->move('uploads/1/'.date('Y/m/'), $fileName);
                  $fileName='uploads/1/'.date('Y/m/').$fileName;
             }
@@ -158,19 +158,19 @@ class FrontendController extends Controller
             return view('admin.frontend.header',compact('info'));
         }
         if ($type=="features") {
-            $posts=Category::where('type','features')->where('is_admin',1)->latest()->get(); 
+            $posts=Category::where('type','features')->where('is_admin',1)->latest()->get();
             return view('admin.frontend.features',compact('posts'));
         }
         if ($type=="counter_area") {
-            
+
             $option=Option::where('key','counter_area')->first();
             $info=json_decode($option->value ?? '');
             return view('admin.frontend.counter_area',compact('info','type'));
         }
-        if ($type=="about_1") {            
-            $option=Option::where('key','about_1')->first();           
+        if ($type=="about_1") {
+            $option=Option::where('key','about_1')->first();
             $info=json_decode($option->value);
-           
+
             return view('admin.frontend.about',compact('info','type'));
         }
         if ($type=="about_2") {
@@ -186,12 +186,12 @@ class FrontendController extends Controller
         }
 
         if ($type=="testimonials") {
-            $posts=Category::where('type','testimonial')->where('is_admin',1)->latest()->get(); 
+            $posts=Category::where('type','testimonial')->where('is_admin',1)->latest()->get();
             return view('admin.frontend.testimonials',compact('posts'));
         }
 
         if ($type=="brands") {
-            $posts=Category::where('type','brand')->with('preview')->where('is_admin',1)->latest()->get(); 
+            $posts=Category::where('type','brand')->with('preview')->where('is_admin',1)->latest()->get();
             return view('admin.frontend.brands',compact('posts'));
         }
 
@@ -204,10 +204,10 @@ class FrontendController extends Controller
         if ($type=="contact") {
             return view('admin.frontend.contact');
         }
-        
+
     }
 
-   
+
     /**
      * Update the specified resource in storage.
      *
@@ -234,7 +234,7 @@ class FrontendController extends Controller
             else{
                 $ytb_url=null;
             }
-            
+
             $data['title']=$request->title;
             $data['highlight_title']=$request->highlight_title;
             $data['ytb_video']=$ytb_url;
@@ -245,10 +245,10 @@ class FrontendController extends Controller
                         unlink($info->preview);
                     }
                 }
-                $fileName = time().'.'.$request->file->extension();  
+                $fileName = time().'.'.$request->file->extension();
                 $request->file->move('uploads/1/'.date('Y/m/'), $fileName);
                 $fileName='uploads/1/'.date('Y/m/').$fileName;
-                
+
             }
             else{
                 $fileName =$info->preview ?? null;
@@ -262,7 +262,7 @@ class FrontendController extends Controller
         }
 
         if ($id=="counter_area") {
-           
+
 
             $option=Option::where('key','counter_area')->first();
             if (empty($option)) {
@@ -274,7 +274,7 @@ class FrontendController extends Controller
             $data['total_reviews']=$request->total_reviews;
             $data['total_domain']=$request->total_domain;
             $data['community_member']=$request->community_member;
-            
+
             $option->value=json_encode($data);
             $option->save();
 
@@ -303,10 +303,10 @@ class FrontendController extends Controller
                         unlink($info->top_image);
                     }
                 }
-                $fileName = time().'.'.$request->top_image->extension();  
+                $fileName = time().'.'.$request->top_image->extension();
                 $request->top_image->move('uploads/1/'.date('Y/m/'), $fileName);
                 $top_image='uploads/1/'.date('Y/m/').$fileName;
-                
+
             }
             else{
                 $top_image =$info->top_image ?? null;
@@ -318,10 +318,10 @@ class FrontendController extends Controller
                         unlink($info->center_image);
                     }
                 }
-                $fileName = time().'.'.$request->center_image->extension();  
+                $fileName = time().'.'.$request->center_image->extension();
                 $request->center_image->move('uploads/1/'.date('Y/m/'), $fileName);
                 $center_image='uploads/1/'.date('Y/m/').$fileName;
-                
+
             }
             else{
                 $center_image =$info->center_image ?? null;
@@ -333,10 +333,10 @@ class FrontendController extends Controller
                         unlink($info->bottom_image);
                     }
                 }
-                $fileName = time().'.'.$request->bottom_image->extension();  
+                $fileName = time().'.'.$request->bottom_image->extension();
                 $request->bottom_image->move('uploads/1/'.date('Y/m/'), $fileName);
                 $bottom_image='uploads/1/'.date('Y/m/').$fileName;
-                
+
             }
             else{
                 $bottom_image =$info->bottom_image ?? null;
@@ -356,7 +356,7 @@ class FrontendController extends Controller
 
 
 
-        }    
+        }
          if ($id=="about_1") {
             $validatedData = $request->validate([
                 'file' => 'image|max:1000',
@@ -436,14 +436,14 @@ class FrontendController extends Controller
             $validatedData = $request->validate([
                 'file' => 'image|max:1000',
             ]);
-            $fileName = 'contact.png';  
+            $fileName = 'contact.png';
             $request->file->move('uploads/', $fileName);
             return response()->json(['Image Changed']);
 
-         }   
+         }
     }
 
-     public function parse_yotube_url($url) 
+     public function parse_yotube_url($url)
         {
         $pattern = '#^(?:https?://)?';    # Optional URL scheme. Either http or https.
         $pattern .= '(?:www\.)?';         #  Optional www subdomain.
@@ -453,7 +453,7 @@ class FrontendController extends Controller
         $pattern .=   '(?:';              #    Group path alternatives:
         $pattern .=     '/embed/';        #      Either /embed/,
         $pattern .=     '|/v/';           #      or /v/,
-        $pattern .=     '|/watch\?v=';    #      or /watch?v=,    
+        $pattern .=     '|/watch\?v=';    #      or /watch?v=,
         $pattern .=     '|/watch\?.+&v='; #      or /watch?other_param&v=
         $pattern .=   ')';                #    End path alternatives.
         $pattern .= ')';                  #  End host alternatives.

@@ -59,7 +59,7 @@
 
 	$("#basicform").on('submit', function (e) {
 		e.preventDefault();
-
+		console.log("Im here");
 		$.ajaxSetup({
 			headers: {
 				'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -80,17 +80,21 @@
 			success: function (response) {
 				$('.basicbtn').removeAttr('disabled')
 				Sweet('success', response)
-
 				success(response)
 			},
 			error: function (xhr, status, error) {
+				console.log(error)
 				$('.basicbtn').removeAttr('disabled')
 				$('.errorarea').show();
 				$.each(xhr.responseJSON.errors, function (key, item) {
+					console.log("key" + key)
+
+					console.log("item" + item)
+
 					Sweet('error', item)
-					$("#errors").html("<li class='text-danger'>" + item + "</li>")
+					$("#errors").html("<li class='text-danger'>" + key + item + "</li>")
 				});
-				errosresponse(xhr, status, error);
+				console.log(xhr, status, error);
 			}
 		})
 
@@ -177,9 +181,13 @@
 				$('.errorarea').show();
 				$.each(xhr.responseJSON.errors, function (key, item) {
 					Sweet('error', item)
-					$("#errors").html("<li class='text-danger'>" + item + "</li>")
+					if (key == 'userdonotexist') {
+						var createnewcustomer = 'Customer does not exist in the customer master, <a href="/seller/customer/create" target="blank"> click here </a> to create the customer first.';
+						$("#errors").html("<li class='text-danger'>" + createnewcustomer + "</li>")
+					} else {
+						$("#errors").html("<li class='text-danger'>" + item + "</li>")
+					}
 				});
-				errosresponse(xhr, status, error);
 			}
 		})
 

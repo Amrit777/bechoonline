@@ -40,8 +40,8 @@ class ResetPasswordController extends Controller
            }else{
             $this->redirectTo=env('APP_URL').'/admin/dashboard';
             return $this->redirectTo;
-           } 
-           
+           }
+
         }
         elseif (Auth::user()->role_id==2) {
            $url= Auth::user()->user_domain->full_domain;
@@ -52,7 +52,7 @@ class ResetPasswordController extends Controller
            else{
              $this->redirectTo=$url.'/user/dashboard';
            }
-          
+
            return $this->redirectTo;
        }
        elseif (Auth::user()->role_id==3) {
@@ -76,8 +76,8 @@ class ResetPasswordController extends Controller
              }
             return $this->redirectTo=$url.'/seller/dashboard';
            }
-          
-           
+
+
        }
        $this->middleware('guest')->except('logout');
    }

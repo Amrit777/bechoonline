@@ -102,6 +102,9 @@
                             <label for="email" id="emaillabel">{{ __('Customer Email') }}</label>
                             <input type="email" class="form-control" id="email" name="email"
                                 placeholder="customer@example.com">
+                                @if ($errors->has('email'))
+                                    <div class="alert alert-danger"> {{$errors->first('email')}} </div>
+                                @endif
                             <div class="invalid-feedback">
                                 {{ __('Please enter a valid email address for shipping updates.') }}
                             </div>
@@ -214,6 +217,7 @@
                         </div>
 
                         <hr class="mb-4">
+                        <div id="errors"></div>
                         <button class="btn btn-primary btn-lg btn-block submit_btn basicbtn"
                             type="submit">{{ __('Make Order') }}</button>
                     </form>
