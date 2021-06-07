@@ -7,6 +7,7 @@ use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Auth;
 use App\Models\User;
+use Illuminate\Http\Request;
 
 class LoginController extends Controller
 {
@@ -81,5 +82,15 @@ class LoginController extends Controller
             }
         }
         $this->middleware('guest')->except('logout');
+    }
+
+    public function logout(Request $request)
+    {
+        $role = Auth::user()->role_id;
+        Auth::logout();
+        if ($role == 3) {
+            return redirect(env('APP_URL'));
+        }
+        return redirect('/');
     }
 }
