@@ -7,7 +7,7 @@
 			<div class="col-md-12">
 				<div class="block text-center">
 					<h1 class="text-capitalize mb-5 text-lg">{{ __('Pricing') }}</h1>
-					<span class="text-white">{{ __('priceing_description') }}</span>   
+					<span class="text-white">{{ __('priceing_description') }}</span>
 				</div>
 			</div>
 		</div>
@@ -16,7 +16,7 @@
 
 <section class="section gray-bg" id="priceing">
 	<div class="container">
-		
+
 		<!-- END -->
 		<div class="row text-center align-items-end plan_list">
 			<!-- Pricing Table-->

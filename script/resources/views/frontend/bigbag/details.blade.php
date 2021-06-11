@@ -81,9 +81,9 @@
                                 @if ($info->price->starting_date != null)
 
                                     <h3><del>{{ amount_format($info->price->regular_price) }}</del> <span
-                                            id="amount">{{ amount_format($info->price->price) }}</span></h3>
+                                            id="amount" data-price="{{ ($info->price->price) }}">{{ amount_format($info->price->price) }}</span></h3>
                                 @else
-                                    <h3 id="amount">{{ amount_format($info->price->price) }}</h3>
+                                    <h3 id="amount" data-price="{{ ($info->price->price) }}">{{ amount_format($info->price->price) }}</h3>
                                 @endif
                             </div>
                             <input type="hidden" id="main_amount" value="{{ $info->price->price }}">
@@ -156,11 +156,21 @@
                                     </h5>
                                     <ul>
                                         @foreach ($option->childrenCategories as $row)
-
                                             <li><label class="selectgroup-item option option{{ $row->id }}">
-                                                    <input hidden data-amount="{{ $row->amount }}"
-                                                        data-amounttype="{{ $row->amount_type }}" @if ($option->select_type == 1) type="checkbox" name="option[]" @else type="radio" name="option[{{ $key }}]" @endif value="{{ $row->id }}"
-                                                        class="selectgroup-input options   @if ($option->is_required == 1) req @endif" >
+                                                    <input data-amount="{{ $row->amount }}"
+                                                        data-amounttype="{{ $row->amount_type }}" @if ($option->select_type == 1) type="checkbox" name="option[]" @else type="checkbox" name="option[{{ $key }}]" @endif value="{{ $row->id }}"
+                                                        class="selectgroup-input options option  @if ($option->is_required == 1) req @endif
+                                                        @if ($option->select_type == 0)
+                                                                radiotypecheckbox @endif
+                                                                "
+
+                                                        style="display:none;"
+                                                        data-mainprice="{{ $info->price->price }}"
+                                                        data-price="{{ $row->amount }}"
+                                                        data-productid="{{ $info->id }}"
+                                                        id="option{{ $row->id }}"
+
+                                                        >
                                                     <span class="selectgroup-button">{{ $row->name }}</span>
                                                 </label></li>
                                         @endforeach

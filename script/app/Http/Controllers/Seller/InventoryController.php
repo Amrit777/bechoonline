@@ -29,18 +29,18 @@ class InventoryController extends Controller
             else{
                 $posts=Stock::where('stock_status',0)->whereHas('term',function($q){
                 	return $q->where('user_id',Auth::id());
-                })->with('term')->paginate(50); 
+                })->with('term')->paginate(50);
             }
-           
+
 
         }
         else{
            $posts=Stock::with('term')->whereHas('term',function($q){
             	return $q->where('user_id',Auth::id());
             })->paginate(30);
-        } 
+        }
 
-       
+
        $src=$request->src ?? '';
        $status=$request->status ?? '';
        $in_stock=Stock::where('stock_status',1)->whereHas('term',function($q){
@@ -56,7 +56,7 @@ class InventoryController extends Controller
        return view('seller.inventory.index',compact('posts','total','in_stock','out_stock','status'));
     }
 
-   
+
 
     /**
      * Display the specified resource.
@@ -69,7 +69,7 @@ class InventoryController extends Controller
         //
     }
 
-   
+
 
     /**
      * Update the specified resource in storage.
@@ -109,5 +109,5 @@ class InventoryController extends Controller
           return response()->json(['Stock Update Successfully']);
     }
 
-   
+
 }

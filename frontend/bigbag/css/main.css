@@ -2544,14 +2544,14 @@ button:focus {
 
 .product-tags li label:hover {
   color: #fff;
-  background: var(--main-theme-color);
-  border-color: var(--main-theme-color);
+  background: rgb(98, 0, 255);
+  border-color: rgb(0, 4, 255);
 }
 
 .product-tags li label.active {
   color: #fff;
-  background: var(--main-theme-color);
-  border-color: var(--main-theme-color);
+  background: rgb(0, 255, 76);
+  border-color: rgb(0, 255, 76);
 }
 
 
