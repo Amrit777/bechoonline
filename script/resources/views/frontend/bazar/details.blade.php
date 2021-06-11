@@ -81,10 +81,10 @@
                                 <div class="pd-detail__inline">
                                     @if ($info->price->starting_date != null)
                                         <span id="amount"
-                                            class="pd-detail__price">{{ amount_format($info->price->price) }}</span>
+                                            class="pd-detail__price"  data-price="{{ ($info->price->price) }}">{{ amount_format($info->price->price) }}</span>
 
                                         <del
-                                            class="pd-detail__del">{{ amount_format($info->price->regular_price) }}</del>
+                                            class="pd-detail__del" data-price="{{($info->price->price) }}">{{ amount_format($info->price->regular_price) }}</del>
                                 </div>
 
                             @else
@@ -208,9 +208,17 @@
                                                 @foreach ($option->childrenCategories as $row)
                                                     <div class="@if ($option->select_type == 1) size__checkbox @else size__radio @endif">
                                                         <input data-amount="{{ $row->amount }}"
-                                                            data-amounttype="{{ $row->amount_type }}" @if ($option->select_type == 1) type="checkbox" name="option[]" @else name="option[{{ $key }}]" type="radio" @endif value="{{ $row->id }}"
+                                                            data-amounttype="{{ $row->amount_type }}" @if ($option->select_type == 1) type="checkbox" name="option[]" @else name="option[{{ $key }}]" type="checkbox" @endif value="{{ $row->id }}"
                                                             class="selectgroup-input option options
-                                                            @if ($option->is_required == 1) req @endif"
+                                                            @if ($option->is_required == 1) req @endif
+                                                            @if ($option->select_type == 0)
+                                                                radiotypecheckbox @endif
+                                                            "
+                                                        style="@if ($option->select_type == 0)
+                                                        display:none; @endif"
+                                                        data-mainprice="{{ $info->price->price }}"
+                                                        data-price="{{ $row->amount }}"
+                                                        data-productid="{{ $info->id }}"
                                                         id="option{{ $row->id }}">
                                                         <label class="size__radio-label option option{{ $row->id }}"
                                                             for="option{{ $row->id }}">{{ $row->name }}</label>

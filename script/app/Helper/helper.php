@@ -489,10 +489,10 @@ function ThemeFooterMenu($position, $path)
     return view($path . '.parent', compact('menus'));
 }
 
-
-function ConfigCategory($type, $select = '')
+// amit singh added notid -> for not sending own id
+function ConfigCategory($type, $select = '', $notid = '')
 {
-    return Lphelper::ConfigCategory($type, $select);
+    return Lphelper::ConfigCategory($type, $select, $notid);
 }
 
 function ConfigCategoryMulti($type, $select = [])

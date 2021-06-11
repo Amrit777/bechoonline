@@ -13,7 +13,7 @@
 
           <p class="mb-4 pr-5">{{ $header->description ?? '' }}</p>
           <div class="btn-container ">
-            <a href="#priceing" class="btn btn-main-2 btn-icon btn-round-full">{{ __('Get Start Now') }} <i class="icofont-simple-right ml-2"></i></a>
+            <a href="#pricing" class="btn btn-main-2 btn-icon btn-round-full">{{ __('Get Start Now') }} <i class="icofont-simple-right ml-2"></i></a>
           </div>
         </div>
       </div>

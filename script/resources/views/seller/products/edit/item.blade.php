@@ -9,7 +9,7 @@
 
 
 <div class="row">
-	<div class="col-lg-12">      
+	<div class="col-lg-12">
 		<form method="post" action="{{ route('seller.product.update',$info->id) }}" id="productform">
 			@csrf
 			@method('PUT')
@@ -20,7 +20,7 @@
 						<button type="button" class="close text-white" data-dismiss="alert" aria-hidden="true">×</button>
 						{!! session()->get('flash_notification.message') !!}
 					</div>
-					@endif 
+					@endif
 					<div class="row">
 						<div class="col-sm-3">
 							<ul class="nav nav-pills flex-column">
@@ -36,7 +36,7 @@
 								<li class="nav-item">
 									<a class="nav-link" href="{{ url('seller/product/'.$info->id.'/varient') }}"><i class="fas fa-expand-arrows-alt"></i> {{ __('Variants') }}</a>
 								</li>
-								
+
 								<li class="nav-item">
 									<a class="nav-link" href="{{ url('seller/product/'.$info->id.'/image') }}"><i class="far fa-images"></i> {{ __('Images') }}</a>
 								</li>
@@ -93,7 +93,7 @@
 									<option value="0" @if($info->featured==0) selected="" @endif>{{ __('None') }}</option>
 									<option value="1" @if($info->featured==1) selected="" @endif>{{ __('Trending products') }}</option>
 									<option value="2" @if($info->featured==2) selected="" @endif>{{ __('Best selling products') }}</option>
-									
+
 								</select>
 							</div>
 
@@ -110,7 +110,7 @@
 							</div>
 							<div class="form-group">
 								<button class="btn btn-primary basicbtn" type="submit">{{ __('Save Changes') }}</button>
-							</div>		
+							</div>
 						</div>
 					</div>
 				</div>

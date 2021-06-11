@@ -21,6 +21,36 @@
     var main_amount = parseFloat(main_amount);
     var calculate_amount = $('#main_amount').val();
     var calculate_amount = parseFloat(calculate_amount);
+
+    //amit singh
+    var $box = $(this);
+    if ($box.is(":checked")) {
+      console.log("iom checned");
+      if ($(this).hasClass('radiotypecheckbox')) {
+        var group = "input:checkbox[name='" + $box.attr("name") + "']";
+        $(group).prop("checked", false);
+        $box.prop("checked", true);
+      }
+    } else {
+      $box.prop("checked", false);
+      var id = $(this).attr('data-productid');
+      var initialprice = $('#price' + id).attr('data-price');
+      var price = $(this).attr('data-price'); // price of item selected
+      var price = parseFloat(price);
+
+      var mainprice = $(this).attr('data-mainprice'); // initial price of product
+      var mainprice = parseFloat(mainprice);
+
+      var total_price = initialprice - price;
+
+      $('#amount').html('Rs.' + total_price + '.00');
+      $('#amount').attr('data-price', total_price);
+    }
+    //amit singh
+
+
+
+
     $('.options:checked').each(function () {
       var val = $(this).val()
       var amounttype = $(this).data('amounttype')

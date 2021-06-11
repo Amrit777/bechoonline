@@ -161,20 +161,20 @@ class FrontendController extends Controller
     {
         $seo = Option::where('key', 'seo')->first();
         $seo = json_decode($seo->value);
-        JsonLdMulti::setTitle('Priceing');
+        JsonLdMulti::setTitle('Pricing');
         JsonLdMulti::setDescription($seo->description ?? null);
         JsonLdMulti::addImage(asset('uploads/logo.png'));
 
-        SEOMeta::setTitle('Priceing');
+        SEOMeta::setTitle('Pricing');
         SEOMeta::setDescription($seo->description ?? null);
 
 
-        SEOTools::setTitle('Priceing');
+        SEOTools::setTitle('Pricing');
         SEOTools::setDescription($seo->description ?? null);
 
 
         SEOTools::opengraph()->addProperty('image', asset('uploads/logo.png'));
-        SEOTools::twitter()->setTitle('Priceing');
+        SEOTools::twitter()->setTitle('Pricing');
 
         SEOTools::jsonLd()->addImage(asset('uploads/logo.png'));
 
@@ -322,7 +322,7 @@ class FrontendController extends Controller
             }
             $urlParts = parse_url($input);
             $domain = preg_replace('/^www\./', '', $urlParts['host']);
-            if ($urlParts['scheme'] != 'https') {
+            if ($urlParts['scheme'] != 'https' || $urlParts['scheme'] != 'http') {
                 $full_domain = env('APP_PROTOCOL') . $request->full_domain;
             } else {
                 $full_domain = rtrim($request->full_domain, '/');
@@ -540,7 +540,6 @@ class FrontendController extends Controller
 
     public function make_charge(Request $request, $id)
     {
-
         $info = Plan::where('status', 1)->where('is_default', 0)->where('price', '>', 0)->findorFail($id);
         $getway = Category::where('type', 'payment_getway')->where('featured', 1)->where('slug', '!=', 'cod')->findorFail($request->mode);
 

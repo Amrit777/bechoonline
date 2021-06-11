@@ -96,7 +96,8 @@
                                                             @endif
                                                             @if ($option->select_type == 0)
                                                                 radiotypecheckbox @endif
-                                                            "                                                            data-mainprice="{{ $row->price->price }}"
+                                                            "
+                                                            data-mainprice="{{ $row->price->price }}"
                                                             data-productid="{{ $row->id }}"
                                                             data-price="{{ $item->amount }}"
                                                             data-amounttype="{{ $item->amount_type }}" >

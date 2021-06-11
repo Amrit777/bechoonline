@@ -5,7 +5,7 @@
  @foreach ($categories as $key => $category)
 @php
  if (is_array($select)) {
- 	
+
  	if (in_array($category->id, $select)) {
  		$confirmck="selected";
  	}
@@ -25,7 +25,7 @@
  else{
  	$confirmck="";
  }
-	
+
 @endphp
  <option value="{{ $category->id }}" {{ $confirmck  }} > {{ $category->name }}</option>
 

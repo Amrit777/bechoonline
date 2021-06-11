@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 namespace App\Helper\Sitehelper;
 use Illuminate\Http\Request;
@@ -6,9 +6,9 @@ use App\Http\Controllers\Controller;
 use Auth;
 use Session;
 use Illuminate\Support\Facades\Http;
-class Instamojo 
+class Instamojo
 {
-	
+
     public static function redirect_if_payment_success()
     {
        return route('payment.success');
@@ -32,7 +32,7 @@ class Instamojo
         else{
             $url='https://www.instamojo.com/api/1.1/payment-requests/';
         }
-       
+
 
         $phone=$array['phone'];
         $email=$array['email'];
@@ -57,7 +57,7 @@ class Instamojo
             'X-Auth-Token' => 'test_211beaba149075c9268a47f26c6'
         ])->post($url,$params);
 
-       
+
         $url= $response['payment_request']['longurl'];
         return redirect($url);
     }
@@ -67,7 +67,7 @@ class Instamojo
     {
         $response=Request()->all();
         $payment_id=$response['payment_id'];
-        
+
         if ($response['payment_status']=='Credit') {
              $data['payment_id'] = $payment_id;
              $data['payment_method'] = "instamojo";
@@ -78,7 +78,7 @@ class Instamojo
              Session::forget('order_info');
              Session::put('payment_info', $data);
              return redirect(InstamojoController::redirect_if_payment_success());
-        }      
+        }
         else{
             return redirect(InstamojoController::redirect_if_payment_faild());
         }

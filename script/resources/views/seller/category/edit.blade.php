@@ -24,7 +24,8 @@
             <div class="col-sm-12 col-md-7">
               <select class="form-control selectric" name="p_id" id="p_id">
                 <option value="">{{ __('None') }}</option>
-                <?php echo ConfigCategory('category',$info->id) ?>
+                {{-- amit singh added info->id and info->p_id --}}
+                <?php echo ConfigCategory('category',$info->p_id,$info->id) ?>
               </select>
             </div>
           </div>

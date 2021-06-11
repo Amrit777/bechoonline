@@ -91,6 +91,7 @@
     <script src="{{ asset('frontend/bazar/js/helper.js?v=1.0') }}"></script>
     @stack('js')
     <script src="{{ asset('frontend/bazar/js/app.js') }}"></script>
+
     {{ load_footer() }}
     <!-- FOR INTERACTION -->
     <!--=====================================

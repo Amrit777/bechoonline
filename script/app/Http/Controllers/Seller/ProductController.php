@@ -238,6 +238,7 @@ class ProductController extends Controller
             foreach ($info->post_categories as $key => $value) {
                 array_push($cats, $value->category_id);
             }
+
             $content = json_decode($info->content->value);
             return view('seller.products.edit.item', compact('info', 'cats', 'content'));
         }

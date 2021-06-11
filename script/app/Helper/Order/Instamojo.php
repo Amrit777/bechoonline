@@ -1,4 +1,4 @@
-<?php 
+<?php
 namespace App\Helper\Order;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -7,9 +7,9 @@ use Session;
 use Illuminate\Support\Facades\Http;
 use App\Getway;
 use App\Order;
-class Instamojo 
+class Instamojo
 {
-	
+
      public static function redirect_if_payment_success()
      {
         return url('/payment/payment-success');
@@ -17,12 +17,12 @@ class Instamojo
 
     public static function redirect_if_payment_faild()
     {
-     return url('/payment/payment-fail');  
+     return url('/payment/payment-fail');
     }
 
     public static function fallback()
     {
-     return url('/payment/instamojo'); 
+     return url('/payment/instamojo');
     }
 
     public static function make_payment($array)
@@ -32,7 +32,7 @@ class Instamojo
         $info=json_decode($data->content);
         $data['private_api_key']=$info->private_api_key;
         $data['private_auth_token']=$info->private_auth_token;
-       
+
         if($info->env == 'production'){
             $data['env']=false;
             $test_mode=false;
@@ -49,7 +49,7 @@ class Instamojo
         else{
             $url='https://www.instamojo.com/api/1.1/payment-requests/';
         }
-       
+
 
         $phone=$array['phone'];
         $email=$array['email'];
@@ -58,8 +58,8 @@ class Instamojo
         $getway_id=$array['getway_id'];
         $name=$array['name'];
         $billName=$array['billName'];
-      
-      
+
+
             $params=[
                 'purpose' => $billName,
                 'amount' => $amount,
@@ -86,7 +86,7 @@ class Instamojo
             Session::forget('customer_order_info');
             return redirect(Instamojo::redirect_if_payment_faild());
         }
-        
+
     }
 
 
@@ -94,7 +94,7 @@ class Instamojo
     {
         $response=Request()->all();
         $payment_id=$response['payment_id'];
-        
+
         if ($response['payment_status']=='Credit') {
              $data['payment_id'] = $payment_id;
              $data['payment_method'] = "instamojo";
@@ -103,12 +103,12 @@ class Instamojo
              $data['getway_id']=$order_info['getway_id'];
              $data['amount'] =$order_info['amount'];
              $data['billName']=$order_info['billName'];
-             Session::put('customer_payment_info', $data); 
+             Session::put('customer_payment_info', $data);
              Session::forget('customer_order_info');
-            
+
              Session::forget('order_info');
              return redirect(Instamojo::redirect_if_payment_success());
-        }      
+        }
         else{
             $order_info= Session::get('customer_order_info');
             Order::destroy($order_info['ref_id']);
