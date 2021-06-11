@@ -35,7 +35,9 @@
     <!--=====================================
          CSS LINK PART END
          =======================================-->
-
+<!-- Pixel Code for https://mysocialproof.net/ -->
+<script async src="https://mysocialproof.net/pixel/27a72wltperyoyb90wf2ur7y2ujtdbee"></script>
+<!-- END Pixel Code -->
 
 </head>
 
