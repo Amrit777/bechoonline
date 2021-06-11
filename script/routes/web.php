@@ -14,7 +14,7 @@ Route::group(['domain' => env('APP_URL')], function ($domain) {
     Route::get('/page/{slug}', 'FrontendController@page');
     Route::get('/about', 'FrontendController@about');
     Route::get('/service', 'FrontendController@service');
-    Route::get('/priceing', 'FrontendController@priceing');
+    Route::get('/pricing', 'FrontendController@priceing');
     Route::get('/make-translate', 'FrontendController@translate')->name('translate');
     Route::get('/contact', 'FrontendController@contact');
     Route::post('/sent-mail', 'FrontendController@send_mail')->name('send_mail');
@@ -456,7 +456,7 @@ Route::get('/', 'FrontendController@welcome');
 Route::get('/page/{slug}', 'FrontendController@page');
 Route::get('/about', 'FrontendController@about');
 Route::get('/service', 'FrontendController@service');
-Route::get('/priceing', 'FrontendController@priceing');
+Route::get('/pricing', 'FrontendController@priceing');
 Route::get('/make-translate', 'FrontendController@translate')->name('translate');
 Route::get('/contact', 'FrontendController@contact');
 Route::post('/sent-mail', 'FrontendController@send_mail')->name('send_mail');
