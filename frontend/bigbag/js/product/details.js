@@ -23,12 +23,28 @@
 
 
     $('.option').on('click', function () {
-        $('.option').removeClass('active');
-        $(this).addClass('active');
+
         var main_amount = $('#main_amount').val();
         var main_amount = parseFloat(main_amount);
         var calculate_amount = $('#main_amount').val();
         var calculate_amount = parseFloat(calculate_amount);
+        const id = $(this).attr('data-productid');
+
+        var $box = $(this);
+        if ($box.is(":checked")) {
+
+            if ($(this).hasClass('radiotypecheckbox')) {
+                $('.option').removeClass('active');
+                $(this).addClass('active');
+                var group = "input:checkbox[name='" + $box.attr("name") + "']";
+                $(group).prop("checked", false);
+                $box.prop("checked", true);
+            }
+        } else {
+            $('.option').removeClass('active');
+            $box.prop("checked", false);
+        }
+
         $('.options:checked').each(function () {
             var val = $(this).val()
             var amounttype = $(this).data('amounttype')
