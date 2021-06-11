@@ -63,7 +63,7 @@
                             </ul>
                         </div>
                     </div>
-                    <div class="card-stats-items">
+                    <div class="card-stats-items dashboard-cardination">
                         <div class="card-stats-item">
                             <div class="card-stats-item-count" id="pending_order"></div>
                             <div class="card-stats-item-label">{{ __('Pending') }}</div>
@@ -193,7 +193,7 @@
                     </div>
                 </div>
 
-                <div class="col-6">
+                <div class="col-6 card-mobile-full">
 
                     <div class="card">
                         <div class="card-body">
@@ -209,7 +209,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-6">
+                <div class="col-6 card-mobile-full">
 
                     <div class="card">
                         <div class="card-body">
@@ -225,7 +225,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-6">
+                <div class="col-6 card-mobile-full">
 
                     <div class="card">
                         <div class="card-body">
@@ -241,7 +241,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-6">
+                <div class="col-6 card-mobile-full">
 
                     <div class="card">
                         <div class="card-body">

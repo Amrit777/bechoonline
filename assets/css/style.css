@@ -5211,6 +5211,10 @@ ul.card-tables li .status-visible a.btn:before {content: 'Download';margin-right
     float: right;
 }
 
+ul.card-tables li .foot-bottom .secondary input.form-control {
+    max-width: 100px;
+}
+
 /*Responsiveness*/
 
 @media only screen and (max-width: 800px) {
@@ -5259,9 +5263,20 @@ ul.card-tables li .custom-control.custom-checkbox input { z-index: 1 !important;
   .card.upper-order-cards .card-header .col-sm-10 li.nav-item {width: 100%;}
   ul.card-tables li .status-visible a.btn {display: block;}
   ul.card-tables li .status-visible {text-align: right;}
+  .card .card-stats .card-stats-items.dashboard-cardination {display: inline-block;width: 100%;}
+  .card .card-stats .card-stats-items.dashboard-cardination .card-stats-item {width: 100%;}
+  .card-mobile-full {flex: 100%;max-width: 100%;}
+  ul.card-tables.inventory-card li .title {width: calc(100% - 60px);}
+  ul.card-tables.inventory-card .status-visible.inventory-status {width: 100%;float: left;text-align: left;}
+  .inventory-table-cards .primary-buttons a.btn {width: 100%;margin-bottom: 5px;}
+  .inventory-table-cards .secondary-buttons {float: left;width: 100%;margin-top: 10px;}
 }
 
 @media only screen and (max-width: 400px) {
   ul.card-tables li .title {float: left;max-width: 130px;width: 100%;} 
   .card.order-table-card ul.card-tables li .title {max-width: 100%;}
+  ul.card-tables li .foot-bottom.inventory .primary {width: 100%;margin-bottom: 10px;}
+  ul.card-tables li .foot-bottom.inventory .secondary {width: 100%;}
+  ul.card-tables li .foot-bottom.inventory .secondary input.form-control {max-width: initial;}
+  ul.card-tables li .foot-bottom.inventory .secondary .edit-product-quantity.float-right {float: none !important;}
 }

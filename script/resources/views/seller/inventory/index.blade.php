@@ -5,12 +5,12 @@
 @section('content')
 <div class="row">
   <div class="col-12 mt-2">
-    <div class="card">
+    <div class="card table-card-body inventory-table-cards">
       <div class="card-body">
         @php
         $url=domain_info('full_domain');
         @endphp
-        <div class="float-left">
+        <div class="float-left primary-buttons">
          
            <a href="{{ route('seller.inventory.index') }}" class="btn  btn-outline-primary @if($status == '') active @endif">{{ __('Total') }} ({{ $total }})</a>
            <a href="?status=in" class="btn  btn-outline-success @if($status=='in') active @endif">{{ __('In Stock') }}({{ $in_stock }})</a>
@@ -18,7 +18,7 @@
           
         </div>
 
-        <div class="float-right">
+        <div class="float-right secondary-buttons">
           <form>
             <div class="input-group mb-2">
 
@@ -30,7 +30,7 @@
             </div>
           </form>
         </div>
-        <div class="table-responsive">
+        <div class="table-responsive display-desktop-table">
           <table class="table">
             <thead>
               <tr>
@@ -94,6 +94,52 @@
             </tbody>
 
          </table>
+
+       </div>
+
+       <ul class="card-tables display-mobile-table inventory-card">
+        @foreach($posts as $row)
+            <li>
+              <div class="table-image">
+                <a href="{{ route('seller.product.edit',$row->term_id) }}"  class="d-flex">
+                    <img class="product-img" src="{{ asset($row->term->preview->media->url ?? 'uploads/default.png') }}" alt="">
+                  </a>
+              </div>
+              <div class="title">
+                <a href="{{ route('seller.product.edit',$row->term_id) }}"  class="d-flex">
+                  <h6>
+                    {{ Str::limit($row->term->title,20) }}
+                  </h6>
+                </a>
+
+                <div class="edit-show">{{ $row->sku }}</div>
+              </div>
+
+              <div class="status-visible inventory-status">
+                <span>Stock Manage</span>
+                @if($row->stock_manage==1) <span class="badge badge-success">{{ __('Yes') }}</span> @elseif($row->stock_manage==0) <span class="badge badge-danger">{{ __('No') }}</span>  @endif
+              </div>
+              <div class="foot-bottom inventory">
+                  <div class="primary" style="margin-left: 0px;">
+                    <select class="form-control" name="stock_status">
+                      <option  @if($row->stock_status== 1) selected="" @endif value="1">{{ __('In Stock') }}</option>
+                      <option  @if($row->stock_status== 0) selected="" @endif value="0">{{ __('Out Of Stock') }}</option>
+                    </select>
+                  </div>
+                  <div class="secondary">
+                    <div class="edit-product-quantity float-right">
+                      @if($row->stock_manage==1)
+                      <input type="number" name="stock_qty" class="form-control" min="0" required value="{{ $row->stock_qty }}" placeholder="Quantity">
+                      @endif
+                      <button class="btn btn-primary basicbtn float-right" type="submit">{{ __('Save') }}</button>
+                      </form>
+                    </div>
+                  </div>
+              </div>
+            </li>
+            @endforeach
+        </ul>
+                            
          {{ $posts->appends(array('status'=>$status))->links('vendor.pagination.bootstrap-4') }}
        </div>
        
