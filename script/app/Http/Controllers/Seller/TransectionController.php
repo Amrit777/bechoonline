@@ -18,7 +18,7 @@ class TransectionController extends Controller
      */
     public function index(Request $request)
     {
-      
+
         $user_id=Auth::id();
         if ($request->src) {
             $this->src=$request->src;
@@ -27,7 +27,7 @@ class TransectionController extends Controller
         else{
            $orders=Order::with('getway')->where('user_id',$user_id)->latest()->paginate(40);
        }
-       
+
        $getways=Getway::where('user_id',$user_id)->with('method')->get();
        return view('seller.transection.index',compact('orders','request','getways'));
     }
@@ -51,11 +51,11 @@ class TransectionController extends Controller
         $transaction->category_id = $request->method;
         $transaction->transaction_id = $request->transection_id;
         $transaction->save();
-       
+
 
         return response()->json(['Trasection Successfully Updated']);
 
     }
 
-    
+
 }

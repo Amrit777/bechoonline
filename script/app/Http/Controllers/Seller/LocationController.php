@@ -40,15 +40,15 @@ class LocationController extends Controller
     public function store(Request $request)
     {
         $plan=user_limit();
-        
+
         $count=Category::where('user_id',Auth::id())->where('type','city')->count();
         $limit=$plan['location_limit'];
         if($limit <= $count){
            $msg='Maximum Location Exceeded Please Update Your Plan';
            $error['errors']['error']=$msg;
            return response()->json($error,401);
-           
-        }  
+
+        }
 
        $validatedData = $request->validate([
         'title' => 'required|max:50',
@@ -63,7 +63,7 @@ class LocationController extends Controller
        return response()->json(['Location Created Successfully']);
     }
 
-   
+
 
     /**
      * Show the form for editing the specified resource.

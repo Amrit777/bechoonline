@@ -11,12 +11,12 @@ use App\Term;
 use Carbon\Carbon;
 class CartController extends Controller
 {
-    
+
     public function add_to_cart(Request $request,$id)
     {
     	$id=request()->route()->parameter('id');
     	$user_id=domain_info('user_id');
-    	
+
         $term=Term::where('user_id',$user_id)->with('price','preview')->where('id',$id);
        if($request->option != null){
         $term=$term->with('termoption',function($q) use ($option){
@@ -36,7 +36,7 @@ class CartController extends Controller
             else{
                 return $q;
             }
-         
+
         });
        }
        $term= $term->first();
@@ -67,9 +67,9 @@ class CartController extends Controller
            $qty=$request->qty ?? 1;
 
            $price=$price;
-                   
+
            Cart::add($term->id,$term->title, $qty,$price,0,['attribute' => $attributes,'options'=>$options,'preview' => $term->preview->media->url ?? asset('uploads/default.png')]);
-          
+
        }
         $data['count']=Cart::count();
     	$data['total']=Cart::total();
@@ -83,7 +83,7 @@ class CartController extends Controller
     public function add_to_wishlist(Request $request,$id){
         $id=request()->route()->parameter('id');
         $user_id=domain_info('user_id');
-        
+
         $term=Term::where('user_id',$user_id)->with('price','preview')->where('id',$id);
         if($request->option != null){
          $term=$term->with('termoption',function($q) use ($option){
@@ -103,7 +103,7 @@ class CartController extends Controller
              else{
                  return $q;
              }
-          
+
          });
         }
         $term= $term->first();
@@ -124,7 +124,7 @@ class CartController extends Controller
             else{
              $options= [];
             }
- 
+
             if($request->variation != null){
              $attributes=$term->attributes ?? [];
             }
@@ -132,11 +132,11 @@ class CartController extends Controller
              $attributes= [];
             }
             $qty=$request->qty ?? 1;
- 
+
             $price=$price*$qty;
-                    
+
             Cart::instance('wishlist')->add($term->id,$term->title, $qty,$price,0,['attribute' => $attributes,'options'=>$options,'preview' => $term->preview->media->url ?? asset('uploads/default.png')]);
-           
+
         }
         return Cart::instance('wishlist')->count();
     }
@@ -155,7 +155,7 @@ class CartController extends Controller
 
     public function cart_add(Request $request)
     {
-      
+
         $id=$request->id;
         $user_id=domain_info('user_id');
         $option=$request->option ?? [];
@@ -171,13 +171,13 @@ class CartController extends Controller
             });
         }
         if($request->variation != null){
-            
+
             $variation=[];
             foreach($request->variation as $key => $row){
                 array_push($variation,$row);
             }
 
-            
+
             $term=$term->with('attributes',function($q) use ($variation){
              if(count($variation) > 0){
                  return $q->whereIn('variation_id',$variation);
@@ -185,12 +185,12 @@ class CartController extends Controller
              else{
                    return $q;
              }
-             
+
             });
-           
+
         }
          $term= $term->first();
-       
+
         if(!empty($term)){
             $price=$term->price->price;
 
@@ -209,23 +209,23 @@ class CartController extends Controller
             else{
              $options= [];
             }
- 
+
             if($request->variation != null){
              $attributes=$term->attributes ?? [];
-             
+
             }
             else{
              $attributes= [];
             }
-           
-           
+
+
             $price=$price;
-            // dd($price);       
+            // dd($price);
             Cart::add($term->id,$term->title, $request->qty,$price,0,['attribute' => $attributes,'options'=>$options,'preview' => $term->preview->media->url ?? asset('uploads/default.png')]);
-           
+
         }
-        
-        
+
+
         $data['count']=Cart::count();
         $data['total']=Cart::total();
         $data['subtotal']=Cart::subtotal();
@@ -280,7 +280,7 @@ class CartController extends Controller
     }
 
     public function express(Request $request){
-       
+
         $id=$request->id;
         $user_id=domain_info('user_id');
         $option=$request->option ?? [];
@@ -296,13 +296,13 @@ class CartController extends Controller
             });
         }
         if($request->variation != null){
-            
+
             $variation=[];
             foreach($request->variation as $key => $row){
                 array_push($variation,$row);
             }
 
-            
+
             $term=$term->with('attributes',function($q) use ($variation){
              if(count($variation) > 0){
                  return $q->whereIn('variation_id',$variation);
@@ -310,12 +310,12 @@ class CartController extends Controller
              else{
                    return $q;
              }
-             
+
             });
-           
+
         }
          $term= $term->first();
-       
+
         if(!empty($term)){
             $price=$term->price->price;
 
@@ -334,23 +334,23 @@ class CartController extends Controller
             else{
              $options= [];
             }
- 
+
             if($request->variation != null){
              $attributes=$term->attributes ?? [];
-             
+
             }
             else{
              $attributes= [];
             }
-           
-           
+
+
             $price=$price;
-            // dd($price);       
+            // dd($price);
              Cart::add($term->id,$term->title, $request->qty,$price,0,['attribute' => $attributes,'options'=>$options,'preview' => $term->preview->media->url ?? asset('uploads/default.png')]);
-           
+
         }
 
-       
+
        return redirect('/checkout');
     }
 

@@ -12,7 +12,7 @@ class ReportController extends Controller
     {
     	$user_id=Auth::id();
     	if ($request->start) {
-    		
+
     		$start = date("Y-m-d",strtotime($request->start));
     		$end = date("Y-m-d",strtotime($request->end));
 
@@ -37,7 +37,7 @@ class ReportController extends Controller
     			['user_id',$user_id],
     			['status','!=','completed'],
     			['status','!=','canceled'],
-    			
+
     		])->whereBetween('created_at',[$start,$end])->sum('total');
     		$amount_completed=Order::where([
     			['user_id',$user_id],
@@ -81,7 +81,7 @@ class ReportController extends Controller
     			['payment_status',1]
     		])->sum('total');
 
-    		
+
     	}
 
     	$start=$request->start ?? '';

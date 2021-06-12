@@ -157,7 +157,7 @@ class FrontendController extends Controller
         return view('service', compact('features'));
     }
 
-    public function priceing()
+    public function pricing()
     {
         $seo = Option::where('key', 'seo')->first();
         $seo = json_decode($seo->value);
@@ -180,7 +180,7 @@ class FrontendController extends Controller
 
         $plans = Plan::where('status', 1)->where('is_default', 0)->get();
 
-        return view('priceing', compact('plans'));
+        return view('pricing', compact('plans'));
     }
 
 
