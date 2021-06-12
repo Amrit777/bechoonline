@@ -56,7 +56,7 @@
 
 
     {{-- load whatsapp api --}}
-    {{-- {{ load_whatsapp() }} --}}
+    {{ load_whatsapp() }}
     {{-- end whatsapp api loading --}}
 
     @php

@@ -58,7 +58,7 @@
         {{-- end load --}}
 
         {{-- load whatsapp api --}}
-        {{-- {{ load_whatsapp() }} --}}
+        {{ load_whatsapp() }}
         {{-- end whatsapp api loading --}}
     </div>
     <!--====== End - Main App ======-->
