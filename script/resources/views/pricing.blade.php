@@ -7,21 +7,21 @@
 			<div class="col-md-12">
 				<div class="block text-center">
 					<h1 class="text-capitalize mb-5 text-lg">{{ __('Pricing') }}</h1>
-					<span class="text-white">{{ __('priceing_description') }}</span>
+					<span class="text-white">{{ __('pricing_description') }}</span>
 				</div>
 			</div>
 		</div>
 	</div>
 </section>
 
-<section class="section gray-bg" id="priceing">
+<section class="section gray-bg" id="pricing">
 	<div class="container">
 
 		<!-- END -->
 		<div class="row text-center align-items-end plan_list">
 			<!-- Pricing Table-->
 			@foreach($plans as $row)
-			<div class="col-lg-4 mb-5 mb-lg-0  @if($row->featured == 0) priceing @endif">
+			<div class="col-lg-4 mb-5 mb-lg-0  @if($row->featured == 0) pricing @endif">
 				<div class="bg-white p-5 rounded-lg  @if($row->featured == 1) shadow @endif ">
 					<h1 class="h6 text-uppercase font-weight-bold mb-4">{{ $row->name }}</h1>
 					<h2 class="h1 font-weight-bold">{{ amount_format($row->price) }}</h2>

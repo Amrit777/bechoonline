@@ -42,7 +42,7 @@ class ShippingController extends Controller
         'title' => 'required|max:50',
         'price' => 'required|max:50',
         'locations' => 'required',
-       
+
        ]);
 
        $post = new Category;
@@ -78,7 +78,7 @@ class ShippingController extends Controller
      */
     public function edit($id)
     {
-      
+
       $info=Category::where('user_id',Auth::id())->with('parent_relation')->findorFail($id);
       $data=[];
 
@@ -87,7 +87,7 @@ class ShippingController extends Controller
       }
 
       return view('seller.shipping.method.edit',compact('info','data'));
-     }  
+     }
 
     /**
      * Update the specified resource in storage.
@@ -102,7 +102,7 @@ class ShippingController extends Controller
         'title' => 'required|max:50',
         'price' => 'required|max:50',
         'locations' => 'required',
-       
+
        ]);
 
        $post = Category::where('user_id',Auth::id())->findorFail($id);

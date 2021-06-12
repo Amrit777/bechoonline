@@ -7,7 +7,7 @@
 	<div class="col-sm-6">
 		<div class="card">
 			<div class="card-body">
-				
+
 				<h5></h5>
 				<ul class="list-group">
 					<li class="list-group-item d-flex justify-content-between align-items-center">
@@ -22,7 +22,7 @@
 					<li class="list-group-item d-flex justify-content-between align-items-center">
 						{{ __('Registration Date') }}: <b>{{ $info->created_at->format('d-F-Y') }}</b>
 					</li>
-				</ul>   		
+				</ul>
 			</div>
 		</div>
 	</div>
@@ -66,7 +66,7 @@
 							<th>{{ __('Invoice ID') }}</th>
 							<th>{{ __('Amount') }}</th>
 							<th>{{ __('Items') }}</th>
-							
+
 							<th>{{ __('Payment Metho') }}d</th>
 							<th>{{ __('Payment Status') }}</th>
 							<th>{{ __('Order Statu') }}s</th>
@@ -89,15 +89,15 @@
 								<span class="badge badge-success">{{ __('Complete') }}</span>
 
 								@elseif($row->payment_status==0)
-								<span class="badge badge-danger">{{ __('Cancel') }}</span> 
+								<span class="badge badge-danger">{{ __('Cancel') }}</span>
 								@elseif($row->payment_status==3)
-								<span class="badge badge-danger">{{ __('Incomplete') }}</span> 
+								<span class="badge badge-danger">{{ __('Incomplete') }}</span>
 
 								@endif
 
 							</td>
 							<td>
-								
+
 								@if($row->status=='pending')
 								<span class="badge badge-warning">{{ __('Awaiting processing') }}</span>
 

@@ -50,12 +50,12 @@ class CouponController extends Controller
          $error['errors']['error']='Maximum storage limit exceeded';
          return response()->json($error,401);
         }
-        
+
        $validatedData = $request->validate([
         'coupon_code' => 'required|max:50',
         'date' => 'required|max:50',
         'percent' => 'required|max:2',
-        
+
       ]);
 
         $post=new Category;
@@ -69,7 +69,7 @@ class CouponController extends Controller
         return response()->json(['Coupon Created']);
     }
 
-   
+
 
     /**
      * Show the form for editing the specified resource.
@@ -97,7 +97,7 @@ class CouponController extends Controller
         'coupon_code' => 'required|max:50',
         'date' => 'required|max:50',
         'percent' => 'required|max:2',
-        
+
       ]);
 
         $post= Category::where('user_id',Auth::id())->findOrFail($id);
