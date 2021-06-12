@@ -51,8 +51,9 @@ var dataId = '';
 		});
 	});
 	$(".basicform").on('submit', function (e) {
+		// console.log(this.action);
 		var id = $(this).attr('data-id');
-		console.log("id " + id);
+		// console.log("id " + id);
 		e.preventDefault();
 		$.ajaxSetup({
 			headers: {
@@ -63,12 +64,17 @@ var dataId = '';
 		var required = false;
 
 		if ($('.req' + id).length > 0) {
-			$('.req' + id + ':checked').each(function () {
-				if (this.checked == true) {
-					required = true;
-				} else {
-					required = false;
-				}
+			$('.req' + id).each(function () {
+				required = false;
+				var key = $(this).attr('data-parentid');
+
+				$('.req' + id + 'key' + key + ':checked').each(function () {
+					if (this.checked == true) {
+						required = true;
+					} else {
+						required = false;
+					}
+				})
 			});
 		} else {
 			required = true;

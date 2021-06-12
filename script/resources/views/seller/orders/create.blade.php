@@ -92,11 +92,11 @@
                                                                     <input @if ($option->select_type == 1) type="checkbox" name="option[]"
                                                                             @else type="checkbox" name="option[{{ $key }}]" @endif value="{{ $item->id }}" class="selectgroup-input
                                                                                        @if ($option->is_required == 1)
-                                                                    req{{ $row->id }}
-                                                            @endif
+                                                                    req{{ $row->id }} req{{ $row->id }}key{{$option->id}}@endif
                                                             @if ($option->select_type == 0)
                                                                 radiotypecheckbox @endif
                                                             "
+                                                            data-parentid="{{$option->id}}"
                                                             data-mainprice="{{ $row->price->price }}"
                                                             data-productid="{{ $row->id }}"
                                                             data-price="{{ $item->amount }}"
@@ -115,7 +115,7 @@
                     <input type="number" class="form-control" @if ($row->stock->stock_manage == 1) max="{{ $row->stock->stock_qty }}" min="0" @endif
                         required="" value="1" name="qty">
                     <div class="input-group-append">
-                        <button onclick="assignId({{ $row->id }})" @if ($row->stock->stock_status == 0) disabled="" @endif
+                        <button data-parentid="w23e232" onclick="assignId({{ $row->id }})" @if ($row->stock->stock_status == 0) disabled="" @endif
                             class="btn btn-primary btn-icon" id="submitbtn{{ $row->id }}" type="submit"
                             data-id="{{ $row->id }}"><i class="fas fa-cart-arrow-down"></i></button>
                     </div>
