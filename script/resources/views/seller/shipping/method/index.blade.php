@@ -1,3 +1,5 @@
+<!-- Shipping Price -->
+
 @extends('layouts.app')
 @section('head')
 @include('layouts.partials.headersection',['title'=>'Shipping'])

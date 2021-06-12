@@ -1,3 +1,5 @@
+<!-- Customer -->
+
 @extends('layouts.app')
 @section('head')
 @include('layouts.partials.headersection',['title'=>'Customers'])

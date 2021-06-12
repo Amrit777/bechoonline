@@ -1,3 +1,5 @@
+<!-- Customer Order History -->
+
 @extends('layouts.app')
 @section('head')
 @include('layouts.partials.headersection',['title'=>'Customer Info'])

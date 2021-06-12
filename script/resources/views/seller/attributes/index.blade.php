@@ -1,3 +1,5 @@
+<!-- Attribute -->
+
 @extends('layouts.app')
 @section('head')
 @include('layouts.partials.headersection',['title'=>'Attributes'])
