@@ -81,6 +81,7 @@ WHATSAPP and tawk amit singh
     <script src="{{ asset('assets/js/sweetalert2.all.min.js') }}"></script>
     @stack('js')
     <script src="{{ asset('assets/js/stisla.js') }}"></script>
+    <script src="{{ asset('assets/js/jquery.validate.min.js') }}"></script>
     <!-- Template JS File -->
     <script src="{{ asset('assets/js/scripts.js') }}"></script>
 

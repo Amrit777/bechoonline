@@ -77,6 +77,9 @@
 
   $(".cart-form").on('submit', function (e) {
     var btn_content = $('.submit_btn').html();
+    var id = $("#detailid").val();
+
+    console.log("id" + id);
     e.preventDefault();
     $.ajaxSetup({
       headers: {
@@ -84,27 +87,33 @@
       }
     });
 
-    var required = false;
-    if ($('.req').length > 0) {
-      $('.req:checked').each(function () {
-        if (this.checked == true) {
-          required = true;
-        }
-        else {
-          required = false;
-        }
-
+    // amit singh
+    var required;
+    let obj = {};
+    if ($('.req' + id).length > 0) {
+      $('.req' + id).each(function () {
+        var key = $(this).attr('data-parentid');
+        obj[key] = false;
+        $('.key' + key).each(function () {
+          if ($(this).is(':checked')) {
+            obj[key] = true;
+            return true;
+          }
+        });
       });
     }
-    else {
-      required = true;
-    }
-    if (required == false) {
+    console.log(obj);
+    var allTrueVal = allTrue(obj);
+    if (allTrueVal == false) {
+      required = false;
       $('.required_option').show();
-    }
-    else {
+      return 0;
+    } else if (allTrueVal == true) {
+      required = true;
       $('.required_option').hide();
     }
+    console.log("required" + required);
+    // amit singh
 
     if (required == true) {
       $.ajax({
@@ -191,7 +200,11 @@
 
   });
 
-
+  function allTrue(obj) {
+    for (var o in obj)
+      if (!obj[o]) return false;
+    return true;
+  }
 
   function get_data() {
     var term = $('#term').val();

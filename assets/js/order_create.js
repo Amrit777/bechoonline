@@ -2,7 +2,6 @@ var dataId = '';
 (function ($) {
 	"use strict";
 	$('.selectgroup-input').on('click', function (e) {
-
 		var $box = $(this);
 		if ($box.is(":checked")) {
 			if ($(this).hasClass('radiotypecheckbox')) {
@@ -51,9 +50,10 @@ var dataId = '';
 		});
 	});
 	$(".basicform").on('submit', function (e) {
+
 		// console.log(this.action);
 		var id = $(this).attr('data-id');
-		// console.log("id " + id);
+		console.log("id " + id);
 		e.preventDefault();
 		$.ajaxSetup({
 			headers: {
@@ -61,28 +61,32 @@ var dataId = '';
 			}
 		});
 		var basicbtnhtml = $('#submitbtn' + dataId).html();
-		var required = false;
-
+		// amit singh
+		var required;
+		let obj = {};
 		if ($('.req' + id).length > 0) {
 			$('.req' + id).each(function () {
-				required = false;
 				var key = $(this).attr('data-parentid');
-
-				$('.req' + id + 'key' + key + ':checked').each(function () {
-					if (this.checked == true) {
-						required = true;
-					} else {
-						required = false;
+				obj[key] = false;
+				$('.key' + key).each(function () {
+					if ($(this).is(':checked')) {
+						obj[key] = true;
+						return true;
 					}
-				})
+				});
 			});
-		} else {
+		}
+		console.log(obj);
+		var allTrueVal = allTrue(obj);
+		if (allTrueVal == false) {
+			required = false;
+			Sweet('error', "Please select required option.")
+			return 0;
+		} else if (allTrueVal == true) {
 			required = true;
 		}
-		if (required == false) {
-			Sweet('error', "Please select required option.")
-		}
-
+		console.log("required" + required);
+		// amit singh
 		if (required == true) {
 			$.ajax({
 				type: 'POST',
@@ -152,6 +156,13 @@ var dataId = '';
 function assignId(id) {
 	dataId = id;
 }
+
+function allTrue(obj) {
+	for (var o in obj)
+		if (!obj[o]) return false;
+	return true;
+}
+
 
 
 

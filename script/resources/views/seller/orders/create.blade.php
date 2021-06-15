@@ -52,19 +52,23 @@
 
                                 @endphp
                                 <form method="post" class="basicform" data-id="{{ $row->id }}"
-                                    action="{{ route('seller.order.store') }}">
+                                    action="{{ route('seller.order.store') }}" id="create_pos{{ $row->id }}">
                                     @csrf
                                     <input type="hidden" name="term_id" value="{{ $term_id }}">
                                     <input type="hidden" name="main_price" id="main_price{{ $row->id }}"
                                         value="{{ $price }}">
                                     <tr>
-                                        <td><a
-                                                href="{{ route('seller.product.edit', $row->id) }}">#{{ $row->id }}</a>
+                                        <td>
+                                            <a href="{{ route('seller.product.edit', $row->id) }}">#{{ $row->id }}</a>
                                         </td>
-                                        <td><img src="{{ asset($row->preview->media->url ?? 'uploads/default.png') }}"
-                                                height="50"></td>
-                                        <td><a href="{{ url($url . '/product/' . $row->slug . '/' . $term_id) }}"
-                                                target="_blank">{{ Str::limit($row->title, 50) }}</a></td>
+                                        <td>
+                                            <img src="{{ asset($row->preview->media->url ?? 'uploads/default.png') }}"
+                                                height="50">
+                                        </td>
+                                        <td>
+                                            <a href="{{ url($url . '/product/' . $row->slug . '/' . $term_id) }}"
+                                                target="_blank">{{ Str::limit($row->title, 50) }}</a>
+                                        </td>
                                         <td><span id="price{{ $row->id }}" data-price="{{ $price }}">{{ $price }}</span> </td>
 
                                         <td>
@@ -83,53 +87,54 @@
                                             @if (count($row->options) > 0)
                                                 @foreach ($row->options as $key => $option)
                                                     <div class="form-group">
-                                                        <label class="form-label">{{ $option->name }} @if ($option->is_required == 1) <span
-                                                                    class="text-danger">*</span> @endif
+                                                        <label class="form-label">{{ $option->name }}
+                                                             @if ($option->is_required == 1) <span class="text-danger">*</span> @endif
                                                         </label>
-                                                        <div class="selectgroup w-100">
-                                                            @foreach ($option->childrenCategories as $item)
+                                                        <div class="selectgroup w-100" >
+                                                            @foreach ($option->childrenCategories as $key => $item)
                                                                 <label class="selectgroup-item">
                                                                     <input @if ($option->select_type == 1) type="checkbox" name="option[]"
-                                                                            @else type="checkbox" name="option[{{ $key }}]" @endif value="{{ $item->id }}" class="selectgroup-input
-                                                                                       @if ($option->is_required == 1)
-                                                                    req{{ $row->id }} req{{ $row->id }}key{{$option->id}}@endif
-                                                            @if ($option->select_type == 0)
-                                                                radiotypecheckbox @endif
-                                                            "
-                                                            data-parentid="{{$option->id}}"
-                                                            data-mainprice="{{ $row->price->price }}"
-                                                            data-productid="{{ $row->id }}"
-                                                            data-price="{{ $item->amount }}"
-                                                            data-amounttype="{{ $item->amount_type }}" >
-                                                            <span class="selectgroup-button">{{ $item->name }}</span>
-                                                            </label>
+                                                                            @else type="checkbox" name="option[{{ $key }}]" @endif value="{{ $item->id }}"
+                                                                             class="selectgroup-input
+                                                                                    @if ($option->is_required == 1) req
+                                                                                    req{{ $row->id }} key{{$option->id}}
+                                                                                    @endif
+                                                                                    @if ($option->select_type == 0)
+                                                                                        radiotypecheckbox @endif
+                                                                                    "
+                                                                                    data-parentid="{{$option->id}}"
+                                                                                    data-mainprice="{{ $row->price->price }}"
+                                                                                    data-productid="{{ $row->id }}"
+                                                                                    data-price="{{ $item->amount }}"
+                                                                                    data-amounttype="{{ $item->amount_type }}" >
+                                                                    <span class="selectgroup-button">{{ $item->name }}</span>
+                                                                </label>
+                                                            @endforeach
+                                                        </div>
+                                                        {{-- <span class="required_option"></span> --}}
+                                                    </div>
                                                 @endforeach
+                                            @endif
+                                        </td>
+                                        <td>
+                                            <div class="input-group">
+                                                <input type="number" class="form-control" @if ($row->stock->stock_manage == 1) max="{{ $row->stock->stock_qty }}" min="0" @endif
+                                                    required="" value="1" name="qty">
+                                                <div class="input-group-append">
+                                                    <button onclick="assignId({{ $row->id }})" @if ($row->stock->stock_status == 0) disabled="" @endif
+                                                        class="btn btn-primary btn-icon" id="submitbtn{{ $row->id }}" type="submit"
+                                                        data-id="{{ $row->id }}"><i class="fas fa-cart-arrow-down"></i></button>
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </form>
+                            @endforeach
+                        </tbody>
+                    </table>
                 </div>
-                <span class="required_option"></span>
             </div>
-            @endforeach
-            @endif
-            </td>
-            <td>
-                <div class="input-group">
-                    <input type="number" class="form-control" @if ($row->stock->stock_manage == 1) max="{{ $row->stock->stock_qty }}" min="0" @endif
-                        required="" value="1" name="qty">
-                    <div class="input-group-append">
-                        <button data-parentid="w23e232" onclick="assignId({{ $row->id }})" @if ($row->stock->stock_status == 0) disabled="" @endif
-                            class="btn btn-primary btn-icon" id="submitbtn{{ $row->id }}" type="submit"
-                            data-id="{{ $row->id }}"><i class="fas fa-cart-arrow-down"></i></button>
-                    </div>
-                </div>
-            </td>
-            </tr>
-            </form>
-            @endforeach
-            </tbody>
-            </table>
-
         </div>
-    </div>
-    </div>
     <div class="card-footer">
         {{ $posts->links('vendor.pagination.bootstrap-4') }}
     </div>

@@ -93,7 +93,7 @@
                         </div>
                         <form method="post" class="cart-form" action="{{ url('/addtocart') }}">
                             @csrf
-                            <input type="hidden" name="id" value="{{ $info->id }}">
+                            <input type="hidden" name="id" id="detailid" value="{{ $info->id }}">
                             <div class="single-product-widget product-quantity">
                                 <h5>{{ __('Product Quantity') }} :</h5>
                                 <ul>
@@ -159,17 +159,14 @@
                                             <li><label class="selectgroup-item option option{{ $row->id }}">
                                                     <input data-amount="{{ $row->amount }}"
                                                         data-amounttype="{{ $row->amount_type }}" @if ($option->select_type == 1) type="checkbox" name="option[]" @else type="checkbox" name="option[{{ $key }}]" @endif value="{{ $row->id }}"
-                                                        class="selectgroup-input options option  @if ($option->is_required == 1) req @endif
+                                                        class="selectgroup-input options option  @if ($option->is_required == 1) req req{{ $info->id }} key{{$option->id}} @endif
                                                         @if ($option->select_type == 0)
-                                                                radiotypecheckbox @endif
-                                                                "
-
-                                                        style="display:none;"
+                                                                radiotypecheckbox @endif"
                                                         data-mainprice="{{ $info->price->price }}"
                                                         data-price="{{ $row->amount }}"
                                                         data-productid="{{ $info->id }}"
                                                         id="option{{ $row->id }}"
-
+                                                        data-parentid="{{$option->id}}"
                                                         >
                                                     <span class="selectgroup-button">{{ $row->name }}</span>
                                                 </label></li>
