@@ -57,12 +57,12 @@
 
 <div class="row">
 	<div class="col-md-12">
-		<div class="card">
+		<div class="card table-card-body history-of-orders">
 			<div class="card-header">
 				<h4>{{ __('Order History') }}</h4>
 			</div>
 			<div class="card-body p-0">
-				<div class="table-responsive table-invoice">
+				<div class="table-responsive table-invoice display-desktop-table">
 					<table class="table table-striped">
 						<tbody><tr>
 							<th>{{ __('Invoice ID') }}</th>
@@ -132,6 +132,65 @@
 
 						</tbody>
 					</table>
+				</div>
+
+				<ul class="card-tables display-mobile-table">
+					@foreach($orders as $row)
+					<li>
+						<div class="title">
+							<div class="name"><b>Invoice ID </b><a href="{{ route('seller.invoice',$row->id) }}">{{ $row->order_no }}</a></div>
+							<div class="amount"><b>Amount </b>{{ amount_format($row->total) }}</div>
+							<div class="item-number"><b>Item </b>{{ $row->order_item_count }}</div>
+							<div class="payment-method"><b>Payment Method </b>{{ $row->payment_method->method->name ?? '' }}</div>
+							<div class="payment-method"><b>Due Date </b>{{ $row->created_at->format('d-F-Y') }}</div>
+						</div>
+						<div class="status-visible">
+							<a href="{{ route('seller.order.show',$row->id) }}" class="btn btn-primary">{{ __('Detail') }}</a>
+						</div>
+						<div class="foot-bottom">
+							<div class="primary" style="margin-left:0;">
+								<b>Payment Status </b>
+								@if($row->payment_status==2)
+								<span class="badge badge-warning">{{ __('Pending') }}</span>
+
+								@elseif($row->payment_status==1)
+								<span class="badge badge-success">{{ __('Complete') }}</span>
+
+								@elseif($row->payment_status==0)
+								<span class="badge badge-danger">{{ __('Cancel') }}</span>
+								@elseif($row->payment_status==3)
+								<span class="badge badge-danger">{{ __('Incomplete') }}</span>
+
+								@endif
+							</div>
+							<div class="secondary">
+								<b>Order Status </b>
+								@if($row->status=='pending')
+								<span class="badge badge-warning">{{ __('Awaiting processing') }}</span>
+
+								@elseif($row->status=='processing')
+								<span class="badge badge-primary">{{ __('Processing') }}</span>
+
+								@elseif($row->status=='ready-for-pickup')
+								<span class="badge badge-info">{{ __('Ready for pickup') }}</span>
+
+								@elseif($row->status=='completed')
+								<span class="badge badge-success">{{ __('Completed') }}</span>
+
+								@elseif($row->status=='archived')
+								<span class="badge badge-warning">{{ __('Archived') }}</span>
+								@elseif($row->status=='canceled')
+								<span class="badge badge-danger">{{ __('Canceled') }}</span>
+
+								@else
+								<span class="badge badge-info">{{ $row->status }}</span>
+
+								@endif
+							</div>
+						</div>
+					</li>
+					@endforeach					
+				</ul>
 
 					{{ $orders->links('vendor.pagination.bootstrap-4') }}
 				</div>

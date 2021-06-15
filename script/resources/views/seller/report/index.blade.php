@@ -131,7 +131,7 @@
 	</div>
 
 	<div class="col-sm-12">
-		<div class="card card-primary">
+		<div class="card card-primary table-card-body">
 			<div class="card-header">
 				<h4>{{ __('Orders') }}</h4>
 				<form class="card-header-form">
@@ -147,7 +147,7 @@
 			<div class="card-body">
 				
 
-				<div class="table-responsive">
+				<div class="table-responsive display-desktop-table">
 					<table class="table table-striped table-md table-hover">
 						<tbody><tr>
 							<th class="text-left" >{{ __('Invoice No') }}</th>
@@ -213,6 +213,74 @@
 						@endforeach
 						
 					</tbody></table>
+				</div>
+
+				<ul class="card-tables display-mobile-table">
+					@foreach($orders as $key => $row)
+					<li class="report-table">
+						<div class="title">
+			                <div class="invoice-number">
+			                	<b>Invoice No. : </b>{{ $row->order_no }}
+			                </div>
+			                <div class="customer-name">
+			                	<b>Customer : </b>@if(empty($row->user_id)) {{ __('Guest Order') }} @else <a href="{{ route('seller.customer.show',$row->user_id) }}">{{ $row->customer->name ?? '' }}</a>  @endif
+			                </div>
+			                <div class="total-items">
+			                	<b>Items : </b> {{ $row->order_items_count }}
+			                </div>
+			            </div>
+			            <div class="status-visible">
+			                <span class="invoice"><a href="{{ route('seller.order.show',$row->id) }}" class="btn btn-primary btn-sm"><i class="fa fa-eye"></i></a></span>
+   			            </div>
+   			            <div class="foot-bottom">
+			                <div class="primary"><b>Date : </b>{{ $row->created_at->format('d-F-Y') }}</div>
+			                <div class="secondary category-edit"><b>Order Total : </b>{{ amount_format($row->total) }}</div>
+		              	</div>
+		              	<div class="bottom-footer">
+		              		<div class="primary">
+		              			<b>Payment : </b>
+		              			@if($row->payment_status==2)
+								<span class="badge badge-warning">{{ __('Pending') }}</span>
+
+								@elseif($row->payment_status==1)
+								<span class="badge badge-success">{{ __('Complete') }}</span>
+
+								@elseif($row->payment_status==0)
+								<span class="badge badge-danger">{{ __('Cancel') }}</span> 
+								@elseif($row->payment_status==3)
+								<span class="badge badge-danger">{{ __('Incomplete') }}</span> 
+
+								@endif
+		              		</div>
+		              		<div class="secondary">
+		              			<b>Fulfillment : </b>
+		              			@if($row->status=='pending')
+								<span class="badge badge-warning">{{ __('Awaiting processing') }}</span>
+
+								@elseif($row->status=='processing')
+								<span class="badge badge-primary">{{ __('Processing') }}</span>
+
+								@elseif($row->status=='ready-for-pickup')
+								<span class="badge badge-info">{{ __('Ready for pickup') }}</span>
+
+								@elseif($row->status=='completed')
+								<span class="badge badge-success">{{ __('Completed') }}</span>
+
+								@elseif($row->status=='archived')
+								<span class="badge badge-warning">{{ __('Archived') }}</span>
+								@elseif($row->status=='canceled')
+								<span class="badge badge-warning">{{ __('Canceled') }}</span>
+
+								@else
+								<span class="badge badge-info">{{ $row->status }}</span>
+
+								@endif
+		              		</div>
+		              	</div>
+					</li>
+					@endforeach
+				</ul>
+
 					{{ $orders->appends($request->all())->links('vendor.pagination.bootstrap-4') }}
 				</div>
 			</div>

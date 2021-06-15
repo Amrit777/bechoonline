@@ -1,3 +1,4 @@
+<!-- order show -->
 @extends('layouts.app')
 @section('head')
     @include('layouts.partials.headersection',['title'=>'Order No: '.$info->order_no])
@@ -9,7 +10,7 @@
 
         <div class="col-12 col-lg-8">
             @if ($info->status == 'pending')
-                <div class="card card-warning">
+                <div class="card card-warning order-show">
 
                 @elseif($info->status=='processing')
                     <div class="card card-primary">
@@ -32,7 +33,7 @@
 
 
 
-            <div class="card-body">
+            <div class="card-body desktop display-desktop-table">
                 <ul class="list-group list-group-lg list-group-flush list">
                     <li class="list-group-item">
                         <div class="row align-items-center">
@@ -121,7 +122,42 @@
                         </div>
                     </li>
                 </ul>
+
             </div>
+                <ul class="card-tables display-mobile-table">
+                    @foreach ($info->order_item as $row)
+                        <li class="product-description">
+                            <div class="title"><b>Product </b><a href="{{ url('/seller/product/' . $row->term->id . '/edit') }}">{{ $row->term->title ?? '' }}<br>
+                                    </a></div>
+                            <div class="options">
+                                @php
+                                    $variations = json_decode($row->info);
+
+                                @endphp
+                                @foreach ($variations->attribute ?? [] as $item)
+
+                                    <span>{{ __('Variation') }} :</span> <small>{{ $item->attribute->name ?? '' }} -
+                                        {{ $item->variation->name ?? '' }}</small>
+                                @endforeach
+                                <br>
+                                @foreach ($variations->options ?? [] as $option)
+                                    <span>{{ __('Options') }} :</span> <small>{{ $option->name ?? '' }}</small>
+                                @endforeach
+                            </div>
+                            <div class="amount"><b>Amount </b>{{ $row->amount }} × {{ $row->qty }}</div>
+                            <div class="amount"><b>Total </b>{{ amount_format($row->amount * $row->qty) }}</div>
+                        </li>
+                    @endforeach
+                    <li class="product-final-details">
+                        <div class="shipping-method-name"><b>{{ $info->shipping_info->shipping_method->name ?? '' }}</b></div>
+                        <div class="shipping-fee"><b>{{ __('Shipping Fee') }}</b>{{ amount_format($info->shipping) }}</div>
+                        <div class="gst-tax"><b>GST({{ tax() }}%)</b> {{ amount_format($info->tax) }} </div>
+                        <div class="discount"><b>{{ __('Discount') }}</b> {{ amount_format($order_content->coupon_discount) }} </div>
+                        <div class="subtotal"><b>{{ __('Subtotal') }}</b>{{ amount_format($order_content->sub_total) }}</div>
+                        <div class="subtotal"><b>{{ __('Total') }}</b>{{ amount_format($info->total) }}</div>
+                    </li>
+                </ul>
+
 
             <div class="card-footer">
 

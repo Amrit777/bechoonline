@@ -5215,7 +5215,253 @@ ul.card-tables li .foot-bottom .secondary input.form-control {
     max-width: 100px;
 }
 
+.categories-dash li .custom-control input ,
+li.attribute-listing .custom-control input[type="checkbox"],
+ul.card-tables li.brand-listing input[type="checkbox"],
+.checkbox-non-custom input[type="checkbox"]{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.category-edit a.btn ,ul.card-tables li.attribute-listing .secondary a.btn {
+    position: relative;
+}
+
+.category-edit a.btn:before, ul.card-tables li.attribute-listing .secondary a.btn:before {content: 'Edit ';margin-right: 7px;}
+
+.categories-dash li .title {
+    width: calc(100% - 240px);
+    padding-right:10px;
+}
+
+ul.card-tables li.attribute-listing .status-visible .date span {
+    font-weight: bold;
+    margin-right: 5px;
+}
+
+ul.card-tables li.attribute-listing .primary {
+    margin: 0;
+}
+
+ul.card-tables li.attribute-listing .primary a.btn {
+    position: relative;
+}
+
+ul.card-tables li.attribute-listing .primary a.btn:before {content: 'Setting';margin-right: 10px;}
+
+ul.card-tables li.attribute-listing  .varitations {
+    float: left;
+    width: 100%;
+    margin: 10px 0;
+}
+
+ul.card-tables li.attribute-listing .status-visible .features, ul.card-tables li.attribute-listing .status-visible .date {
+    line-height: normal;
+}
+
+ul.card-tables li.brand-listing .title {
+    width: calc(100% - 230px);
+}
+
+ul.card-tables li .status-visible .category-edit a.btn:before {
+    content: 'Edit';
+}
+
+ul.card-tables li .status-visible span.delete a.btn:before {
+    content: 'Delete';
+}
+
+ul.card-tables li.location-table .title h6 {
+    line-height: 60px;
+}
+
+.customer-dash ul.card-tables li .status-visible .dropdown-menu {
+    left: auto !important;
+    right: 0;
+    transform: translate3d(0px, 30px, 0px) !important;
+}
+
+ul.card-tables li.transaction-details .status-visible {
+    line-height: normal;
+    height: auto;
+}
+
+ul.card-tables li.transaction-details .status-visible .method {
+    margin-top: 10px;
+}
+
+ul.card-tables li.transaction-details b {
+    margin-right: 4px;
+}
+
+ul.card-tables li.transaction-details .foot-bottom .primary {
+    margin-left: 0;
+}
+
+ul.card-tables li.transaction-details .foot-bottom .secondary.category-edit {
+    font-size: 28px;
+    font-weight: bold;
+}
+
+ul.card-tables li.transaction-details .foot-bottom .secondary.category-edit b {
+    font-size: 14px;
+}
+
+ul.card-tables li.report-table .bottom-footer {
+    float: left;
+    width: 100%;
+}
+
+ul.card-tables li.report-table .bottom-footer fl.primary {
+    float: left;
+    width: auto;
+}
+
+ul.card-tables li.report-table .bottom-footer .primary {
+    float: left;
+}
+
+ul.card-tables li.report-table .bottom-footer .secondary {
+    float: right;
+}
+
+ul.card-tables li.report-table .foot-bottom .primary {margin-left: 0;}
+
+ul.card-tables li.report-table .status-visible span.invoice {
+    padding: 0;
+    display: inline-block;
+    margin: 0;
+    line-height: normal;
+}
+
+ul.card-tables li.report-table .status-visible span.invoice a:before {
+    content: 'Invoice';
+}
+
+ul.card-tables li.create-order-table .bottom-footer {
+    float: left;
+    width: 100%;
+    margin-top: 10px;
+}
+
+ul.card-tables li.create-order-table .bottom-footer .form-group {
+    margin-bottom: 10px;
+}
+
+ul.card-tables li.create-order-table .foot-bottom .primary span.select2 {
+    width: 150px !important;
+}
+
+ul.card-tables li.create-order-table .bottom-footer .form-group .selectgroup {
+    display: inline-block;
+    width: 100%;
+    float: left;
+}
+
+ul.card-tables li.create-order-table .bottom-footer .form-group label.selectgroup-item {
+    width: 33.33%;
+    float: left;
+    overflow: hidden;
+}
+
+.modal-open .modal ul.card-tables li {
+    box-shadow: 0 0 6px #0000001c;
+    border-bottom: 2px solid #6777ef;
+}
+
+ul.card-tables li.order-history-card .bottom-footer {
+    float: left;
+    width: 100%;
+    margin-top: 10px;
+}
+
+ul.card-tables li.order-history-card .bottom-footer .primary {
+    float: left;
+}
+
+ul.card-tables li.order-history-card .bottom-footer .secondary {
+    float: right;
+}
+
+.history-order-table ul.card-tables {
+    margin-top: 0;
+}
+
+ul.card-tables 
+ li.shop-setting-table {
+    border: 1px solid #e8e8e8;
+    border-bottom: 2px solid #6777ef;
+}
+
+ul.card-tables li.shop-setting-table .url-field-input {
+    float: left;
+    width: calc(100% - 170px);
+}
+
+ul.card-tables li.shop-setting-table .icon-class {
+    float: left;
+    width: 160px;
+    margin-left: 10px;
+}
+
+ul.card-tables li.shop-setting-table b {
+    display: block;
+}
+
+.order-show ul.card-tables {
+    padding: 0 20px;
+}
+
+.order-show ul.card-tables li {
+    border: 1px solid #ececec;
+    border-bottom: 2px solid #6777ef;
+}
+
+ul.card-tables li.product-description b {
+    width: 120px;
+    float: left;
+    text-align: left;
+}
+
+.order-show ul.card-tables li.product-final-details {
+    border: none;
+    background: transparent;
+    box-shadow: none;
+}
+
+.order-show ul.card-tables li.product-final-details b {
+    float: left;
+    width: 130px;
+    text-align: left;
+}
+
+.order-show ul.card-tables li.product-final-details div {
+    float: left;
+    width: 100%;
+    text-align: right;
+}
+
+.order-show ul.card-tables li.product-description div {
+    float: left;
+    width: 100%;
+    text-align: right;
+}
+
+ul.card-tables li.product-description .options br {
+    display: none;
+}
+
 /*Responsiveness*/
+
+@media only screen and (max-width: 1300px) {
+  .pricing .pricing-price div.main-offered-price {font-size: 40px !important;}
+}
+
+@media only screen and (max-width: 1150px) {
+  .pricing .pricing-price div.main-offered-price {font-size: 32px !important;}
+}
 
 @media only screen and (max-width: 800px) {
   .display-desktop-table {display: none;}
@@ -5235,7 +5481,12 @@ ul.card-tables li .foot-bottom .secondary input.form-control {
   .order-table-card .card-header  h4 {float: left;width: 100%;margin-bottom: 10px;}
   .card.order-table-card .card-header {margin-bottom: 10px;}/*
   ul.card-tables li .custom-control.custom-checkbox label.custom-control-label {display: none;}*/
-ul.card-tables li .custom-control.custom-checkbox input { z-index: 1 !important;}
+  ul.card-tables li .custom-control.custom-checkbox input { z-index: 1 !important;}
+  span.note {float: left;width: 100%;}
+  .history-order-table .card-header { padding: 0;}
+  .history-of-orders .card-header {padding: 15px 0;}
+  .history-of-orders ul.card-tables {margin: 0;}
+  .attribute-setting {float: left;width: 100%;text-align: left !important;}
 }
 
 
@@ -5270,13 +5521,78 @@ ul.card-tables li .custom-control.custom-checkbox input { z-index: 1 !important;
   ul.card-tables.inventory-card .status-visible.inventory-status {width: 100%;float: left;text-align: left;}
   .inventory-table-cards .primary-buttons a.btn {width: 100%;margin-bottom: 5px;}
   .inventory-table-cards .secondary-buttons {float: left;width: 100%;margin-top: 10px;}
+  .categories-dash ul.card-tables li .title {width: calc(100% - 52px);max-width: initial;padding-right: 0;}
+  .categories-dash ul.card-tables li .status-visible {float: left;width: 100%;text-align: left;margin-top: 10px;}
+  .categories-dash li .custom-control input,
+  li.attribute-listing .custom-control input[type="checkbox"],
+  ul.card-tables li.brand-listing input[type="checkbox"] {left:30%;}
+  .checkbox-non-custom input[type="checkbox"] {left:30%;}
+  .select-category {width: 100%;margin-bottom: 10px !important;}
+  .category-creation {width: 100%;}
+  .category-creation a.btn.btn-primary {width: 100%;}
+  ul.card-tables li.attribute-listing .status-visible.attribute-status {float: left;width: 100%;}
+  ul.card-tables li.attribute-listing .status-visible.attribute-status .features { float: left;}
+  ul.card-tables li.attribute-listing .status-visible .date {float: right;}
+  ul.card-tables li.attribute-listing .status-visible .features, 
+  ul.card-tables li.attribute-listing .status-visible .date {width: 100%;margin-bottom: 4px;text-align:left;}
+  ul.card-tables li.attribute-listing .status-visible {height:auto;}
+  ul.card-tables li.brand-listing .status-visible {width: 100%;text-align: left;}
+  ul.card-tables li.brand-listing .title {width: calc(100% - 52px);}
+  ul.card-tables li.coupon-table .foot-bottom .primary, 
+  ul.card-tables li.coupon-table .foot-bottom .secondary {width: 100%;text-align: left;}
+  ul.card-tables li.transaction-details .status-visible {float: left;width: 100%;}
+  .customer-dash ul.card-tables li .status-visible .dropdown.d-inline {display: inline-block !important;width: 100%;}
+  .customer-dash ul.card-tables li .status-visible {height: auto;text-align: left;}
+  .customer-dash ul.card-tables li .status-visible .dropdown.d-inline button {width: 100%;}
+  .customer-dash ul.card-tables li .primary, .customer-dash ul.card-tables li .secondary {width: 100%;}
+  .customer-dash ul.card-tables li .status-visible .dropdown-menu {width:230px;}
+  ul.card-tables li.transaction-details .status-visible {text-align: left;}
+  ul.card-tables li.transaction-details .foot-bottom .primary,
+  ul.card-tables li.transaction-details .foot-bottom .secondary {width: 100%;}
+  ul.card-tables li.transaction-details .foot-bottom .secondary.category-edit {font-size: 20px;}
+  ul.card-tables li.transaction-details .title {width: 100%;max-width: initial;}
+  ul.card-tables li.report-table .status-visible {text-align: left;margin-top: 10px;}
+  ul.card-tables li.report-table .primary,ul.card-tables li.report-table .secondary {width: 100%;margin-bottom: 7px;}
+  ul.card-tables li.report-table .title {width: calc(100% - 90px);}
+  ul.card-tables li.create-order-table .bottom-footer .form-group label.selectgroup-item {width: 50%;}
+  ul.card-tables li.create-order-table .title {max-width: calc(100% - 52px);}
+  ul.card-tables li.create-order-table .status-visible {text-align: left;}
+  ul.card-tables li.create-order-table .primary, ul.card-tables li.create-order-table .secondary {width: 100%;}
+  ul.card-tables li.create-order-table .foot-bottom .primary span.select2 {width: 100% !important;}
+  .pos-table-header {padding: 0 15px!important;}
+  .pos-table-header button.btn {margin-left: 0 !important;}
+  ul.card-tables li.create-order-table .secondary .input-group input.form-control {max-width: initial;}
+  ul.card-tables li.create-order-table .secondary {margin-top: 10px;}
+  ul.card-tables li.order-history-card .status-visible {text-align: left;}
+  ul.card-tables li.order-history-card .foot-bottom .primary
+  ,ul.card-tables li.order-history-card .foot-bottom .secondary {float: left;width: 100%;}
+  ul.card-tables li.order-history-card .bottom-footer .primary,
+  ul.card-tables li.order-history-card .bottom-footer .secondary {float: left;width: 100%;margin-bottom: 10px;}
+  ul.card-tables li.shop-setting-table .icon-class, ul.card-tables li.shop-setting-table .url-field-input {width: 100%;}
+  ul.card-tables li.shop-setting-table .icon-class {margin: 10px 0 0;}
+  .history-of-orders ul.card-tables li .status-visible {margin: 10px 0;}
+  ul.card-tables li.order-history-card .status-visible {float: left;width: 100%;}
 }
 
 @media only screen and (max-width: 400px) {
-  ul.card-tables li .title {float: left;max-width: 130px;width: 100%;} 
+  ul.card-tables li.coupon-table .status-visible {float: left;margin-top: 10px;}
+  ul.card-tables li .title {float: left;width: 100%;} 
   .card.order-table-card ul.card-tables li .title {max-width: 100%;}
   ul.card-tables li .foot-bottom.inventory .primary {width: 100%;margin-bottom: 10px;}
   ul.card-tables li .foot-bottom.inventory .secondary {width: 100%;}
   ul.card-tables li .foot-bottom.inventory .secondary input.form-control {max-width: initial;}
   ul.card-tables li .foot-bottom.inventory .secondary .edit-product-quantity.float-right {float: none !important;}
+  ul.card-tables li.banner-ads-table .title {width: auto;}
+  ul.card-tables li .status-visible.inventory-status {float: left;width: 100%;}
+  ul.card-tables li.location-table .title {width: calc(100% - 64px);}
+  ul.card-tables li.location-table .title h6 {line-height: normal;}
+  ul.card-tables li.product-display-mobile .title {width: calc(100% - 52px);}
+  ul.card-tables li.product-display-mobile .foot-bottom .primary, 
+  ul.card-tables li.product-display-mobile .foot-bottom .secondary {float: left;width: 100%;}
+  ul.card-tables li.product-display-mobile .foot-bottom {float: left;width: calc(100% - 61px);}
+  ul.card-tables li.coupon-table .title {width: calc(100% - 52px);}
+  ul.card-tables li.customer-editing .status-visible {float: left;}
+  ul.card-tables li.customer-editing .status-visible button {line-height: normal;}
+  ul.card-tables li.report-table .status-visible {float: left;}
+  ul.card-tables li.report-table .title {width: 100%;}
 }

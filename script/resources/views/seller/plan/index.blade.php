@@ -1,3 +1,4 @@
+<!-- Subscription Plan - work on order history  list to card view-->
 @extends('layouts.app')
 @section('head')
     @include('layouts.partials.headersection',['title'=>'Plans'])
@@ -53,7 +54,7 @@
                     </div>
                     <div class="pricing-padding">
                         <div class="pricing-price">
-                            <div>{{ amount_admin_format($row->price) }}</div>
+                            <div class="main-offered-price">{{ amount_admin_format($row->price) }}</div>
                             <div>
                                 @if ($row->days == 365) {{ __('Yearly') }}
                             @elseif($row->days == 30) Monthly @else {{ $row->days }} Days @endif
@@ -164,7 +165,7 @@
 
 </div>
 
-<div class="card">
+<div class="card table-card-body history-order-table">
     <div class="card-header">
         <h4>{{ __('Order History') }}</h4>
     </div>
@@ -176,7 +177,7 @@
                 ->paginate(20);
         @endphp
 
-        <div class="table-responsive">
+        <div class="table-responsive  display-desktop-table">
             <table class="table table-hover table-nowrap card-table text-center">
                 <thead>
                     <tr>
@@ -232,6 +233,47 @@
                 </tbody>
             </table>
         </div>
+        <ul class="card-tables display-mobile-table">
+            @foreach ($posts as $row)
+            <li class="order-history-card">
+                <div class="title">
+                   <div class="order-number"><b>Order : </b>{{ $row->order_no }}</div>
+                   <div class="order-number"><b>Name : </b>{{ $row->plan_info->name ?? '' }}</div>
+                   <div class="order-number"><b>Total : </b>{{ amount_admin_format($row->amount, 2) }}</div>
+                </div>
+                <div class="status-visible">
+                    <div class="order-number"><b>Payment Method : </b>{{ $row->payment_method->method->name ?? '' }}</div>
+                </div>
+                <div class="foot-bottom" >
+                    <div class="primary"style="margin-left:0;"><b>Purchase date :</b>{{ $row->created_at->format('Y-m-d') }}</div>
+                    <div class="secondary"><b>Expiry date :</b>{{ $row->will_expired }}</div>
+                </div>
+                <div class="bottom-footer">
+                    <div class="primary">
+                        <b>Payment Status :</b>
+                        @if (!empty($row->payment_method))
+                                    @if ($row->payment_method->status == 1)
+                                        <span class="badge badge-success">{{ __('Paid') }}</span>
+
+                                    @elseif($row->payment_method->status==2)
+                                        <span class="badge badge-warning">{{ __('Pending') }}</span>
+                                    @else
+                                        <span class="badge badge-danger">{{ __('Fail') }}</span>
+                                    @endif
+                                @endif
+                    </div>
+                    <div class="secondary">
+                        <b>Fulfilment :</b>
+                        @if ($row->status == 1) <span
+                            class="badge badge-success">Approved</span> @elseif($row->status == 2) <span
+                            class="badge badge-warning">{{ __('Pending') }}</span>@elseif($row->status ==
+                        3) <span class="badge badge-danger">{{ __('Expired') }}</span>@else <span
+                                class="badge badge-danger">{{ __('Cancelled') }}</span> @endif
+                    </div>
+                </div>
+            </li>
+            @endforeach
+        </ul>
     </div>
     <div class="card-footer d-flex justify-content-between">
         {{ $posts->links('vendor.pagination.bootstrap-4') }}

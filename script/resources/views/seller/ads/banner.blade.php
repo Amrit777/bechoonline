@@ -1,3 +1,5 @@
+<!-- Banner Ad -->
+
 @extends('layouts.app')
 @section('head')
 @include('layouts.partials.headersection',['title'=>'Banner Ads'])
@@ -15,13 +17,13 @@
 	</div>
 </div>
 @endif
-<div class="card">
+<div class="card table-card-body">
 	<div class="card-body">
 
 		<div class="float-left mb-2">
 			<button class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">{{ __('Create New') }}</button>
 		</div>
-		<div class="table-responsive custom-table">
+		<div class="table-responsive custom-table  display-desktop-table">
 			<table class="table">
 				<thead>
 					<tr>
@@ -34,7 +36,7 @@
 				<tbody>
 					@if(!empty($row))
 					<tr>
-						<td class="text-left"><img src="{{ asset($row->name) }}" height="100"></td>
+						<td class="text-left"><img src="{{ asset($row->name) }}" height="100" class="product-img"></td>
 						<td class="text-left">{{ $row->slug }}</td>
 						<td class="text-right">{{ $row->updated_at->diffForHumans() }}</td>
 						<td class="text-right"><a href="{{ route('seller.ad.destroy',$row->id) }}" class="btn btn-danger  cancel"><i class="fa fa-trash"></i></a></td>
@@ -43,6 +45,28 @@
 				</tbody>
 			</table>
 		</div>
+
+		<ul class="card-tables display-mobile-table">
+			@if(!empty($row))
+			<li class="banner-ads-table">
+				<div class="table-image">
+	                <img src="{{ asset($row->name) }}" height="100">
+	            </div>
+	            <div class="title">
+	            	{{ $row->slug }}
+	            </div>
+	            <div class="status-visible">
+	            	<span class="delete">
+	            		<a href="{{ route('seller.ad.destroy',$row->id) }}" class="btn btn-danger  cancel"><i class="fa fa-trash"></i></a>
+	            	</span>
+	            </div>
+
+	            <div class="foot-bottom">
+	            	<div class="primary"><b>Last Modified : </b>{{ $row->updated_at->diffForHumans() }}</div>
+	            </div>
+			</li>
+			@endif
+		</ul>
 	</div>
 </div>
 
