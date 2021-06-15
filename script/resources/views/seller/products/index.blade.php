@@ -1,3 +1,5 @@
+<!-- Product -->
+
 @extends('layouts.app')
 @section('head')
     @include('layouts.partials.headersection',['title'=>'Products'])
@@ -117,7 +119,7 @@
                                         </div>
                                     </td>
                                     <td><img src="{{ asset($row->preview->media->url ?? 'uploads/default.png') }}"
-                                            height="50" alt=""></td>
+                                            height="50" alt="" class="product-img"></td>
                                     <td>{{ $row->title }} (#{{ $row->id }})
                                         <div>
                                             <a
@@ -171,7 +173,7 @@
 
                 <ul class="card-tables display-mobile-table">
                     @foreach ($posts as $row)
-                        <li>
+                        <li class="product-display-mobile">
                             <div class="custom-control custom-checkbox">
                                 <input type="checkbox" name="ids[]" class="custom-control-input"
                                     id="customCheck{{ $row->id }}" value="{{ $row->id }}">
@@ -203,8 +205,8 @@
                                 @endif
                             </div>
                             <div class="foot-bottom">
-                                <div class="primary">{{ $row->updated_at->diffForHumans() }}</div>
-                                <div class="secondary"><span>Total Sales</span>{{ $row->order_count }}</div>
+                                <div class="primary"><b>Last Update : </b>{{ $row->updated_at->diffForHumans() }}</div>
+                                <div class="secondary"><b>Total Sales : </b>{{ $row->order_count }}</div>
                             </div>
                         </li>
                     @endforeach

@@ -1,3 +1,5 @@
+<!-- Attribute -->
+
 @extends('layouts.app')
 @section('head')
 @include('layouts.partials.headersection',['title'=>'Attributes'])
@@ -5,11 +7,11 @@
 @section('content')
 <div class="row">
   <div class="col-12 mt-2">
-    <div class="card">
+    <div class="card table-card-body">
       <div class="card-body">
         <form method="post" action="{{ route('seller.attributes.destroy') }}" class="basicform_with_reload">
           @csrf
-          <div class="float-left mb-1">
+          <div class="float-left mb-1 select-category">
 
             <div class="input-group">
               <select class="form-control" name="method">
@@ -23,13 +25,13 @@
             </div>
 
           </div>
-          <div class="float-right mb-1">
+          <div class="float-right mb-1 category-creation">
 
             <a href="{{ route('seller.attribute.create') }}" class="btn btn-primary">{{ __('Create Attribute') }}</a>
 
           </div>
 
-          <div class="table-responsive">
+          <div class="table-responsive  display-desktop-table">
             <table class="table table-striped table-hover text-center table-borderless">
               <thead>
                 <tr>
@@ -72,6 +74,40 @@
              </table>
 
            </div>
+
+           <ul class="card-tables display-mobile-table">
+           @foreach($posts as $row)
+            <li class="attribute-listing">
+              <div class="custom-control custom-checkbox">
+                  <input type="checkbox"  name="ids[]" value="{{ $row->id }}">
+              </div>
+              <div class="title">
+                  <h6><b>Name : </b>{{ $row->name }}</h6>
+                  <div class="product-listing">
+                     <b>Products : </b> {{ $row->parent_variation_count }}
+                  </div>
+              </div>
+              <div class="status-visible attribute-status">
+                <div class="features">
+                    <b>Featured : </b>
+                   @if($row->featured==1) <span class="badge badge-success">{{ __('Yes') }}</span> @else <span class="badge badge-danger">{{ __('No') }}</span> @endif
+                 </div>
+                 <div class="date"><b>Created at : </b>{{ $row->created_at->diffForHumans() }}</div>
+              </div>
+
+              <div class="varitations">
+                @foreach($row->childrenCategories as $r) <span class="badge badge-primary">{{ $r->name }}</span> @endforeach
+              </div>
+
+              <div class="foot-bottom">
+                <div class="primary"><a href="{{ route('seller.attribute.show',$row->id) }}" class="btn btn-primary btn-sm"><i class="fas fa-cog"></i></a> </div>
+                <div class="secondary category-edit"><a href="{{ route('seller.attribute.edit',$row->id) }}" class="btn btn-success btn-sm"><i class="fas fa-edit"></i></a></div>
+              </div>
+            </li>
+            @endforeach
+          </ul>
+
+
          </form>
        </div>
      </div>

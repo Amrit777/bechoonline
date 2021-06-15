@@ -1,15 +1,17 @@
+<!-- Customer -->
+
 @extends('layouts.app')
 @section('head')
 @include('layouts.partials.headersection',['title'=>'Customers'])
 @endsection
 @section('content')
-<div class="card">
+<div class="card table-card-body customer-dash">
 	<div class="card-body">
-			<div class="float-right">
+			<div class="float-right  category-creation">
 					<a href="{{ route('seller.customer.create') }}" class="btn btn-primary float-right">{{ __('Create Customer') }}</a>
 				</div>
 		<br><br>
-		<div class="float-right">
+		<div class="float-right  category-creation">
 			<form>
 				<div class="input-group mb-2">
 
@@ -27,7 +29,7 @@
 		</div>
 		<form method="post" action="{{ route('seller.customers.destroys') }}" class="basicform">
 			@csrf
-			<div class="float-left">
+			<div class="float-left  select-category">
 				<div class="input-group">
 					<select class="form-control selectric" name="type">
 						<option selected="">{{ __('Select Action') }}</option>
@@ -38,7 +40,7 @@
 					</div>
 				</div>
 			</div>
-			<div class="table-responsive custom-table">
+			<div class="table-responsive custom-table display-desktop-table">
 				<table class="table">
 					<thead>
 						<tr>
@@ -113,10 +115,48 @@
 						</tr>
 					</tfoot>
 				</table>
+
+			</div>
+			<ul class="card-tables display-mobile-table">
+				@foreach($posts as $row)
+				<li class="customer-editing">
+					<div class="custom-control custom-checkbox">
+						<input type="checkbox" name="ids[]" class="custom-control-input" id="customCheck{{ $row->id }}" value="{{ $row->id }}">
+						<label class="custom-control-label" for="customCheck{{ $row->id }}"></label>
+					</div>
+					<div class="title">
+		                <b>Name : </b><a href="{{ route('seller.customer.show',$row->id) }}">{{ $row->name }} (#{{ $row->id }})</a> 
+						<div>
+							<a href="{{ route('seller.customer.edit',$row->id) }}">{{ __('Edit') }}</a>
+						</div>
+		                <div class="category-link">
+		                    <b>Email : </b><a href="{{ route('seller.customer.show',$row->id) }}">{{ $row->email }}</a>
+		                </div>
+		            </div>
+		            <div class="status-visible">
+		                <div class="dropdown d-inline">
+	                      <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+	                       {{ __('Action') }}
+	                      </button>
+	                      <div class="dropdown-menu">
+	                        <a class="dropdown-item has-icon" href="{{ route('seller.customer.edit',$row->id) }}"><i class="fas fa-user-edit"></i> {{ __('Edit Acount') }}</a>
+	                        <a class="dropdown-item has-icon" href="{{ route('seller.customer.show',$row->id) }}"><i class="fas fa-search"></i> {{ __('View User') }}</a>
+	                        <a class="dropdown-item has-icon" href="{{ route('seller.customer.login',$row->id) }}"><i class="fas fa-key"></i> {{ __('Login As ').$row->name }}</a>
+
+	                      </div>
+	                    </div>
+		            </div>
+		            <div class="foot-bottom">
+		                <div class="primary"><b>Total Orders : </b>{{ number_format($row->orders_count) }}</div>
+		                <div class="secondary category-edit"><b>Registered at : </b>{{ $row->updated_at->diffForHumans() }}</div>
+		              </div>
+				</li>
+				@endforeach
+			</ul>
 				
 			</form>
 			{{ $posts->links('vendor.pagination.bootstrap-4') }}
-			<span>{{ __('Note') }}: <b class="text-danger">{{ __('For Better Performance Remove Unusual Users') }}</b></span>
+			<span class="note">{{ __('Note') }}: <b class="text-danger">{{ __('For Better Performance Remove Unusual Users') }}</b></span>
 		</div>
 	</div>
 </div>

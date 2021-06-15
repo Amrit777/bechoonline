@@ -1,3 +1,5 @@
+<!-- Category -->
+
 @extends('layouts.app')
 @section('head')
 @include('layouts.partials.headersection',['title'=>'Categories'])
@@ -5,7 +7,7 @@
 @section('content')
 <div class="row">
   <div class="col-12 mt-2">
-    <div class="card">
+    <div class="card table-card-body categories-dash">
       <div class="card-body">
         @php
         $url=my_url();
@@ -14,7 +16,7 @@
 
           <form method="post" action="{{ route('seller.categorie.destroys') }}" class="basicform_with_reload">
             @csrf
-            <div class="float-left mb-1">
+            <div class="float-left mb-1 select-category">
               
               <div class="input-group">
                 <select class="form-control" name="type">
@@ -28,13 +30,13 @@
               </div>
              
             </div>
-              <div class="float-right mb-1">
+              <div class="float-right mb-1 category-creation">
               
               <a href="{{ route('seller.category.create') }}" class="btn btn-primary">{{ __('Create Category') }}</a>
              
             </div>
         
-          <div class="table-responsive">
+          <div class="table-responsive display-desktop-table">
             <table class="table table-striped table-hover text-center table-borderless">
               <thead>
                 <tr>
@@ -53,7 +55,7 @@
                 @foreach($posts as $row)
                 <tr id="row{{ $row->id }}">
                   <td><input type="checkbox" name="ids[]" value="{{ base64_encode($row->id) }}"></td>
-                  <td><img src="{{ asset($row->preview->content ?? 'uploads/default.png') }}" height="50"></td>
+                  <td><img src="{{ asset($row->preview->content ?? 'uploads/default.png') }}" height="50" class="product-img"></td>
                   <td>{{ $row->name  }}</td>
                   <td><a href="{{ $url.'/category/'.$row->slug.'/'.$row->id }}">{{ $url.'/category/'.$row->slug.'/'.$row->id }}</a></td>
                   <td>@if($row->featured==1) <span class="badge badge-success  badge-sm">Yes</span> @else <span class="badge badge-danger  badge-sm">No</span> @endif</td>
@@ -77,6 +79,37 @@
                </tr>
              </tfoot>
            </table>
+         </div>
+         <ul class="card-tables display-mobile-table">
+           @foreach($posts as $row)
+            <li>
+              <div class="custom-control custom-checkbox">
+                  <input type="checkbox" name="ids[]" value="{{ base64_encode($row->id) }}">
+              </div>
+              <div class="table-image">
+                  <img src="{{ asset($row->preview->content ?? 'uploads/default.png') }}" height="50">
+              </div>
+
+              <div class="title">
+                  <h6><b>Name : </b>{{ $row->name  }} </h6>
+                  <div class="category-link">
+                     <a href="{{ $url.'/category/'.$row->slug.'/'.$row->id }}">{{ $url.'/category/'.$row->slug.'/'.$row->id }}</a>
+                  </div>
+              </div>
+              <div class="status-visible">
+                <b>Featured : </b>
+                 @if($row->featured==1) <span class="badge badge-success  badge-sm">Yes</span> @else <span class="badge badge-danger  badge-sm">No</span> @endif
+              </div>
+
+              <div class="foot-bottom">
+                <div class="primary"><b>Created at : </b>{{ $row->created_at->diffforHumans()  }}</div>
+                <div class="secondary category-edit"><a href="{{ route('seller.category.edit',$row->id) }}" class="btn btn-primary btn-sm text-center"><i class="far fa-edit"></i></a></div>
+              </div>
+            </li>
+            @endforeach
+          </ul>
+
+
            {{ $posts->links('vendor.pagination.bootstrap-4') }}
          </div>
        </form>

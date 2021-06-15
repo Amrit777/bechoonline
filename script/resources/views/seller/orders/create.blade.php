@@ -1,3 +1,4 @@
+<!-- POS -->
 @extends('layouts.app')
 <!-- amit singh added select2-->
 @push('style')
@@ -10,8 +11,8 @@
     @php
     $url = domain_info('full_domain');
     @endphp
-    <div class="card card-primary">
-        <div class="card-header">
+    <div class="card card-primary table-card-body ">
+        <div class="card-header pos-table-header">
             <div class="input-group-btn  mr-3">
                 <button class="btn btn-primary btn-sm ml-3" data-toggle="modal" data-target="#cartModal"><i
                         class="fas fa-cart-arrow-down"></i> <span id="cart_count">{{ Cart::count() }}</span></button>
@@ -30,7 +31,7 @@
         </div>
         <div class="card-body">
             <div class="col-sm-12">
-                <div class="table-responsive">
+                <div class="table-responsive display-desktop-table">
                     <table class="table table-striped ">
                         <tbody>
                             <tr>
@@ -69,6 +70,10 @@
                                             <a href="{{ url($url . '/product/' . $row->slug . '/' . $term_id) }}"
                                                 target="_blank">{{ Str::limit($row->title, 50) }}</a>
                                         </td>
+                                        <td><img src="{{ asset($row->preview->media->url ?? 'uploads/default.png') }}"
+                                                height="50" class="product-img" ></td>
+                                        <td><a href="{{ url($url . '/product/' . $row->slug . '/' . $term_id) }}"
+                                                target="_blank">{{ Str::limit($row->title, 50) }}</a></td>
                                         <td><span id="price{{ $row->id }}" data-price="{{ $price }}">{{ $price }}</span> </td>
 
                                         <td>
@@ -114,27 +119,116 @@
                                                         {{-- <span class="required_option"></span> --}}
                                                     </div>
                                                 @endforeach
-                                            @endif
-                                        </td>
-                                        <td>
-                                            <div class="input-group">
-                                                <input type="number" class="form-control" @if ($row->stock->stock_manage == 1) max="{{ $row->stock->stock_qty }}" min="0" @endif
-                                                    required="" value="1" name="qty">
-                                                <div class="input-group-append">
-                                                    <button onclick="assignId({{ $row->id }})" @if ($row->stock->stock_status == 0) disabled="" @endif
-                                                        class="btn btn-primary btn-icon" id="submitbtn{{ $row->id }}" type="submit"
-                                                        data-id="{{ $row->id }}"><i class="fas fa-cart-arrow-down"></i></button>
-                                                </div>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                </form>
+
+                            @endif
+                            </td>
+                            <td>
+                                <div class="input-group">
+                                    <input type="number" class="form-control" @if ($row->stock->stock_manage == 1) max="{{ $row->stock->stock_qty }}" min="0" @endif
+                                        required="" value="1" name="qty">
+                                    <div class="input-group-append">
+                                        <button data-parentid="w23e232" onclick="assignId({{ $row->id }})" @if ($row->stock->stock_status == 0) disabled="" @endif
+                                            class="btn btn-primary btn-icon" id="submitbtn{{ $row->id }}" type="submit"
+                                            data-id="{{ $row->id }}"><i class="fas fa-cart-arrow-down"></i></button>
+                                    </div>
+                                </div>
+                            </td>
+                            </tr>
+                            </form>
                             @endforeach
-                        </tbody>
-                    </table>
-                </div>
+                    </tbody>
+                </table>
             </div>
-        </div>
+            <ul class="card-tables display-mobile-table">
+                @foreach ($posts as $row)
+                                @php
+
+                                    $price = amount_format($row->price->price);
+                                    $qty = $row->stock->stock_qty;
+                                    $term_id = $row->id;
+
+                                @endphp
+                <li class="create-order-table">
+                    <div class="table-image">
+                        <img src="{{ asset($row->preview->media->url ?? 'uploads/default.png') }}" height="50">
+                    </div>
+                    <div class="title">
+                        <div class="product-id">Id :
+                            <a href="{{ route('seller.product.edit', $row->id) }}">#{{ $row->id }}</a>
+                        </div>
+                        <div class="name">
+                            <a href="{{ url($url . '/product/' . $row->slug . '/' . $term_id) }}"
+                                                target="_blank">{{ Str::limit($row->title, 50) }}</a>
+                        </div>
+                    </div>
+                    <div class="status-visible inventory-status">
+                        <b>Price : </b>
+                        <span id="price{{ $row->id }}" data-price="{{ $price }}">{{ $price }}</span>
+                    </div>
+                    <div class="bottom-footer">
+                        {{-- amit singh added --}}
+                                            @if (count($row->options) > 0)
+                                                @foreach ($row->options as $key => $option)
+                                                    <div class="form-group">
+                                                        <label class="form-label">{{ $option->name }} @if ($option->is_required == 1) <span
+                                                                    class="text-danger">*</span> @endif
+                                                        </label>
+                                                        <div class="selectgroup w-100">
+                                                            @foreach ($option->childrenCategories as $item)
+                                                                <label class="selectgroup-item">
+                                                                    <input @if ($option->select_type == 1) type="checkbox" name="option[]"
+                                                                            @else type="checkbox" name="option[{{ $key }}]" @endif value="{{ $item->id }}" class="selectgroup-input
+                                                                                       @if ($option->is_required == 1)
+                                                                     req{{ $row->id }} key{{$option->id}}@endif
+                                                            @if ($option->select_type == 0)
+                                                                radiotypecheckbox @endif
+                                                            "
+                                                            data-parentid="{{$option->id}}"
+                                                            data-mainprice="{{ $row->price->price }}"
+                                                            data-productid="{{ $row->id }}"
+                                                            data-price="{{ $item->amount }}"
+                                                            data-amounttype="{{ $item->amount_type }}" >
+                                                            <span class="selectgroup-button">{{ $item->name }}</span>
+                                                            </label>
+                                                @endforeach
+                        </div>
+
+
+                        <span class="required_option"></span>
+                            </div>
+                            @endforeach
+                            @endif
+                    </div>
+                    <div class="foot-bottom inventory">
+                        <div class="primary" style="margin-left: 0px;">
+                            {{-- amit singh added select2 --}}
+                            <select class="form-control select2 multislect" name="variation[]" multiple>
+                                {{-- <option disabled selected>{{ __('Select Variation') }}</option> --}}
+                                @foreach ($row->attributes as $attribute)
+                                    <option value="{{ $attribute->id }}">
+                                        {{ $attribute->attribute->name }} -
+                                        {{ $attribute->variation->name }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="secondary">
+                            <div class="input-group">
+                                <input type="number" class="form-control" @if ($row->stock->stock_manage == 1) max="{{ $row->stock->stock_qty }}" min="0" @endif
+                                    required="" value="1" name="qty">
+                                <div class="input-group-append">
+                                    <button data-parentid="w23e232" onclick="assignId({{ $row->id }})" @if ($row->stock->stock_status == 0) disabled="" @endif
+                                        class="btn btn-primary btn-icon" id="submitbtn{{ $row->id }}" type="submit"
+                                        data-id="{{ $row->id }}"><i class="fas fa-cart-arrow-down"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </li>
+                @endforeach
+            </ul>
+    </div>
+    </div>
     <div class="card-footer">
         {{ $posts->links('vendor.pagination.bootstrap-4') }}
     </div>
@@ -153,7 +247,7 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <div class="table-responsive">
+                    <div class="table-responsive  display-desktop-table">
                         <table class="table table-hover">
                             <thead>
                                 <tr>
@@ -185,6 +279,26 @@
                                 @endforeach
                         </table>
                     </div>
+                    <ul class="card-tables display-mobile-table">
+                        @foreach (Cart::content() as $row)
+                        <li>
+                            <div class="table-image">
+                                <img src="{{ asset($row->options->preview) }}" height="50">
+                            </div>
+                            <div class="title">
+                                <div class="name"><b>Name </b>{{ $row->name }}</div>
+                                <div class="price"><b>Price </b>{{ $row->name }}</div>
+                                <div class="name"><b>Qty </b>{{ $row->qty }}</div>
+                            </div>
+                            <div class="status-visible">
+                                <span class="delete">
+                                    <a href="{{ route('seller.cart.remove', $row->rowId) }}"
+                                                class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></a>
+                                </span>
+                            </div>
+                        </li>
+                        @endforeach
+                    </ul>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">{{ __('Close') }}</button>

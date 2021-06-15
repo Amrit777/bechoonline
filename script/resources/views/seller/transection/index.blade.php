@@ -1,13 +1,15 @@
+<!-- Transaction -->
+
 @extends('layouts.app')
 @section('content')
 <div class="">
     <div class="row justify-content-center">
         <div class="col-12">
            
-            <div class="card">
+            <div class="card table-card-body">
                 <div class="card-header">
                     <h4>{{ __('Transactions') }}</h4>
-                    <form class="card-header-form">
+                    <form class="card-header-form transactions-search">
                         <div class="input-group">
                             <input type="text" name="src" value="{{ $request->src ?? '' }}" class="form-control" required=""  placeholder="transactions id..." />
                             <div class="input-group-btn">
@@ -17,7 +19,7 @@
                     </form> 
                 </div>
                 <div class="card-body">
-                    <div class="table-responsive">
+                    <div class="table-responsive display-desktop-table">
                         <table class="table table-hover table-nowrap card-table text-center">
                             <thead>
                                 <tr>
@@ -68,6 +70,50 @@
                         </table>
 
                     </div>
+
+                    <ul class="card-tables display-mobile-table">
+                        @foreach($orders as $key => $row)
+                        <li class="transaction-details">
+                            <div class="title">
+                                <b>Order No. : </b><a href="{{ route('seller.order.show',$row->id) }}">{{ $row->order_no }}</a>
+                                <div class="customer-name">
+                                    <b>Customer Name : </b>@if($row->customer_id != null)<a href="{{ route('seller.customer.show',$row->customer_id) }}">{{ $row->customer->name }}</a>@else {{ __('Guest Transaction') }} @endif
+                                </div>
+                                <div class="transaction-id">
+                                    <b>Transaction ID : </b><a href="#" data-toggle="modal" class="edit" data-target="#editModal" data-oid="{{ $row->id }}" data-td="{{ $row->id }}"  data-mode="{{ $row->getway->id ?? '' }}" data-transaction="{{ $row->transaction_id }}">{{ $row->transaction_id }}</a>
+                                </div>
+                            </div>
+                            <div class="status-visible">
+                                <b>Payment : </b>
+                                @if($row->payment_status==2)
+                                <span class="badge badge-warning">{{ __('Pending') }}</span>
+
+                                @elseif($row->payment_status==1)
+                                <span class="badge badge-success">{{ __('Complete') }}</span>
+
+                                @elseif($row->payment_status==0)
+                                <span class="badge badge-danger">{{ __('Cancel') }}</span> 
+                                @elseif($row->payment_status==3)
+                                <span class="badge badge-danger">{{ __('Incomplete') }}</span> 
+
+                                @endif
+                                <div class="method">
+                                    <b>Method : </b>{{ $row->getway->name ?? '' }}
+                                </div>
+                            </div>
+
+                            <div class="foot-bottom">
+                                <div class="primary"><b>Last Update : </b>
+                                    <a href="{{ route('seller.order.show',$row->id) }}">{{ $row->updated_at->format('d-F-Y') }}</a>
+                                    <br>
+                                    <small>{{ $row->updated_at->diffForHumans() }}</small>
+                                </div>
+                                <div class="secondary category-edit"><b>Amount : </b>{{ amount_format($row->total) }}</div>
+                            </div>
+                        </li>
+                        @endforeach
+                    </ul>
+
                 </div>
                 <div class="card-footer d-flex justify-content-between">
                     @if(count($request->all()) > 0)

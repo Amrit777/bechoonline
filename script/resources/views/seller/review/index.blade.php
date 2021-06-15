@@ -1,3 +1,6 @@
+<!-- Review -->
+
+
 @extends('layouts.app')
 @section('head')
 @include('layouts.partials.headersection',['title'=>'Review And Rattings'])
@@ -5,14 +8,14 @@
 @section('content')
 <div class="">
     <div class="row justify-content-center">
-        <div class="col-12">
+        <div class="col-12 ">
            
-            <div class="card">
+            <div class="card table-card-body">
                
                 <div class="card-body">
                 	<form method="post" action="{{ route('seller.reviews.destroys') }}" class="basicform_with_reload">
                 		@csrf
-                		<div class="float-left mb-2">
+                		<div class="float-left mb-2 select-category">
                 			<div class="input-group">
                 				<select class="form-control selectric" name="method">
                 					<option disabled selected="">{{ __('Select Action') }}</option>
@@ -25,7 +28,7 @@
                 				</div>
                 			</div>
                 		</div>
-                    <div class="table-responsive">
+                    <div class="table-responsive display-desktop-table">
                         <table class="table table-hover table-nowrap card-table text-center">
                             <thead>
                                 <tr>
@@ -63,6 +66,37 @@
                                @endforeach
                             </tbody>
                         </table>
+                      </div>
+                      <ul class="card-tables display-mobile-table">
+                        @foreach($posts as $post)
+                        <li>
+                          <div class="custom-control custom-checkbox">
+                            <input type="checkbox" name="ids[]" class="custom-control-input" id="customCheck{{ $post->id }}" value="{{ $post->id }}">
+                            <label class="custom-control-label" for="customCheck{{ $post->id }}"></label>
+                          </div>
+                          <div class="title">
+                              <div class="person-name">
+                                <b>Name </b> {{ $post->name }} 
+                              </div>
+                              <div class="email-id">
+                                <b>Email </b> {{ $post->email }} 
+                              </div>
+                              <div class="rating">
+                                <b>Rating </b> {{ $post->rating }} 
+                              </div>
+                              <div class="comment">
+                                  {{ $post->comment }}                              
+                              </div>
+                              <div class="product-url">
+                                <a href="{{ url('/product/'.$post->post->slug.'/'.$post->post->id) }}" target="_blank">{{ Str::limit($post->post->title,10) }}</a>
+                              </div>
+                              <div class="comment-post">
+                                {{ $post->created_at->format('d-F-Y') }}
+                              </div>
+                          <div>
+                        </li>
+                        @endforeach
+                      </ul>
                     </form>
                     </div>
                 </div>

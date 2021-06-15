@@ -1,3 +1,4 @@
+<!-- Shop Setting -->
 @extends('layouts.app')
 @push('style')
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/bootstrap-colorpicker.min.css') }}">
@@ -322,31 +323,48 @@
                                         </div>
 
                                         <label>Social Links</label>
-                                        <table class="table table-bordered table-striped" id="user_table">
-                                            <thead>
-                                                <tr>
-                                                    <th width="35%"></th>
-                                                    <th width="35%">Url</th>
-                                                    <th width="35%">Icon Class</th>
-                                                    {{-- <th width="30%"><button type="button" name="add" id="add"
-                                                            class="btn btn-success btn-sm">Add New</button></th> --}}
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-
-                                                @foreach ($socials ?? [] as $key => $row)
+                                        <div class="display-desktop-table">
+                                            <table class="table table-bordered table-striped" id="user_table">
+                                                <thead>
                                                     <tr>
-                                                        <td>{{ $row->placeholder }}</td>
-                                                        <td><input type="text" name="url[]" class="form-control" required
-                                                                value="{{ $row->url }}" /></td>
-                                                        <td><input type="text" name="icon[]" class="form-control" required readonly="true"
-                                                                value="{{ $row->icon }}" /></td>
-                                                        {{-- <td><button type="button" name="remove" id=""
-                                                                class="btn btn-danger remove">Remove</button></td> --}}
+                                                        <th width="35%"></th>
+                                                        <th width="35%">Url</th>
+                                                        <th width="35%">Icon Class</th>
+                                                        {{-- <th width="30%"><button type="button" name="add" id="add"
+                                                                class="btn btn-success btn-sm">Add New</button></th> --}}
                                                     </tr>
-                                                @endforeach
-                                            </tbody>
-                                        </table>
+                                                </thead>
+                                                <tbody>
+
+                                                    @foreach ($socials ?? [] as $key => $row)
+                                                        <tr>
+                                                            <td>{{ $row->placeholder }}</td>
+                                                            <td><input type="text" name="url[]" class="form-control" required
+                                                                    value="{{ $row->url }}" /></td>
+                                                            <td><input type="text" name="icon[]" class="form-control" required readonly="true"
+                                                                    value="{{ $row->icon }}" /></td>
+                                                            {{-- <td><button type="button" name="remove" id=""
+                                                                    class="btn btn-danger remove">Remove</button></td> --}}
+                                                        </tr>
+                                                    @endforeach
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                        <ul class="card-tables display-mobile-table">
+                                             @foreach ($socials ?? [] as $key => $row)
+                                             <li class="shop-setting-table">
+                                                <b>{{ $row->placeholder }}</b>
+                                                <div class="url-field-input">
+                                                    <input type="text" name="url[]" class="form-control" required
+                                                                value="{{ $row->url }}" />
+                                                </div>
+                                                <div class="icon-class">
+                                                    <input type="text" name="icon[]" class="form-control" required readonly="true"
+                                                                value="{{ $row->icon }}" />
+                                                </div>
+                                             </li>
+                                             @endforeach
+                                        </ul>
                                         <div class="form-group">
                                             <button class="btn btn-primary float-right col-3 basicbtn"
                                                 type="submit">Save</button>
