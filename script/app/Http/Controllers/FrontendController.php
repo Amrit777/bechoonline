@@ -378,6 +378,11 @@ class FrontendController extends Controller
             $dom->domain_password = $request->filled('domain_password') ? $request->domain_password : "";
             // amit singh ends
 
+
+            if ($info->custom_domain == 0) {
+                $dom->custom_domain = 1;
+            }
+
             $dom->status = 3;
             $dom->user_id = $user->id;
             $dom->save();

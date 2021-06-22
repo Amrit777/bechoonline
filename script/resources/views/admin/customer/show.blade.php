@@ -75,14 +75,14 @@
                                     @endif
                                 </li>
                                 {{-- amit singh --}}
-                                @if (!empty($info->user_domain->domain_username))
+                                {{-- @if (!empty($info->user_domain->domain_username))
                                     <li class="list-group-item">{{ __('Domain Service Provider :') }}
                                         {{ $info->user_domain->domain_purchased_from ?? '' }}</li>
                                     <li class="list-group-item">{{ __('Domain Username :') }}
                                         {{ $info->user_domain->domain_username ?? '' }}</li>
                                     <li class="list-group-item">{{ __('Domain Password :') }}
                                         {{ $info->user_domain->domain_password ?? '' }}</li>
-                                @endif
+                                @endif --}}
                                 {{-- amit singh --}}
                                 <li class="list-group-item">{{ __('Total Customers :') }}
                                     {{ number_format($info->customers_count) }}</li>

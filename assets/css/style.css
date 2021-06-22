@@ -5908,3 +5908,8 @@ ul.card-tables li.product-description .options br {
   width: 100%;
   color: #dc3545;
 }
+
+.requiredsingup:after {
+  content: " *";
+  color: red;
+}

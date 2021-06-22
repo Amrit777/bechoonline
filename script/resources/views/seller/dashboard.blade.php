@@ -1,6 +1,7 @@
 @extends('layouts.app')
 @section('content')
 
+@if(Auth::user()->user_domain->custom_domain == 1)
     @if (Auth::user()->status == 2 || Auth::user()->status == 3)
         <div class="row mt-3">
             <div class="col-sm-12">
@@ -8,16 +9,40 @@
                     <div class="card-body">
                         <p>
                             {{ __('Dear,') }} <b>{{ Auth::user()->name }}</b>.
-                            {{ __(' Thank you for joining ') }} <b>{{ env('APP_NAME') }}</b>.
-                            {{ __('Your account is sent for an approval. Once approved you will be able to setup your store
-            and start selling online.') }}
-                            {{ __('To know more about How to configure your shop in Bechocart click on the chat icon and watch the video.') }}
+                            {{ __(' Your account is not active due to any one of the following reasons: ') }}:
+                        </p>
+                        <br>
+                        <p>                        1. First Time Registration (If new to Bechocart): We welcome you to Bechocart. Your account is sent for an approval. To approve your account, connect to our chat support to approve your account instantly. Once your account is approved, you will be notified on your registered email ID.
+
+                        </p>
+                        <br>
+                        <p>                        2. Subscription Plan Expired: Your subscription plan is expired (Previous Plan Name and Expiry date). To continue Bechocart service please renew/ upgrade your subscription plan <a href="{{ route('seller.settings.show', 'plan') }}">Click here</a>.Please connect to our support chat if any query.
                         </p>
                     </div>
                 </div>
             </div>
         </div>
     @endif
+@else
+    @if (Auth::user()->status == 2 || Auth::user()->status == 3)
+            <div class="row mt-3">
+                <div class="col-sm-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <p>
+                                {{ __('Dear,') }} <b>{{ Auth::user()->name }}</b>.
+                                {{ __(' Thank you for joining ') }} <b>{{ env('APP_NAME') }}</b>.
+                                {{ __('Your account is sent for an approval. Once approved you will be able to setup your store
+                and start selling online.') }}
+                                {{ __('To know more about How to configure your shop in Bechocart click on the chat icon and watch the video.') }}
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    @endif
+@endif
+
     <div class="row">
         <div class="col-lg-4 col-md-4 col-sm-12">
             <div class="card card-statistic-2">

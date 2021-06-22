@@ -40,12 +40,12 @@
 
                                     <div class="row">
                                         <div class="form-group col-6">
-                                            <label for="frist_name">{{ __('Name') }}</label>
+                                            <label for="frist_name" class="required">{{ __('Name') }}</label>
                                             <input id="frist_name" type="text" class="form-control" name="name"
                                                 autofocus required="">
                                         </div>
                                         <div class="form-group col-6">
-                                            <label for="last_name">{{ __('Email') }}</label>
+                                            <label for="last_name" class="required">{{ __('Email') }}</label>
                                             <input id="email" type="email" class="form-control" name="email"
                                                 required="">
                                         </div>
@@ -53,12 +53,12 @@
                                     {{-- amit singh --}}
                                     <div class="row">
                                         <div class="form-group col-6">
-                                            <label for="shop_name">{{ __('Store Name') }}</label>
+                                            <label for="shop_name" class="required">{{ __('Store Name') }}</label>
                                             <input id="shop_name" type="text" class="form-control" name="shop_name"
                                                 autofocus required="">
                                         </div>
                                         <div class="form-group col-6">
-                                            <label for="whatsapp_number">{{ __('WhatsaApp Number') }}</label>
+                                            <label for="whatsapp_number" class="required">{{ __('Whatsapp Number') }}</label>
                                             <input id="whatsapp_number" type="text" class="form-control"
                                                 name="whatsapp_number" required="">
                                         </div>
@@ -67,7 +67,7 @@
 
                                     <div class="row">
                                         <div class="form-group col-6">
-                                            <label for="password" class="d-block">{{ __('Password') }}</label>
+                                            <label for="password" class="d-block required" >{{ __('Password') }}</label>
                                             <input id="password" type="password" class="form-control pwstrength"
                                                 data-indicator="pwindicator" name="password" required>
                                             <div id="pwindicator" class="pwindicator">
@@ -77,7 +77,7 @@
                                         </div>
                                         <div class="form-group col-6">
                                             <label for="password2"
-                                                class="d-block">{{ __('Password Confirmation') }}</label>
+                                                class="d-block required">{{ __('Password Confirmation') }}</label>
                                             <input id="password2" type="password" class="form-control"
                                                 name="password_confirmation" required>
                                         </div>
@@ -85,7 +85,7 @@
 
                                     @if ($info->custom_domain == 0)
                                         <div class="form-divider">
-                                            {{ __('Your Subdomain') }} <br>
+                                            <span class="required"> {{__('Your Subdomain') }} </span><br>
                                         </div>
                                         <div class="row">
                                             <div class="col-12">
@@ -128,16 +128,16 @@
                                             {{ __('Enter domain details') }} <br>
                                         </div>
                                         <div class="row">
-                                            <div <div class="form-group col-6">
+                                            {{-- <div <div class="form-group col-6">
                                                 <label for="password2"
                                                     class="d-block">{{ __('Select your domain provider') }}</label>
-                                                <select class="form-control" name="domain_purchased_from" required>
+                                                <select class="form-control" name="domain_purchased_from" required> --}}
                                                     {{-- @if (!empty($domainslist))
                                                         @foreach ($domainslist as $item)
                                                             <option value="{{ $key }}">{{ $row }}</option>
                                                         @endforeach
                                                     @endif --}}
-                                                    <option value="Bechocart">Bechocart</option>
+                                                    {{-- <option value="Bechocart">Bechocart</option>
                                                     <option value="GoDaddy">GoDaddy</option>
                                                     <option value="Hostinger">Hostinger</option>
                                                     <option value="Bigrock">Bigrock</option>
@@ -150,21 +150,22 @@
                                                     class="btn btn-primary btn-lg btn-block ">
                                                     {{ __(' Buy domain') }}
                                                 </a>
-                                            </div>
+                                            </div> --}}
                                             <div class="col-12">
-                                                <div class="form-group">
-                                                    <input type="text" class="form-control" name="full_domain"
-                                                        placeholder="Enter Your domain (URL)" required>
-                                                </div>
+                                                    <div class="form-group">
+                                                        <span>https://www.</span>
+                                                        <input type="text" class="form-control" name="full_domain"
+                                                            placeholder="Enter Your domain (URL)" required>
+                                                    </div>
                                             </div>
-                                            <div class="form-group col-6">
+                                            {{-- <div class="form-group col-6">
                                                 <input id="domain_username" type="text" class="form-control"
                                                     name="domain_username" placeholder="Enter Your domain username" required>
                                             </div>
                                             <div class="form-group col-6">
                                                 <input id="domain_password" type="text" class="form-control"
                                                     name="domain_password" placeholder="Enter Your domain password" required>
-                                            </div>
+                                            </div> --}}
 
                                         </div>
                                         {{-- amit singh --}}
@@ -179,10 +180,10 @@
                                         <div class="custom-control custom-checkbox">
                                             <input type="checkbox" required="" name="agree" class="custom-control-input"
                                                 id="agree">
-                                            <label class="custom-control-label"
+                                            <label class="custom-control-label "
                                                 for="agree">{{ __('I agree with the') }}
-                                                <a
-                                                    href="{{ url('/page/terms-and-condition') }}">{{ __('terms and conditions') }}</a></label>
+                                                <span class="required"><a
+                                                    href="{{ url('/page/terms-and-condition') }}">{{ __('terms and conditions') }}</a></span></label>
                                         </div>
                                     </div>
 
