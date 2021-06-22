@@ -25,7 +25,6 @@
     //amit singh
     var $box = $(this);
     if ($box.is(":checked")) {
-      console.log("iom sdcscdsdc");
       if ($(this).hasClass('radiotypecheckbox')) {
         var group = "input:checkbox[name='" + $box.attr("name") + "']";
         $(group).prop("checked", false);

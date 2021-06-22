@@ -158,7 +158,23 @@
                                         @foreach ($option->childrenCategories as $row)
                                             <li><label class="selectgroup-item option option{{ $row->id }}">
                                                     <input data-amount="{{ $row->amount }}"
-                                                        data-amounttype="{{ $row->amount_type }}" @if ($option->select_type == 1) type="checkbox" name="option[]" @else type="checkbox" name="option[{{ $key }}]" @endif value="{{ $row->id }}"
+                                                        data-amounttype="{{ $row->amount_type }}"
+
+
+
+                                                        {{-- optional --}}
+                                                        @if ($option->is_required == 0)
+                                                            @if ($option->select_type == 1)  name="option[]" type="checkbox"
+                                                            @else name="option[{{ $key }}]" type="checkbox"
+                                                            @endif
+                                                        @else
+                                                            @if ($option->select_type == 1)  name="option[]" type="checkbox"
+                                                            @else name="option[{{ $key }}]" type="radio"
+                                                            @endif
+                                                        @endif
+
+
+                                                        value="{{ $row->id }}"
                                                         class="selectgroup-input options option  @if ($option->is_required == 1) req req{{ $info->id }} key{{$option->id}} @endif
                                                         @if ($option->select_type == 0)
                                                                 radiotypecheckbox @endif"

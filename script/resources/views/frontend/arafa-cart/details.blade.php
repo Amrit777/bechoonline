@@ -198,19 +198,31 @@
 
                                     </div>
                                     <div class="u-s-m-b-15">
-                                        @foreach ($info->options as $option)
+                                        @foreach ($info->options as $key => $option)
                                             <span class="pd-detail__label u-s-m-b-8">{{ $option->name }} @if ($option->is_required == 1) <span
                                                         class="text-danger">*</span> @endif </span>
                                             <div class="pd-detail__size">
                                                 @foreach ($option->childrenCategories as $row)
                                                     <div class="@if ($option->select_type == 1) size__checkbox @else size__radio @endif">
                                                         <input data-amount="{{ $row->amount }}"
-                                                            data-amounttype="{{ $row->amount_type }}" @if ($option->select_type == 1) type="checkbox" name="option[]" @else name="option[{{ $key }}]" type="checkbox" @endif value="{{ $row->id }}"
+                                                            data-amounttype="{{ $row->amount_type }}"
+                                                        {{-- optional --}}
+                                                        @if ($option->is_required == 0)
+                                                            @if ($option->select_type == 1)  name="option[]" type="checkbox"
+                                                            @else name="option[{{ $key }}]" type="checkbox"
+                                                            @endif
+                                                        @else
+                                                            @if ($option->select_type == 1)  name="option[]" type="checkbox"
+                                                            @else name="option[{{ $key }}]" type="radio"
+                                                            @endif
+                                                        @endif
+                                                            value="{{ $row->id }}"
                                                             class="selectgroup-input option options
                                                             @if ($option->is_required == 1) req req{{ $info->id }} key{{$option->id}} @endif
                                                             @if ($option->select_type == 0)
                                                             radiotypecheckbox @endif
                                                             "
+                                                        style="display:none"
                                                         data-parentid="{{$option->id}}"
                                                         data-mainprice="{{ $info->price->price }}"
                                                         data-price="{{ $row->amount }}"

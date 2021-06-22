@@ -96,16 +96,28 @@
                                                              @if ($option->is_required == 1) <span class="text-danger">*</span> @endif
                                                         </label>
                                                         <div class="selectgroup w-100" >
-                                                            @foreach ($option->childrenCategories as $key => $item)
+                                                            @foreach ($option->childrenCategories as $item)
                                                                 <label class="selectgroup-item">
-                                                                    <input @if ($option->select_type == 1) type="checkbox" name="option[]"
-                                                                            @else type="checkbox" name="option[{{ $key }}]" @endif value="{{ $item->id }}"
-                                                                             class="selectgroup-input
+                                                                    <input
+
+                                                                    @if ($option->is_required == 0)
+                                                                        @if ($option->select_type == 1)  name="option[]" type="checkbox"
+                                                                        @else name="option[{{ $key }}]" type="checkbox"
+                                                                        @endif
+                                                                    @else
+                                                                        @if ($option->select_type == 1)  name="option[]" type="checkbox"
+                                                                        @else name="option[{{ $key }}]" type="radio"
+                                                                        @endif
+                                                                    @endif
+
+                                                                    value="{{ $item->id }}"
+                                                                             class="selectgroup-input option options
                                                                                     @if ($option->is_required == 1) req
                                                                                     req{{ $row->id }} key{{$option->id}}
                                                                                     @endif
                                                                                     @if ($option->select_type == 0)
-                                                                                        radiotypecheckbox @endif
+                                                                                        radiotypecheckbox dcsdcsd
+                                                                                    @endif
                                                                                     "
                                                                                     data-parentid="{{$option->id}}"
                                                                                     data-mainprice="{{ $row->price->price }}"

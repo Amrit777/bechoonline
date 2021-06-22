@@ -24,6 +24,9 @@
             <div class="login-brand">
               <img src="{{ asset('uploads/logo.png') }}" alt="logo" width="100" class="shadow-light">
             </div>
+            @if(isset($_COOKIE['loggedinfrommainurl']) && $_COOKIE['loggedinfrommainurl'] == true)
+                ksjbdncjksd cjk,
+            @endif
 
             <div class="card card-primary">
               <div class="card-header"><h4>{{ __('Login') }}</h4></div>
@@ -65,7 +68,11 @@
                      <label class="custom-control-label" for="remember-me">{{ __('Remember Me') }}</label>
                    </div>
                  </div>
-
+                 @if(url('/') == env('APP_URL'))
+                    <div class="invalid-feedback-red">
+                    To prevent unauthorized access, store owners will be required to enter their login credentials twice
+                    </div>
+                 @endif
                  <div class="form-group">
                   <button type="submit" class="btn btn-primary btn-lg btn-block basicbtn" tabindex="4">
                     {{ __('Login') }}
@@ -74,12 +81,12 @@
               </form>
 
 
-   
+
 
           <div class="simple-footer">
             {{ __('Copyright') }} &copy; {{ env('APP_NAME') }} {{ date('Y') }}
           </div>
-       
+
       </div>
     </div>
   </section>
