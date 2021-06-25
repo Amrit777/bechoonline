@@ -294,8 +294,6 @@ class FrontendController extends Controller
             }
         }
 
-
-
         $info = Plan::where('status', 1)->findorFail($id);
         if ($info->custom_domain == 0) {
             // amit singh
@@ -379,7 +377,7 @@ class FrontendController extends Controller
             // amit singh ends
 
 
-            if ($info->custom_domain == 0) {
+            if ($info->custom_domain == 1) {
                 $dom->custom_domain = 1;
             }
 
