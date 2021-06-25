@@ -298,7 +298,7 @@ class OrderController extends Controller
         if ($method == 'whatsapp') {
             if (Cache::has(domain_info('user_id') . 'whatsapp')) {
                 $whatsapp = json_decode(Cache::get(domain_info('user_id') . 'whatsapp'));
-                $url = "https://wa.me/+" . $whatsapp->phone_number . "?text=My Order No Is " . str_replace('#', '', $order->order_no);
+                $url = "https://wa.me/+91" . $whatsapp->phone_number . "?text=My Order No Is " . str_replace('#', '', $order->order_no);
                 return redirect($url);
             }
         }
@@ -362,7 +362,7 @@ class OrderController extends Controller
             } else {
                 if (Cache::has(domain_info('user_id') . 'whatsapp')) {
                     $whatsapp = json_decode(Cache::get(domain_info('user_id') . 'whatsapp'));
-                    $url = "https://wa.me/+" . $whatsapp->phone_number . "?text=My Order No Is " . str_replace('#', '', $order->order_no);
+                    $url = "https://wa.me/+91" . $whatsapp->phone_number . "?text=My Order No Is " . str_replace('#', '', $order->order_no);
                     return redirect($url);
                 }
                 if (env('QUEUE_MAIL') == 'on') {
