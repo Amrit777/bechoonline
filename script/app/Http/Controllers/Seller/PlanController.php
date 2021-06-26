@@ -154,8 +154,9 @@ class PlanController extends Controller
                 if (!empty($domain)) {
                     $domainname = $domain->full_domain;
                 }
-                $msg = "Your website link is:" . $domainname
-                    . "Want to have your own brand name URL (www.yourstorename.com) Purchase the plan accordingly.";
+                // $msg = "Your website link is:" . $domainname
+                //     . "Want to have your own brand name URL (www.yourstorename.com) Purchase the plan accordingly.";
+                $msg = "Payment successfull";
 
                 Session::flash('success', $msg);
 

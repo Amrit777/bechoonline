@@ -16,7 +16,7 @@
                     </div>
                 </div>
             @endif
-            @if (Auth::user()->status == 2 || Auth::user()->status == 3)
+            {{-- @if (Auth::user()->status == 2 || Auth::user()->status == 3)
                 <div class="row mt-3">
                     <div class="col-sm-12">
                         <div class="card">
@@ -32,7 +32,7 @@
                         </div>
                     </div>
                 </div>
-            @endif
+            @endif --}}
             @if (Session::has('success'))
 
                 <div class="alert alert-success alert-dismissible show fade">
