@@ -9305,5 +9305,29 @@ img {
 }
 
 .main-logo img {
-    max-width: 130px;
+    max-width: 68px;
 }
+
+.add-part.banner_ads {
+    height: 300px;
+    background: #fff;
+    overflow: hidden;
+    border-radius: 24px;
+    padding: 0;
+    position: relative;
+}
+
+.add-part.banner_ads img {
+    position: absolute;
+    width: 100%;
+    height: auto;
+    max-width: 100%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+@media only screen and (max-width: 767px) {
+  .add-part.banner_ads {height: 200px;}
+}
+

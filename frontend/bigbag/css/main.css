@@ -1571,7 +1571,7 @@ button:focus {
 }
 
 .navbar-logo a img {
-  width: 160px;
+  width: 100px;
   height: auto;
 }
 
@@ -3152,3 +3152,64 @@ img {
 .main-logo img {
     max-width: 130px;
 }
+
+section.banner-part .banner-slider .slick-track {height: 400px;}
+
+section.banner-part .banner-slider .slick-track img {
+    height: 100%;
+}
+
+.adbanner-part .container.banner_ad {
+    display: block !important;
+    background: transparent !important;
+    height: 300px;
+    border-radius: 24px;
+    border: none;
+    padding: 0;
+    overflow: hidden;
+    position: relative;
+    margin-bottom: 20px;
+}
+
+.adbanner-part .container.banner_ad a {
+    display: inline-block;
+    width: 100%;
+}
+
+.adbanner-part .container.banner_ad img {
+    position: absolute;
+    width: 100%;
+    height: auto;
+    max-width: 100%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+ .adbanner-part {padding: 0 15px;}
+
+@media only screen and (max-width: 767px) {
+  .adbanner-part .container.banner_ad {height: 200px;}
+}
+
+/*.offer-ads-visible .slick-track {
+    width: 100% !important;
+}*/
+
+.offer-ads-visible .slick-track a {
+    height: 350px;
+    position: relative;
+    border-radius: 10%;
+    overflow: hidden;
+}
+
+.offer-ads-visible .slick-track a:before {content: '';position: absolute;z-index: 1;top: 0;left: 0;right: 0;bottom: 0;transition: all 0.3s linear;background-color: rgba(0, 0, 0, 0.8);opacity: 0;}
+
+.offer-ads-visible .slick-track a:hover:before {
+    opacity: 1;
+}
+
+.offer-ads-visible .slick-track a img {
+    height: 100%;
+}
+

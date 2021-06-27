@@ -5462,6 +5462,10 @@ ul.card-tables li.product-description .options br {
   display: none;
 }
 
+/*td.selection-products span.select2 {
+    min-width: 180px;
+}
+*/
 
 
 /*Responsiveness*/
@@ -5851,6 +5855,14 @@ ul.card-tables li.product-description .options br {
   ul.card-tables li.order-history-card .status-visible {
     float: left;
     width: 100%;
+  }
+  ul.card-tables li.order-history-view .foot-bottom .primary, ul.card-tables li.order-history-view .foot-bottom .secondary {
+      float: left;
+      width: 100%;
+  }
+
+  ul.card-tables li.order-history-view .foot-bottom .secondary {
+      margin-top: 10px;
   }
 }
 

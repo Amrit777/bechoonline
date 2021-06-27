@@ -1,3 +1,4 @@
+<!-- bigbag -->
 @extends('frontend.bigbag.layouts.app')
 @section('content')
 
@@ -42,7 +43,7 @@
                     <div class="col-sm-4 content-placeholder ads_preload"></div>
                     <div class="col-sm-4 content-placeholder ads_preload"></div>
                 </div>
-                <div class="offer-slider">
+                <div class="offer-slider offer-ads-visible">
                     
                 </div>
             </div>
@@ -163,7 +164,7 @@
 <!--=====================================
         ADD PART START
 =======================================-->
-<div class="add-part">
+<div class="add-part adbanner-part">
      <div class="container banner_ad">
         
       </div>

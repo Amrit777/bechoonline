@@ -1,3 +1,4 @@
+<!-- arafa cart -->
 @extends('frontend.arafa-cart.layouts.app')
 @section('content')
 <!--====== App Content ======-->
@@ -28,7 +29,7 @@
       <!--====== Section Content ======-->
       <div class="section__content">
          <div class="container">
-            <div class="row bump_ads">
+            <div class="row bump_ads offer-ads-visible">
                
               
             </div>
@@ -179,7 +180,7 @@
    <!--====== Section 7 ======-->
    <div class="u-s-p-b-60">
       <!--====== Section Content ======-->
-      <div class="section__content">
+      <div class="section__content adbanner-part">
          <div class="container">
             <div class="add-part  banner_ads content-placeholder slider_preload">              
                

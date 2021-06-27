@@ -72,7 +72,7 @@
                                         </td>
                                         <td><span id="price{{ $row->id }}" data-price="{{ $price }}">{{ $price }}</span> </td>
 
-                                        <td>
+                                        <td class="selection-products">
                                             {{-- amit singh added select2 --}}
                                             <select class="form-control select2 multislect" name="variation[]" multiple>
                                                 {{-- <option disabled selected>{{ __('Select Variation') }}</option> --}}

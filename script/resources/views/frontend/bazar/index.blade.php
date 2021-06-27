@@ -1,3 +1,4 @@
+<!-- bazaar -->
 @extends('frontend.bazar.layouts.app')
 @section('content')
 
