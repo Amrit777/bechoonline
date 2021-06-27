@@ -6822,3 +6822,14 @@ svg {
   padding-left: 12px;
 }
 }
+
+/*Themes CSS*/
+
+
+img {
+    max-width: 100%;
+}
+
+.main-logo img {
+    max-width: 130px;
+}

@@ -136,7 +136,7 @@
 
 				<ul class="card-tables display-mobile-table">
 					@foreach($orders as $row)
-					<li>
+					<li class="order-history-view">
 						<div class="title">
 							<div class="name"><b>Invoice ID </b><a href="{{ route('seller.invoice',$row->id) }}">{{ $row->order_no }}</a></div>
 							<div class="amount"><b>Amount </b>{{ amount_format($row->total) }}</div>

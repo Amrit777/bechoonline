@@ -47,7 +47,7 @@
 		</div>
 
 		<ul class="card-tables display-mobile-table">
-			@if(!empty($row))
+			@foreach($posts as $row)
 			<li class="banner-ads-table">
 				<div class="table-image">
 	                <img src="{{ asset($row->name) }}" height="100">
@@ -65,7 +65,7 @@
 	            	<div class="primary"><b>Last Modified : </b>{{ $row->updated_at->diffForHumans() }}</div>
 	            </div>
 			</li>
-			@endif
+			@endforeach
 		</ul>
 		
 	</div>

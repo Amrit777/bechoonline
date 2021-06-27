@@ -13,21 +13,21 @@
                 <div class="card card-warning order-show">
 
                 @elseif($info->status=='processing')
-                    <div class="card card-primary">
+                    <div class="card card-primary order-show">
 
                     @elseif($info->status=='ready-for-pickup')
-                        <div class="card card-info">
+                        <div class="card card-info order-show">
 
                         @elseif($info->status=='completed')
-                            <div class="card card-success">
+                            <div class="card card-success order-show">
 
                             @elseif($info->status=='archived')
-                                <div class="card card-danger">
+                                <div class="card card-danger order-show">
                                 @elseif($info->status=='canceled')
-                                    <div class="card card-danger">
+                                    <div class="card card-danger order-show">
 
                                     @else
-                                        <div class="card card-primary">
+                                        <div class="card card-primary order-show">
 
             @endif
 

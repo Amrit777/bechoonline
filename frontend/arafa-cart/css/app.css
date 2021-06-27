@@ -6822,3 +6822,15 @@ svg {
    padding: 5px 5px;
   background-color: rgba(255, 255, 255, 0.98);
 }
+
+
+/*Themes CSS*/
+
+
+img {
+    max-width: 100%;
+}
+
+.main-logo img {
+    max-width: 130px;
+}

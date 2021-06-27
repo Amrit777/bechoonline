@@ -5462,6 +5462,8 @@ ul.card-tables li.product-description .options br {
   display: none;
 }
 
+
+
 /*Responsiveness*/
 
 @media only screen and (max-width: 1300px) {
@@ -5563,6 +5565,21 @@ ul.card-tables li.product-description .options br {
     float: left;
     width: 100%;
     text-align: left !important;
+  }
+
+  .tab-content.no-padding>.tab-panediv#contact4 button.btn.btn-primary.float-right.col-3.basicbtn {
+      float: left !important;
+  }
+
+  div#contact4 form.basicform button {
+      float: left !important;
+      max-width: 130px !important;
+      width: 100%;
+  }
+
+  div#contact4 form.basicform .form-group {
+      float: left;
+      width: 100%;
   }
 }
 
@@ -5773,7 +5790,7 @@ ul.card-tables li.product-description .options br {
     max-width: initial;
   }
   ul.card-tables li.report-table .status-visible {
-    text-align: left;
+    text-align: right;
     margin-top: 10px;
   }
   ul.card-tables li.report-table .primary, ul.card-tables li.report-table .secondary {
@@ -5839,7 +5856,7 @@ ul.card-tables li.product-description .options br {
 
 @media only screen and (max-width: 400px) {
   ul.card-tables li.coupon-table .status-visible {
-    float: left;
+    float: right;
     margin-top: 10px;
   }
   ul.card-tables li .title {
@@ -5863,7 +5880,12 @@ ul.card-tables li.product-description .options br {
     float: none !important;
   }
   ul.card-tables li.banner-ads-table .title {
-    width: auto;
+      display: -webkit-box;
+      -webkit-line-clamp: 1;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      width: 100%;
+      word-break: break-all;
   }
   ul.card-tables li .status-visible.inventory-status {
     float: left;
@@ -5891,15 +5913,25 @@ ul.card-tables li.product-description .options br {
   }
   ul.card-tables li.customer-editing .status-visible {
     float: left;
+    width: 100%;
+    text-align: right;
+  }
+
+  ul.card-tables li.customer-editing .status-visible button {
+    width: auto !important;
   }
   ul.card-tables li.customer-editing .status-visible button {
     line-height: normal;
   }
   ul.card-tables li.report-table .status-visible {
     float: left;
+    width: 100%;
   }
   ul.card-tables li.report-table .title {
     width: 100%;
+  }
+  ul.card-tables li.coupon-table .status-visible span.category-edit a.btn {
+      margin-left: 10px;
   }
 }
 
@@ -5912,4 +5944,19 @@ ul.card-tables li.product-description .options br {
 .requiredsingup:after {
   content: " *";
   color: red;
+}
+
+ul.card-tables li.order-history-view a.btn.btn-primary:before {
+    content: none;
+}
+
+
+
+.selectgroup.w-100.option-selection {
+    display: inline-block;
+}
+
+.selectgroup.w-100.option-selection label {
+    display: block;
+    width: 200px;
 }

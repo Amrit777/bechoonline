@@ -3140,3 +3140,15 @@ svg {
   color: #dc3545;
   font-size: 16px;
 }
+
+
+/*Themes CSS*/
+
+
+img {
+    max-width: 100%;
+}
+
+.main-logo img {
+    max-width: 130px;
+}

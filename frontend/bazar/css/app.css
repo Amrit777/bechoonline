@@ -9295,3 +9295,15 @@ svg {
 .text-white{
 	color: #fff;
 }
+
+
+/*Themes CSS*/
+
+
+img {
+    max-width: 100%;
+}
+
+.main-logo img {
+    max-width: 130px;
+}

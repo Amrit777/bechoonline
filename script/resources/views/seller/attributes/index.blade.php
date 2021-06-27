@@ -55,7 +55,7 @@
                    <td>{{ $row->parent_variation_count }}</td>
                   <td>@if($row->featured==1) <span class="badge badge-success">{{ __('Yes') }}</span> @else <span class="badge badge-danger">{{ __('No') }}</span> @endif</td>
                   <td>{{ $row->created_at->diffForHumans() }}</td>
-                  <td><a href="{{ route('seller.attribute.show',$row->id) }}" class="btn btn-primary btn-sm"><i class="fas fa-cog"></i></a> <a href="{{ route('seller.attribute.edit',$row->id) }}" class="btn btn-success btn-sm"><i class="fas fa-edit"></i></a></td>
+                  <td><a href="{{ route('seller.attribute.show',$row->id) }}" class="btn btn-primary btn-sm"><i class="fas fa-cog"></i></a> <a href="{{ route('seller.attribute.edit',$row->id) }}" class="btn btn-primary btn-sm"><i class="fas fa-edit"></i></a></td>
 
                 </tr>
                 @endforeach
@@ -101,7 +101,7 @@
 
               <div class="foot-bottom">
                 <div class="primary"><a href="{{ route('seller.attribute.show',$row->id) }}" class="btn btn-primary btn-sm"><i class="fas fa-cog"></i></a> </div>
-                <div class="secondary category-edit"><a href="{{ route('seller.attribute.edit',$row->id) }}" class="btn btn-success btn-sm"><i class="fas fa-edit"></i></a></div>
+                <div class="secondary category-edit"><a href="{{ route('seller.attribute.edit',$row->id) }}" class="btn btn-primary btn-sm"><i class="fas fa-edit"></i></a></div>
               </div>
             </li>
             @endforeach

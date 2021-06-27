@@ -70,10 +70,6 @@
                                             <a href="{{ url($url . '/product/' . $row->slug . '/' . $term_id) }}"
                                                 target="_blank">{{ Str::limit($row->title, 50) }}</a>
                                         </td>
-                                        <td><img src="{{ asset($row->preview->media->url ?? 'uploads/default.png') }}"
-                                                height="50" class="product-img" ></td>
-                                        <td><a href="{{ url($url . '/product/' . $row->slug . '/' . $term_id) }}"
-                                                target="_blank">{{ Str::limit($row->title, 50) }}</a></td>
                                         <td><span id="price{{ $row->id }}" data-price="{{ $price }}">{{ $price }}</span> </td>
 
                                         <td>
@@ -95,7 +91,7 @@
                                                         <label class="form-label">{{ $option->name }}
                                                              @if ($option->is_required == 1) <span class="text-danger">*</span> @endif
                                                         </label>
-                                                        <div class="selectgroup w-100" >
+                                                        <div class="selectgroup w-100 option-selection" >
                                                             @foreach ($option->childrenCategories as $item)
                                                                 <label class="selectgroup-item">
                                                                     <input
@@ -169,7 +165,7 @@
                             <a href="{{ route('seller.product.edit', $row->id) }}">#{{ $row->id }}</a>
                         </div>
                         <div class="name">
-                            <a href="{{ url($url . '/product/' . $row->slug . '/' . $term_id) }}"
+                            Name : <a href="{{ url($url . '/product/' . $row->slug . '/' . $term_id) }}"
                                                 target="_blank">{{ Str::limit($row->title, 50) }}</a>
                         </div>
                     </div>
@@ -178,6 +174,7 @@
                         <span id="price{{ $row->id }}" data-price="{{ $price }}">{{ $price }}</span>
                     </div>
                     <div class="bottom-footer">
+                        <b class="create-order-heading">Options</b>
                         {{-- amit singh added --}}
                                             @if (count($row->options) > 0)
                                                 @foreach ($row->options as $key => $option)
@@ -212,6 +209,7 @@
                             @endif
                     </div>
                     <div class="foot-bottom inventory">
+                        <b class="create-order-heading">Variable</b>
                         <div class="primary" style="margin-left: 0px;">
                             {{-- amit singh added select2 --}}
                             <select class="form-control select2 multislect" name="variation[]" multiple>
