@@ -352,7 +352,11 @@ class FrontendController extends Controller
             // amit singh ends
 
             $user->role_id = 3;
-            $user->status = 3;
+            if ($info->custom_domain == 0) {
+                $user->status = 1; // subdomain paid/free will be auto approved
+            } else {
+                $user->status = 3;
+            }
             $user->save();
             // amit singh starts
             if ($request->filled('shop_name')) {
@@ -379,9 +383,11 @@ class FrontendController extends Controller
 
             if ($info->custom_domain == 1) {
                 $dom->custom_domain = 1;
+                $dom->status = 3;
+            } else {
+                $dom->status = 1; // subdomain paid/free will be auto approved
             }
 
-            $dom->status = 3;
             $dom->user_id = $user->id;
             $dom->save();
 
