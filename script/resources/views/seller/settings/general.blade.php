@@ -26,6 +26,7 @@
                                     <a class="nav-link" id="profile-tab4" data-toggle="tab" href="#profile4" role="tab"
                                         aria-controls="profile" aria-selected="false">Location</a>
                                 </li>
+
                                 {{-- amit singh --}}
                                 {{-- <li class="nav-item">
                                     <a class="nav-link" id="profile-tab4" data-toggle="tab" href="#pwa" role="tab"
@@ -56,6 +57,33 @@
                                             <textarea class="form-control" required=""
                                                 name="shop_description">{{ $shop_description->value ?? '' }}</textarea>
                                         </div>
+
+                                        {{-- amit singh --}}
+                                        {{-- @php
+                                        print_r(($shop_categoriesList));
+                                        exit();
+                                        @endphp --}}
+                                        <div class="form-group">
+                                            <label>Category</label>
+                                            <select class="form-control" name="shop_category">
+                                                @foreach ($shop_categoriesList ?? [] as $storekey => $storerow)
+                                                    <option value="{{ $storekey }}" @if ($storekey == $my_categories) selected="" @endif>
+                                                        {{ $storerow }}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                        {{-- <div class="form-group">
+                                            <label>Category</label>
+                                            <select class="form-control" name="shop_category">
+                                                @foreach ($langlist ?? [] as $key => $row)
+                                                    <option value="{{ $row }},{{ $key }}" @if (in_array($key, $my_languages)) selected="" @endif>
+                                                        {{ $key }}</option>
+                                                @endforeach
+                                            </select>
+                                        </div> --}}
+
+
+
                                         <div class="form-group">
                                             <label>Notification & Reply-to Email</label>
                                             <input type="email" name="store_email" class="form-control" required=""
@@ -335,11 +363,9 @@
                                                     </tr>
                                                 </thead>
                                                 <tbody>
+                  <tbody>
 
-                                                    @foreach ($socials ?? [] as $key => $row)
-                                                        <tr>
-                                                            <td>{{ $row->placeholder }}</td>
-                                                            <td><input type="text" name="url[]" class="form-control" required
+required
                                                                     value="{{ $row->url }}" /></td>
                                                             <td><input type="text" name="icon[]" class="form-control" required readonly="true"
                                                                     value="{{ $row->icon }}" /></td>

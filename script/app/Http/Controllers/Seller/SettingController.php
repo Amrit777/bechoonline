@@ -11,6 +11,7 @@ use App\Useroption;
 use App\Category;
 use App\Domain;
 use App\Models\User;
+use App\Option;
 use Hash;
 
 class SettingController extends Controller
@@ -190,6 +191,26 @@ class SettingController extends Controller
             }
             $languages->value = json_encode($langs);
             $languages->save();
+
+
+            //amit singh
+            // $shop_categoryArr = [];
+            // foreach ($request->shop_category as $key => $value) {
+            //     $str = explode(',', $value);
+            //     $shop_categoryArr[$str[0]] = $str[1];
+            // }
+            $shop_category = Useroption::where('user_id', $user_id)->where('key', 'shop_category')->first();
+            if ($request->filled('shop_category')) {
+                if (empty($shop_category)) {
+                    $shop_category = new Useroption;
+                    $shop_category->key = 'shop_category';
+                    $shop_category->user_id = $user_id;
+                }
+                $shop_category->value = $request->shop_category;
+            }
+            $shop_category->save();
+            //amit singh
+
 
             $tax = Useroption::where('user_id', $user_id)->where('key', 'tax')->first();
             if (empty($tax)) {
@@ -391,12 +412,64 @@ class SettingController extends Controller
             $langlist = \App\Option::where('key', 'languages')->first();
             $langlist = json_decode($langlist->value ?? '');
 
+            // amit singh
+            $shop_categoriesList = \App\Option::where('key', 'shop_categories')->first();
+            if (empty($shop_categoriesList)) {
+                $options = array(
+                    array(
+                        'id' => '18', 'key' => 'shop_categories', 'value' => '
+                    {"1" : "Fruits & Vegetables",
+                      "2" : "Groceries",
+                      "3" : "Medicine",
+                      "4" : "Food",
+                      "5" : "Gifts",
+                      "6" : "Cake",
+                      "7" : "Hardware & Tools",
+                      "8" : "Apparels",
+                      "9" : "Electronics",
+                      "10" : "Mobile & Accessories",
+                      "11" : "Books",
+                      "12" : "Fashion Accessories",
+                      "13" : "Stationary",
+                      "14" : "Paintings",
+                      "15" : "Furniture",
+                      "16" : "Home Decor",
+                      "17" : "Sweets",
+                      "18" : "Paan",
+                      "19" : "Milk Products",
+                      "20" : "Bakery",
+                      "21" : "Flowers",
+                      "22" : "Pooja Samaan",
+                      "23" : "Meat and Poultry"}', 'created_at' => '2021-02-21 18:14:35', 'updated_at' => '2021-02-21 18:14:44'
+                    ),
+                );
+                Option::insert($options);
+                $shop_categoriesList = \App\Option::where('key', 'shop_categories')->first();
+            }
+            $shop_categoriesList = json_decode($shop_categoriesList->value ?? '');
+
+            // print_r($shop_categoriesList);
+            // exit();
+            // amit singh
+
+
             $languages = Useroption::where('user_id', $user_id)->where('key', 'languages')->first();
             $active_languages = json_decode($languages->value ?? '');
             $my_languages = [];
             foreach ($active_languages ?? [] as $key => $value) {
                 array_push($my_languages, $value);
             }
+
+            // amit singh
+            $my_categories = Useroption::where('user_id', $user_id)->where('key', 'shop_category')->first();
+            $my_categories = $my_categories->value ?? '';
+
+            // $categories = Useroption::where('user_id', $user_id)->where('key', 'shop_category')->first();
+            // $active_categories = json_decode($categories->value ?? '');
+            // $my_categories = [];
+            // foreach ($active_categories ?? [] as $key => $value) {
+            //     array_push($my_categories, $value);
+            // }
 
             $shop_name = Useroption::where('key', 'shop_name')->where('user_id', $user_id)->first();
             $shop_description = Useroption::where('key', 'shop_description')->where('user_id', $user_id)->first();
@@ -433,16 +506,9 @@ class SettingController extends Controller
             $gstin = Useroption::where('user_id', $user_id)->where('key', 'gstin')->first(); // amit singh
             $min_delivery_amt = Useroption::where('user_id', $user_id)->where('key', 'min_delivery_amt')->first(); // amit singh
             // amit singh
-            return view('seller.settings.general', compact('min_delivery_amt', 'gstin', 'shop_name', 'order_receive_method', 'shop_description', 'store_email', 'order_prefix', 'currency', 'location', 'theme_color', 'langlist', 'my_languages', 'tax', 'local', 'socials', 'pwa'));
-        }
-        if ($slug == 'payment') {
-            $posts = Category::with('description', 'active_getway')->where('type', 'payment_getway')->where('slug', '!=', 'cod')->get();
-            $cod = Category::with('description', 'active_getway')->where('type', 'payment_getway')->where('slug', 'cod')->get();
-            return view('seller.settings.payment_method', compact('posts', 'cod'));
-        }
-        if ($slug == 'plan') {
-            $posts = Plan::where('status', 1)->latest()->get();
-            return view('seller.plan.index', compact('posts'));
+            return view('seller.settings.general', compact('min_delivery_amt', 'gstin', 'shop_name', 'order_receive_method', 'shop_description', 'store_email', 'order_prefix', 'currency', 'location', 'theme_color', 'langlist', 'my_languages', 'my_categories', 'shop_categoriesList', 'tax', 'local', 'socials', 'pwa'));
+', 'pwa'));
+  return view('seller.plan.index', compact('posts'));
         }
 
         return back();

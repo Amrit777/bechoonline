@@ -35,7 +35,7 @@ class UserTableSeeder extends Seeder
     		'email' => 'admin@admin.com',
     		'password' => Hash::make('rootadmin'),
     	]);
-    	
+
     	// User::create([
     	// 	'role_id' => 3,
     	// 	'domain_id' => 1,
@@ -99,7 +99,7 @@ class UserTableSeeder extends Seeder
     				'page.edit',
     				'page.delete',
     				'page.list',
-    				
+
     			]
     		],
     		[
@@ -135,10 +135,10 @@ class UserTableSeeder extends Seeder
     			'group_name' => 'Report',
     			'permissions' => [
     				'report.view',
-    				
+
     			]
     		],
-    		
+
     		[
     			'group_name' => 'Customer',
     			'permissions' => [
@@ -149,7 +149,7 @@ class UserTableSeeder extends Seeder
                     'customer.delete',
     				'customer.request',
     				'customer.expired_subscription',
-    				
+
     			]
     		],
     		[
@@ -159,21 +159,21 @@ class UserTableSeeder extends Seeder
     				'domain.edit',
     				'domain.list',
                     'domain.delete',
-    				
+
     			]
     		],
     		[
     			'group_name' => 'Cron jobs',
     			'permissions' => [
     				'cron_job.control',
-    				
+
     			]
     		],
             [
                 'group_name' => 'menu',
                 'permissions' => [
                     'menu',
-                    
+
                 ]
             ],
     		[
@@ -186,29 +186,29 @@ class UserTableSeeder extends Seeder
     				'template.list',
     				'environment.settings',
     				'payment_gateway.setup',
-    				
+
     			]
     		],
 
-    		
-    		
+
+
     		[
     			'group_name' => 'Settings',
     			'permissions' => [
-    				'site.settings', 
-					'marketing.tools',                  
+    				'site.settings',
+					'marketing.tools',
     			]
     		],
     		[
     			'group_name' => 'Seller Activity',
     			'permissions' => [
-    				'uploaded_files.control',                  
-    				'uploaded_files_directory.control',                  
-    				'product.control',                  
-    				'invoices.control',                  
+    				'uploaded_files.control',
+    				'uploaded_files_directory.control',
+    				'product.control',
+    				'invoices.control',
     			]
     		],
-    		
+
     		[
     			'group_name' => 'language',
     			'permissions' => [
@@ -231,7 +231,7 @@ class UserTableSeeder extends Seeder
     		}
     	}
 
-    	
+
 
         $options = array(
   array('id' => '1','key' => 'langlist','value' => '{"English":"en","Bengali":"bn"}','created_at' => '2020-12-12 14:49:37','updated_at' => '2020-12-12 14:49:37'),
@@ -244,31 +244,57 @@ class UserTableSeeder extends Seeder
   array('id' => '8','key' => 'marketing_tool','value' => '{"ga_measurement_id":"UA-180680025-1","analytics_view_id":"231381168","google_status":"on","fb_pixel":"","fb_pixel_status":""}','created_at' => '2020-12-25 17:32:48','updated_at' => '2020-12-25 17:32:48'),
   array('id' => '9','key' => 'languages','value' => '{"en":"English","bn":"Bangla","ar":"Arabic"}','created_at' => '2021-01-05 09:51:31','updated_at' => '2021-01-11 17:07:34'),
   array('id' => '10','key' => 'active_languages','value' => '{"en":"English","ar":"Arabic"}','created_at' => '2021-01-08 15:21:41','updated_at' => '2021-01-11 17:07:52'),
-  array('id' => '11','key' => 'about_1','value' => '{"title":"Upload your product","description":"Enter the product along with other complete information such as photos, videos, variations, product descriptions, promotions and so on.","btn_link":"#priceing","btn_text":"Free Trial","preview":"icofont-cloud-upload"}','created_at' => '2021-01-09 18:51:25','updated_at' => '2021-01-16 06:22:49'),
+  array('id' => '11','key' => 'about_1','value' => '{"title":"Upload your product","description":"Enter the product along with other complete information such as photos, videos, variations, product descriptions, promotions and so on.","btn_link":"#pricing","btn_text":"Free Trial","preview":"icofont-cloud-upload"}','created_at' => '2021-01-09 18:51:25','updated_at' => '2021-01-16 06:22:49'),
   array('id' => '12','key' => 'about_2','value' => '{"title":"Setup your store","description":"Insert logo, banner and modify your store theme according to your own brand identity without having to create any code.","btn_link":"","btn_text":"","preview":"icofont-shopping-cart"}','created_at' => '2021-01-09 18:55:31','updated_at' => '2021-01-16 06:18:44'),
   array('id' => '13','key' => 'about_3','value' => '{"title":"The launch continues","description":"Easily, your online store goes live and you can validate your business and get market share faster than your other competitors.","btn_link":"","btn_text":"","preview":"icofont-rocket-alt-2"}','created_at' => '2021-01-09 18:56:22','updated_at' => '2021-01-16 06:56:08'),
   array('id' => '14','key' => 'seo','value' => '{"title":"Dokans","description":"test","canonical":"'.env('APP_URL').'","tags":"test","twitterTitle":"@dokans"}','created_at' => '2021-01-16 08:30:26','updated_at' => '2021-01-16 08:30:26'),
-  array('id' => '15','key' => 'auto_order','value' => 'yes','created_at' => '2021-02-21 18:14:35','updated_at' => '2021-02-21 18:14:44'), 
+  array('id' => '15','key' => 'auto_order','value' => 'yes','created_at' => '2021-02-21 18:14:35','updated_at' => '2021-02-21 18:14:44'),
   array('id' => '16','key' => 'ecom_features','value' => '{"top_image":"uploads\/1\/2021\/03\/1615392340.png","center_image":"uploads\/1\/2021\/03\/1615392340.webp","bottom_image":"uploads\/1\/2021\/03\/1615392340.webp","area_title":"Market your business","description":"Take the guesswork out of marketing with built-in tools that help you create, execute, and analyze digital marketing campaigns.","btn_link":"#service","btn_text":"Service"}','created_at' => '2021-02-21 18:14:35','updated_at' => '2021-02-21 18:14:44'),
   array('id' => '17','key' => 'counter_area','value' => '{"happy_customer":"1000","total_reviews":"800","total_domain":"1200","community_member":"2000"}','created_at' => '2021-02-21 18:14:35','updated_at' => '2021-02-21 18:14:44'),
+  array('id' => '18','key' => 'shop_categories','value' => '
+  {"1" : "Fruits & Vegetables",
+    "2" : "Groceries",
+    "3" : "Medicine",
+    "4" : "Food",
+    "5" : "Gifts",
+    "6" : "Cake",
+    "7" : "Hardware & Tools",
+    "8" : "Apparels",
+    "9" : "Electronics",
+    "10" : "Mobile & Accessories",
+    "11" : "Books",
+    "12" : "Fashion Accessories",
+    "13" : "Stationary",
+    "14" : "Paintings",
+    "15" : "Furniture",
+    "16" : "Home Decor",
+    "17" : "Sweets",
+    "18" : "Paan",
+    "19" : "Milk Products",
+    "20" : "Bakery",
+    "21" : "Flowers",
+    "22" : "Pooja Samaan",
+    "23" : "Meat and Poultry"}'
+
+  ,'created_at' => '2021-02-21 18:14:35','updated_at' => '2021-02-21 18:14:44'),
 );
 
     Option::insert($options);
 
 
         $adminmenus = array(
-  array('id' => '1','name' => 'Header','position' => 'header','data' => '[{"text":"Home","href":"/","icon":"","target":"_self","title":""},{"text":"Pricing","href":"/priceing","icon":"empty","target":"_self","title":""},{"text":"Services","href":"/service","icon":"empty","target":"_self","title":""},{"text":"Contact","href":"/contact","icon":"empty","target":"_self","title":""},{"text":"Login","href":"/login","icon":"empty","target":"_self","title":""}]','lang' => 'en','status' => '1','created_at' => '2021-01-08 15:21:55','updated_at' => '2021-01-11 17:08:42'),
+  array('id' => '1','name' => 'Header','position' => 'header','data' => '[{"text":"Home","href":"/","icon":"","target":"_self","title":""},{"text":"Pricing","href":"/pricing","icon":"empty","target":"_self","title":""},{"text":"Services","href":"/service","icon":"empty","target":"_self","title":""},{"text":"Contact","href":"/contact","icon":"empty","target":"_self","title":""},{"text":"Login","href":"/login","icon":"empty","target":"_self","title":""}]','lang' => 'en','status' => '1','created_at' => '2021-01-08 15:21:55','updated_at' => '2021-01-11 17:08:42'),
   array('id' => '2','name' => 'Useful links','position' => 'footer_left','data' => '[{"text":"Academy","href":"/","icon":"","target":"_self","title":""},{"text":"Help","href":"/contact","icon":"empty","target":"_self","title":""},{"text":"Community","href":"/contact","icon":"empty","target":"_self","title":""},{"text":"Tools","href":"/contact","icon":"empty","target":"_self","title":""}]','lang' => 'en','status' => '1','created_at' => '2021-01-10 08:46:43','updated_at' => '2021-01-16 07:04:06'),
   array('id' => '3','name' => 'Policy','position' => 'footer_right','data' => '[{"text":"Policy","href":"/page/terms-and-condition","icon":"empty","target":"_self","title":""},{"text":"Service Policy","href":"/page/terms-and-condition","icon":"empty","target":"_self","title":""},{"text":"Refund Policy","href":"/page/terms-and-condition","icon":"empty","target":"_self","title":""}]','lang' => 'en','status' => '1','created_at' => '2021-01-10 08:58:24','updated_at' => '2021-01-16 07:09:59'),
-  array('id' => '4','name' => 'Information','position' => 'footer_center','data' => '[{"text":"About Us","href":"#about_us","icon":"empty","target":"_self","title":""},{"text":"Partners Program","href":"/contact","icon":"empty","target":"_self","title":""},{"text":"Priceing","href":"#priceing","icon":"empty","target":"_self","title":""},{"text":"Payment gateway","href":"/contact","icon":"empty","target":"_self","title":""}]','lang' => 'en','status' => '1','created_at' => '2021-01-10 08:58:40','updated_at' => '2021-01-16 07:02:47'),
-  array('id' => '5','name' => 'Header Arabic','position' => 'header','data' => '[{"text":"الصفحة الرئيسية","icon":"","href":"/","target":"_self","title":""},{"text":"التسعير","icon":"empty","href":"/priceing","target":"_self","title":""},{"text":"صالة عرض","icon":"empty","href":"/service","target":"_self","title":""},{"text":"اتصل","icon":"empty","href":"/contact","target":"_self","title":""},{"text":"تسجيل الدخول","icon":"empty","href":"/login","target":"_self","title":""}]','lang' => 'ar','status' => '1','created_at' => '2021-01-11 17:09:00','updated_at' => '2021-01-11 17:10:56'),
-  array('id' => '6','name' => 'معلومات','position' => 'footer_center','data' => '[{"text":"معلومات عنا","icon":"","href":"#about_us","target":"_self","title":""},{"text":"برنامج الشركاء","icon":"empty","href":"/contact","target":"_self","title":""},{"text":"التسعير","icon":"empty","href":"#priceing","target":"_self","title":""},{"text":"بوابة الدفع","icon":"empty","href":"/contact","target":"_self","title":""}]','lang' => 'ar','status' => '1','created_at' => '2021-01-16 07:05:58','updated_at' => '2021-01-16 07:08:26'),
+  array('id' => '4','name' => 'Information','position' => 'footer_center','data' => '[{"text":"About Us","href":"#about_us","icon":"empty","target":"_self","title":""},{"text":"Partners Program","href":"/contact","icon":"empty","target":"_self","title":""},{"text":"Pricing","href":"#pricing","icon":"empty","target":"_self","title":""},{"text":"Payment gateway","href":"/contact","icon":"empty","target":"_self","title":""}]','lang' => 'en','status' => '1','created_at' => '2021-01-10 08:58:40','updated_at' => '2021-01-16 07:02:47'),
+  array('id' => '5','name' => 'Header Arabic','position' => 'header','data' => '[{"text":"الصفحة الرئيسية","icon":"","href":"/","target":"_self","title":""},{"text":"التسعير","icon":"empty","href":"/pricing","target":"_self","title":""},{"text":"صالة عرض","icon":"empty","href":"/service","target":"_self","title":""},{"text":"اتصل","icon":"empty","href":"/contact","target":"_self","title":""},{"text":"تسجيل الدخول","icon":"empty","href":"/login","target":"_self","title":""}]','lang' => 'ar','status' => '1','created_at' => '2021-01-11 17:09:00','updated_at' => '2021-01-11 17:10:56'),
+  array('id' => '6','name' => 'معلومات','position' => 'footer_center','data' => '[{"text":"معلومات عنا","icon":"","href":"#about_us","target":"_self","title":""},{"text":"برنامج الشركاء","icon":"empty","href":"/contact","target":"_self","title":""},{"text":"التسعير","icon":"empty","href":"#pricing","target":"_self","title":""},{"text":"بوابة الدفع","icon":"empty","href":"/contact","target":"_self","title":""}]','lang' => 'ar','status' => '1','created_at' => '2021-01-16 07:05:58','updated_at' => '2021-01-16 07:08:26'),
   array('id' => '7','name' => 'سياسات','position' => 'footer_right','data' => '[{"text":"سياسات","icon":"","href":"/page/terms-and-condition","target":"_self","title":""},{"text":"سياسة الخدمة","icon":"empty","href":"/page/terms-and-condition","target":"_self","title":""},{"text":"سياسة الاسترجاع","icon":"empty","href":"/page/terms-and-condition","target":"_self","title":""}]','lang' => 'ar','status' => '1','created_at' => '2021-01-16 07:06:18','updated_at' => '2021-01-16 07:10:29'),
   array('id' => '8','name' => 'روابط مفيدة','position' => 'footer_left','data' => '[{"text":"الأكاديمية","icon":"empty","href":"/","target":"_self","title":""},{"text":"مساعدة","icon":"empty","href":"/contact","target":"_self","title":""},{"text":"تواصل اجتماعي","icon":"empty","href":"/contact","target":"_self","title":""},{"text":"أدوات","icon":"empty","href":"/contact","target":"_self","title":""}]','lang' => 'ar','status' => '1','created_at' => '2021-01-16 07:06:35','updated_at' => '2021-01-16 07:24:25')
 );
 
         Adminmenu::insert($adminmenus);
-    
+
 
 
     $plans = array(
