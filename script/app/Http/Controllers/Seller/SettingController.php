@@ -507,10 +507,18 @@ class SettingController extends Controller
             $min_delivery_amt = Useroption::where('user_id', $user_id)->where('key', 'min_delivery_amt')->first(); // amit singh
             // amit singh
             return view('seller.settings.general', compact('min_delivery_amt', 'gstin', 'shop_name', 'order_receive_method', 'shop_description', 'store_email', 'order_prefix', 'currency', 'location', 'theme_color', 'langlist', 'my_languages', 'my_categories', 'shop_categoriesList', 'tax', 'local', 'socials', 'pwa'));
-', 'pwa'));
-  return view('seller.plan.index', compact('posts'));
+        }
+        if ($slug == 'payment') {
+            $posts = Category::with('description', 'active_getway')->where('type', 'payment_getway')->where('slug', '!=', 'cod')->get();
+            $cod = Category::with('description', 'active_getway')->where('type', 'payment_getway')->where('slug', 'cod')->get();
+            return view('seller.settings.payment_method', compact('posts', 'cod'));
+        }
+        if ($slug == 'plan') {
+            $posts = Plan::where('status', 1)->latest()->get();
+            return view('seller.plan.index', compact('posts'));
         }
 
         return back();
     }
 }
+
