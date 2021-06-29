@@ -31,7 +31,7 @@
         </div>
         <div class="card-body">
             <div class="col-sm-12">
-                <div class="table-responsive display-desktop-table">
+                <div class="table-responsive display-desktop-table tabel-pos">
                     <table class="table table-striped ">
                         <tbody>
                             <tr>
