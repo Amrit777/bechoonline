@@ -127,8 +127,8 @@
                                             <select class="form-control" name="shop_type">
                                                 <option value="1" @if ($shop_type == 1) selected="selected" @endif>
                                                     {{ __('I will sale physical products') }}</option>
-                                                <option value="0" @if ($shop_type == 0) selected="selected" @endif>
-                                                    {{ __('I will sale digital products') }}</option>
+                                                {{-- <option value="0" @if ($shop_type == 0) selected="selected" @endif>
+                                                    {{ __('I will sale digital products') }}</option> --}}
                                             </select>
                                         </div>
                                         <div class="form-group">

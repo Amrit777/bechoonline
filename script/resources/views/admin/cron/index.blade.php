@@ -5,20 +5,20 @@
 @section('content')
 
 <div class="row">
-	<div class="col-12">			
+	{{-- <div class="col-12">
 		<div class="card">
 			<div class="card-header">
 				<h4><i class="fas fa-circle"></i> {{ __('Make Expired Membership') }} <code>{{ __('Once/day') }}</code></h4>
-				
-				
+
+
 			</div>
 			<div class="card-body">
 				<div class="code"><p>curl -s {{ url('/cron_job/make_expirable_user') }}</p></div>
 			</div>
 		</div>
-	</div>
+	</div> --}}
 
-	<div class="col-12">			
+	{{-- <div class="col-12">
 		<div class="card">
 			<div class="card-header">
 				<h4><i class="fas fa-circle"></i> {{ __('Membership Will Expiration Alert') }} <code>{{ __('Once/day') }}</code></h4>
@@ -27,8 +27,8 @@
 				<div class="code"><p>curl -s {{ url('/cron_job/send_mail_to_will_expire_plan_soon') }}</p></div>
 			</div>
 		</div>
-	</div>
-	<div class="col-12">			
+	</div> --}}
+	<div class="col-12">
 		<div class="card">
 			<div class="card-header">
 				<h4><i class="fas fa-circle"></i> {{ __('Reset Offer Product Price') }} <code>{{ __('Once/day') }}</code></h4>
@@ -38,31 +38,31 @@
 			</div>
 		</div>
 	</div>
-	<div class="col-12">			
+	<div class="col-12">
 		<div class="card">
 			<div class="card-header">
 				<h4><i class="fas fa-circle"></i> {{ __('Send Mail with Queue') }}</h4>
-				
+
 			</div>
 			<div class="card-body">
 				<span>{{ __('Note') }}: <span class="text-danger">{{ __('You Need Add This Command In Your Supervisor And Also Make QUEUE_MAIL On From System Settings To Mail Configuration.') }}</span></span><br>
 				<span>{{ __('Command Path') }}: <span class="text-danger">{{ base_path() }}</span></span>
 				<div class="code"><p>{{ __('php artisan queue:work') }}</p></div>
 
-				
+
 			</div>
 		</div>
 	</div>
 
 
-	<div class="col-12">			
+	{{-- <div class="col-12">
 		<div class="card">
 			<div class="card-header">
 				<h4>{{ __('Customize Cron Jobs') }}</h4>
 			</div>
 			<form class="basicform" method="post" accept="{{ route('admin.cron.store') }}">
 				@csrf
-			
+
 			<div class="card-body">
 				<div class="row">
 					<div class="col-sm-6">
@@ -75,7 +75,7 @@
 							</select>
 						</div>
 					</div>
-					
+
 
 					<div class="col-sm-6">
 						<div class="form-group">
@@ -89,7 +89,7 @@
 								<option value="3" @if($info->send_mail_to_will_expire_within_days==3)  selected=""  @endif>{{ __('3 Days') }}</option>
 								<option value="2" @if($info->send_mail_to_will_expire_within_days==2)  selected=""  @endif>{{ __('2 Days') }}</option>
 								<option value="1" @if($info->send_mail_to_will_expire_within_days==1)  selected=""  @endif>{{ __('1 Days') }}</option>
-								
+
 							</select>
 						</div>
 					</div>
@@ -116,11 +116,11 @@
 					<div class="col-sm-6">
 						<button class="btn btn-primary basicbtn" type="submit">{{ __('Save Changes') }}</button>
 					</div>
-					</form>	
+					</form>
 				</div>
 			</div>
 		</div>
-	</div>
+	</div> --}}
 </div>
 @endsection
 @push('js')

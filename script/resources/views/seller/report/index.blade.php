@@ -62,7 +62,7 @@
 					<h4>{{ __('Order Complete') }}</h4>
 				</div>
 				<div class="card-body">
-					{{ number_format($canceled) }}
+					{{ number_format($completed) }}
 				</div>
 			</div>
 		</div>
@@ -137,15 +137,15 @@
 				<form class="card-header-form">
 					<div class="d-flex">
 						<input type="text" name="start" class="form-control datepicker" value="{{ $start }}">
-						
+
 						<input type="text" name="end" class="form-control datepicker" value="{{ $end }}">
 
 						<button class="btn btn-primary btn-icon" type="submit"><i class="fas fa-search"></i></button>
-					</div>					
+					</div>
 				</form>
 			</div>
 			<div class="card-body">
-				
+
 
 				<div class="table-responsive display-desktop-table">
 					<table class="table table-striped table-md table-hover">
@@ -159,7 +159,7 @@
 							<th class="text-right">{{ __('Item(s)') }}</th>
 							<th class="text-right">{{ __('Invoice') }}</th>
 						</tr>
-						
+
 						@foreach($orders as $key => $row)
 						<tr>
 
@@ -175,9 +175,9 @@
 								<span class="badge badge-success">{{ __('Complete') }}</span>
 
 								@elseif($row->payment_status==0)
-								<span class="badge badge-danger">{{ __('Cancel') }}</span> 
+								<span class="badge badge-danger">{{ __('Cancel') }}</span>
 								@elseif($row->payment_status==3)
-								<span class="badge badge-danger">{{ __('Incomplete') }}</span> 
+								<span class="badge badge-danger">{{ __('Incomplete') }}</span>
 
 								@endif
 							</td>
@@ -211,7 +211,7 @@
 							</td>
 						</tr>
 						@endforeach
-						
+
 					</tbody></table>
 				</div>
 
@@ -246,9 +246,9 @@
 								<span class="badge badge-success">{{ __('Complete') }}</span>
 
 								@elseif($row->payment_status==0)
-								<span class="badge badge-danger">{{ __('Cancel') }}</span> 
+								<span class="badge badge-danger">{{ __('Cancel') }}</span>
 								@elseif($row->payment_status==3)
-								<span class="badge badge-danger">{{ __('Incomplete') }}</span> 
+								<span class="badge badge-danger">{{ __('Incomplete') }}</span>
 
 								@endif
 		              		</div>
