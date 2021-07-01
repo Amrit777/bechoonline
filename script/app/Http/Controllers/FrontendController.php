@@ -348,15 +348,11 @@ class FrontendController extends Controller
             $user->password = Hash::make($request->password);
             // amit singh starts
             $user->whatsapp_number = $request->filled('whatsapp_number') ? $request->whatsapp_number : "";
-            $user->store_name = $request->filled('store_name') ? $request->store_name : "";
+            $user->store_name = $request->filled('shop_name') ? $request->shop_name : "";
             // amit singh ends
-
+            $user->status = 3;
             $user->role_id = 3;
-            if ($info->custom_domain == 0) {
-                $user->status = 1; // subdomain paid/free will be auto approved
-            } else {
-                $user->status = 3;
-            }
+
             $user->save();
             // amit singh starts
             if ($request->filled('shop_name')) {
@@ -379,15 +375,7 @@ class FrontendController extends Controller
             $dom->domain_username = $request->filled('domain_username') ? $request->domain_username : "";
             $dom->domain_password = $request->filled('domain_password') ? $request->domain_password : "";
             // amit singh ends
-
-
-            if ($info->custom_domain == 1) {
-                $dom->custom_domain = 1;
-                $dom->status = 3;
-            } else {
-                $dom->status = 1; // subdomain paid/free will be auto approved
-            }
-
+            $dom->status = 3;
             $dom->user_id = $user->id;
             $dom->save();
 
@@ -457,6 +445,13 @@ class FrontendController extends Controller
 
                 if ($auto == true) {
                     $userplan->status = 1;
+                    // only for subdomain
+                    if ($info->custom_domain == 0) {
+                        $dom->status = 1;
+                        $user->status = 1;
+                        $dom->save();
+                        $user->save();
+                    }
                 }
                 $userplan->save();
                 // amit singh
@@ -471,7 +466,6 @@ class FrontendController extends Controller
 
                 Session::flash('success', $msg);
             } else {
-
                 if (!empty($plan)) {
                     if ($plan->is_default == 1) {
                         $exp_days =  $plan->days ?? 5;
@@ -504,8 +498,6 @@ class FrontendController extends Controller
         } catch (Exception $e) {
             DB::rollback();
         }
-
-
         return response()->json(['Successfully Registered']);
     }
 
@@ -599,6 +591,7 @@ class FrontendController extends Controller
         if (Session::has('payment_info')) {
             $data = Session::get('payment_info');
             $plan = Plan::findorFail($data['ref_id']);
+            $currentModel = User::findOrFail(Auth::id());
 
             DB::beginTransaction();
             try {
@@ -636,6 +629,9 @@ class FrontendController extends Controller
 
                 $user->save();
 
+
+                $domain = Domain::where('user_id', Auth::id())->first();
+
                 if ($auto_order->value == 'yes' && $transection->status == 1) {
                     $meta = Userplanmeta::where('user_id', Auth::id())->first();
                     if (empty($meta)) {
@@ -651,11 +647,19 @@ class FrontendController extends Controller
                     $meta->brand_limit = $plan->brand_limit;
                     $meta->variation_limit = $plan->variation_limit;
                     $meta->save();
+                    // if subdomain and paid amount successfully
+                    if ($plan->custom_domain == 0) {
+                        if (!empty($domain)) {
+                            $domain->status = 1;
+                            $domain->save();
+                        }
+                        $currentModel->status = 1;
+                        $currentModel->save();
+                    }
                 }
 
                 // amit singh
 
-                $domain = Domain::where('user_id', Auth::id())->first();
                 $domainname = "";
                 if (!empty($domain)) {
                     $domainname = $domain->full_domain;
