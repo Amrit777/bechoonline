@@ -219,7 +219,7 @@
                                     value="{{ $info->site_color ?? '' }}">
                             </div>
                         </div>
-                        <div class="form-group row mb-4">
+                        {{-- <div class="form-group row mb-4">
                             <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">
                                 {{ __('Automatic Order Approved After Payment Success') }}</label>
                             <div class="col-sm-12 col-md-7">
@@ -228,7 +228,7 @@
                                     <option value="no" @if ($auto_order->value == 'no') selected @endif>{{ __('No') }}</option>
                                 </select>
                             </div>
-                        </div>
+                        </div> --}}
 
 
 

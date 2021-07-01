@@ -21,7 +21,7 @@
 							<li class="nav-item">
 								<a class="nav-link @if($type===0) active @endif" href="{{ route('admin.order.index','status=cancelled') }}">{{ __('Cancelled') }}</a>
 							</li>
-							
+
 						</ul>
 					</div>
 					<div class="col-sm-2">
@@ -44,7 +44,7 @@
 									<option value="email">{{ __('Search By User Mail') }}</option>
 
 								</select>
-								<div class="input-group-append">                                            
+								<div class="input-group-append">
 									<button class="btn btn-primary" type="submit"><i class="fas fa-search"></i></button>
 								</div>
 							</div>
@@ -58,7 +58,7 @@
 							<div class="input-group">
 								<select class="form-control selectric" name="method">
 									<option value="" >{{ __('Select Action') }}</option>
-									
+
 									<option value="2" >{{ __('Move To Pending') }}</option>
 									@if($type !== 0)
 									<option value="cancelled" >{{ __('Move To Cancelled') }}</option>
@@ -67,7 +67,7 @@
 									<option value="delete" >{{ __('Delete Permanently') }}</option>
 									@endif
 								</select>
-								<div class="input-group-append">                                            
+								<div class="input-group-append">
 									<button class="btn btn-primary basicbtn" type="submit">{{ __('Submit') }}</button>
 								</div>
 							</div>
@@ -123,7 +123,7 @@
 
 											</div>
 										</div></td>
-									</tr>	
+									</tr>
 									@endforeach
 								</tbody>
 							</table>
@@ -136,7 +136,7 @@
 				</div>
 			</div>
 		</div>
-	</div>   
+	</div>
 </div>
 @endsection
 @push('js')
