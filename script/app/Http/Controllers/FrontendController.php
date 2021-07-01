@@ -392,9 +392,9 @@ class FrontendController extends Controller
                 if ($auto_order->value == 'yes') {
                     $plan = $info;
                     $auto = true;
+                } else {
+                    $auto = false;
                 }
-
-                $auto = false;
             } else {
                 $plan = Plan::where('is_default', 1)->first();
                 $auto = false;
@@ -443,7 +443,7 @@ class FrontendController extends Controller
                 $userplan->will_expired = $expiry_date;
 
 
-                if ($auto == true) {
+                if ($auto) {
                     $userplan->status = 1;
                     // only for subdomain
                     if ($info->custom_domain == 0) {
@@ -455,7 +455,6 @@ class FrontendController extends Controller
                 }
                 $userplan->save();
                 // amit singh
-
                 $domain = Domain::where('user_id', Auth::id())->first();
                 $domainname = "";
                 if (!empty($domain)) {
