@@ -35,6 +35,14 @@ class CronController extends Controller
         Userplan::where('status', 1)->where('will_expired', '<=', date('Y-m-d'))->update([
             'status' => 3
         ]);
+        // make user pending, on expire
+        $usersExpired = Userplan::where('status', 1)->where('will_expired', '<=', date('Y-m-d'))->latest()->get();
+        if (!empty($usersExpired)) {
+            foreach ($usersExpired as $userExpired) {
+                User::where('id', $userExpired->user_id)->update(['status' => 3]);
+                echo $userExpired->user_id . " makred";
+            }
+        }
         if (!empty($auto_plan) && $this->auto_plan_assign == true) {
 
             $meta['name'] = $auto_plan->name;
