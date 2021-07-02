@@ -1,7 +1,34 @@
+@php
+use App\Models\Userplan;
+@endphp
+
 @extends('layouts.app')
 @section('content')
 
-@if(Auth::user()->user_domain->custom_domain == 1)
+{{-- if plan is expired for any plans (domain or subdomain) --}}
+@if(Auth::user()->status == 3 && (Auth::user()->user_domain->status == 1))
+@php
+        $plan = Userplan::where('user_id', Auth::user()->id)->where('status', 3)->orderBy('will_expired', 'DESC')->first();
+@endphp
+@if(!empty($plan))
+<div class="row mt-3">
+    <div class="col-sm-12">
+        <div class="card">
+            <div class="card-body">
+                <p>
+
+                    Hello {{Auth::user()->name}}, your subscription plan is expired (Plan Name: {{$plan->plan_info->name}}, Expired on: {{$plan->will_expired}}).
+                     To continue using Bechocart service <font size="+1"><u><a href="{{ route('merchant.plan') }}">Click here</a></u></font> to renew or upgrade your subscription plan.
+                     Please connect to our support chat if any query.
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+
+@endif
+@endif
+@if(!empty(Auth::user()->user_domain) && (Auth::user()->user_domain->custom_domain) == 1)
     @if (Auth::user()->status == 2 || Auth::user()->status == 3)
         <div class="row mt-3">
             <div class="col-sm-12">
@@ -24,7 +51,7 @@
         </div>
     @endif
 @else
-    @if (Auth::user()->status == 2 || Auth::user()->status == 3)
+    {{-- @if (Auth::user()->status == 2 || Auth::user()->status == 3)
             <div class="row mt-3">
                 <div class="col-sm-12">
                     <div class="card">
@@ -34,13 +61,12 @@
                                 {{ __(' Thank you for joining ') }} <b>{{ env('APP_NAME') }}</b>.
                                 {{ __('Your account is sent for an approval. Once approved you will be able to setup your store
                 and start selling online.') }}
-                                {{ __('To know more about How to configure your shop in Bechocart click on the chat icon and watch the video.') }}
                             </p>
                         </div>
                     </div>
                 </div>
             </div>
-    @endif
+    @endif --}}
 @endif
 
     <div class="row">

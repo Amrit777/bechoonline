@@ -624,6 +624,7 @@ class FrontendController extends Controller
                 $auto_order = Option::where('key', 'auto_order')->first();
                 if ($auto_order->value == 'yes' && $transection->status == 1) {
                     $user->status = 1;
+                    $currentModel->update(['status' => 1]);
                 }
 
                 $user->save();
